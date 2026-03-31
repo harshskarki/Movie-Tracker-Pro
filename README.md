@@ -1,78 +1,123 @@
-🎬 Movie Tracker Pro
+# 🎬 Movie Tracker Pro
 
-🍿 Your personal movie watchlist — simple, fast, and zero setup.
-Add movies, auto-fetch posters 🎞️, ratings ⭐ & release year 📅 via TMDB API — all inside one HTML file. No backend. No install. Just open & use 🚀
+![Made with JavaScript](https://img.shields.io/badge/Made%20with-JavaScript-yellow)
+![Frontend Only](https://img.shields.io/badge/Frontend-Only-blue)
+![No Backend](https://img.shields.io/badge/Backend-None-lightgrey)
+![Status](https://img.shields.io/badge/Status-Active-success)
 
-🚀 Overview
+🍿 A zero-setup, single-file movie watchlist app to track, organize, and discover movies instantly.
 
-Movie Tracker Pro is a lightweight, single-file web app that helps you manage your movie list effortlessly.
+---
 
-💡 No login
-💡 No downloads
-💡 No distractions
+## 🚀 Live Demo  
+👉 https://movietrackerpro.netlify.app/
 
-Just open the file and start building your watchlist instantly.
+---
 
-Type a movie name ➝ hit Add ➝ boom 💥
-You get:
+## 📌 Overview
 
-🎞️ Poster
-⭐ Rating
-📅 Release Year
+Movie Tracker Pro is a lightweight frontend web app that lets users manage their movie watchlist with ease.
 
-Everything is saved in your browser (localStorage), so your list stays safe 💾
+- No login required  
+- No installation needed  
+- Runs directly in browser  
 
-✨ Features
+It fetches real-time movie data using the TMDB API and stores everything locally using browser storage.
 
-🎬 Add Movies Instantly
-Type a title and let the app do the magic ✨
+---
 
-📊 Track Progress
-Mark movies as watched ✅ or unwatched ⏳
-See your progress with a clean progress bar 📈
+## ✨ Features
 
-⭐ Favorites System
-Love a movie? Star it 💛 and access it anytime
+- 🎬 Instant movie search (poster, rating, release year)  
+- 📊 Watch progress tracking (Watched / Unwatched)  
+- ⭐ Favorites system  
+- 🔍 Real-time search & filters  
+- 🎲 Surprise Me (random movie suggestion)  
+- 📴 Works offline after first load  
+- 💾 Data stored in localStorage  
 
-🔍 Search & Filter
+---
 
-Live search as you type ⚡
-Filter by:
-Watched 👀
-Unwatched ⌛
-Favorites ⭐
-Genres 🎭 (Action, Comedy, Horror, etc.)
+## 📸 Screenshots
 
-🎲 Surprise Me Button
-Can’t decide? Click Surprise Me and get a random movie suggestion 🎯
+<p align="center">
+  <img src="screenshots/home.png" width="800"/>
+  <br><br>
+  <img src="screenshots/movies.png" width="800"/>
+  <br><br>
+  <img src="screenshots/filters.png" width="800"/>
+</p>
 
-📴 Works Offline
-Once loaded, no internet needed 🌐❌
-Everything runs locally
+---
 
-⚙️ How It Works
-🎬 Enter Movie Name
-        ↓
-🌐 TMDB API Fetch
-        ↓
-🎞️ Poster + ⭐ Rating + 📅 Year
-        ↓
-💾 Saved in localStorage
-        ↓
-🔍 Search | ⭐ Favorite | ✅ Watch | 🗑️ Delete
+## ⚙️ How It Works
 
-🛠️ Built With
-🧱 HTML5 — structure
-🎨 CSS3 — styling & animations
-⚡ JavaScript — logic & interactivity
-🎬 TMDB API — movie data
-💾 localStorage — saves your data
-🔤 Google Fonts — clean typography
-⚠️ Limitations
-📱 Data stays on one device/browser only
-🔑 TMDB API key is visible (don’t share publicly)
-🧹 Clearing browser data = list gone
-💬 Final Note
+1. Enter movie name  
+2. Fetch data from TMDB API  
+3. Display poster, rating, year  
+4. Save in localStorage  
+5. Manage (search, filter, favorite, watch, delete)  
 
-This app uses the TMDB API 🎬
-(Not officially endorsed or certified by TMDB)
+---
+
+## 🛠️ Tech Stack
+
+- HTML5  
+- CSS3  
+- JavaScript  
+- TMDB API  
+- localStorage  
+
+---
+
+## 📂 Project Structure
+
+movie-tracker-pro/
+│── index.html
+│── style.css
+│── script.js
+│── screenshots/
+    │── home.png
+    │── movies.png
+    │── filters.png
+
+---
+
+## ⚠️ Limitations
+
+- Data is browser-specific  
+- API key is exposed  
+- Clearing browser storage removes data  
+
+---
+
+## 🚀 Future Improvements
+
+- User login system  
+- Cloud database  
+- Mobile app version  
+- AI movie recommendations  
+
+---
+
+## 🤝 Connect With Me
+
+- 🌐 Portfolio: https://harshvardhansportfolio.vercel.app/  
+- 💼 LinkedIn: https://linkedin.com/in/harshvardhan-singh-karki-a9316038a/  
+- 💻 GitHub: https://github.com/harshskarki  
+
+---
+
+## 💬 Final Note
+
+This project uses the TMDB API.  
+This product is not endorsed or certified by TMDB.
+
+---
+
+## 🏆 Project Value
+
+✔ Strong JavaScript fundamentals  
+✔ API integration  
+✔ Clean UI/UX  
+✔ No backend architecture  
