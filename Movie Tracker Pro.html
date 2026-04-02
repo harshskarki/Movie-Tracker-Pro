@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>🎬 Movie Tracker Pro+</title>
+<title>🎬 Movie Tracker Pro</title>
 <style>
 body {
   font-family: 'Segoe UI', sans-serif;
@@ -161,17 +161,17 @@ button:hover {
 
 <body>
 
-<h1>🎬 Movie Tracker Pro+</h1>
+<h1>🎬 Movie Tracker Pro</h1>
 
 <input id="movieInput" placeholder="Movie name">
-<select id="category">
+<select id="Category">
   <option>Action</option>
   <option>Comedy</option>
   <option>Drama</option>
   <option>Horror</option>
 </select>
-<button onclick="addMovie()">Add</button>
-<button onclick="randomMovie()">🎲 Surprise Me</button>
+<button onclick="AddMovie()">Add</button>
+<button onclick="RandomMovie()">🎲 Surprise Me</button>
 
 <br>
 <input id="searchInput" placeholder="Search..." onkeyup="applyFilters()">
@@ -185,13 +185,13 @@ button:hover {
 </div>
 
 <!-- Progress -->
-<div id="progressBar"><div id="progress"></div></div>
+<div id="ProgressBar"><div id="progress"></div></div>
 
 <!-- Filter Pills -->
 <div id="filters">
-  <button class="filter-pill active" data-filter="all" onclick="setFilter('all', this)">All</button>
-  <button class="filter-pill" data-filter="watched" onclick="setFilter('watched', this)">✅ Watched</button>
-  <button class="filter-pill" data-filter="unwatched" onclick="setFilter('unwatched', this)">⏳ Unwatched</button>
+  <button class="filter-pill active" data-filter="All" onclick="setFilter('all', this)">All</button>
+  <button class="filter-pill" data-filter="Watched" onclick="setFilter('watched', this)">✅ Watched</button>
+  <button class="filter-pill" data-filter="Unwatched" onclick="setFilter('unwatched', this)">⏳ Unwatched</button>
   <button class="filter-pill" data-filter="favorites" onclick="setFilter('favorites', this)">★ Favorites</button>
   <button class="filter-pill" data-filter="Action" onclick="setFilter('Action', this)">Action</button>
   <button class="filter-pill" data-filter="Comedy" onclick="setFilter('Comedy', this)">Comedy</button>
@@ -199,8 +199,8 @@ button:hover {
   <button class="filter-pill" data-filter="Horror" onclick="setFilter('Horror', this)">Horror</button>
 </div>
 
-<div class="container" id="movieList"></div>
-<p id="emptyMsg">No movies match this filter 🎭</p>
+<div class="container" id="MovieList"></div>
+<p id="EmptyMsg">No movies match this filter 🎭</p>
 <div id="toast"></div>
 
 <script>
