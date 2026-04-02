@@ -41,13 +41,6 @@ It fetches real-time movie data using the TMDB API and stores everything locally
 ## 📸 Screenshots
 
 <img width="1920" height="968" alt="Image" src="https://github.com/user-attachments/assets/0e0b586a-3d01-4d96-9e82-01b7ddb69450" />
-<p align="center">
-  <img src="screenshots/home.png" width="800"/>
-  <br><br>
-  <img src="screenshots/movies.png" width="800"/>
-  <br><br>
-  <img src="screenshots/filters.png" width="800"/>
-</p>
 
 ---
 
