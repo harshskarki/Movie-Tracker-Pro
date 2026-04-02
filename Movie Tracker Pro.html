@@ -1,8 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>🎬 Movie Tracker Pro</title>
+
 <style>
 body {
   font-family: 'Segoe UI', sans-serif;
@@ -13,7 +15,7 @@ body {
   padding: 0 0 60px 0;
 }
 
-h1 { color: #e50914; margin-bottom: 5px; }
+h1 { color: #e50914; }
 
 input, select {
   padding: 10px;
@@ -39,39 +41,33 @@ button:hover {
   background: #ff1f1f;
 }
 
-/* ── Stats Bar ── */
+/* Stats */
 #statsBar {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin: 12px auto 6px;
   flex-wrap: wrap;
+  margin: 10px;
 }
 
 .stat-chip {
   background: #1c1c1c;
-  border: 1px solid #333;
-  border-radius: 20px;
   padding: 6px 16px;
+  border-radius: 20px;
   font-size: 13px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
-.stat-chip span.num {
+.stat-chip span {
   color: #e50914;
   font-weight: bold;
-  font-size: 15px;
 }
 
-/* ── Filter Pills ── */
+/* Filters */
 #filters {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 10px auto;
 }
 
 .filter-pill {
@@ -81,18 +77,14 @@ button:hover {
   background: transparent;
   color: #aaa;
   cursor: pointer;
-  font-size: 13px;
-  transition: 0.2s;
 }
 
-.filter-pill:hover,
 .filter-pill.active {
   background: #e50914;
-  border-color: #e50914;
   color: white;
-  transform: none;
 }
 
+/* Grid */
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -104,10 +96,7 @@ button:hover {
   background: #1c1c1c;
   padding: 10px;
   border-radius: 10px;
-  transition: 0.3s;
 }
-
-.card:hover { transform: scale(1.05); }
 
 .card img {
   width: 100%;
@@ -123,18 +112,7 @@ button:hover {
   font-size: 12px;
 }
 
-#toast {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #333;
-  padding: 10px 20px;
-  border-radius: 5px;
-  display: none;
-  z-index: 999;
-}
-
+/* Progress */
 #progressBar {
   width: 80%;
   margin: 10px auto;
@@ -147,14 +125,24 @@ button:hover {
   background: #e50914;
   width: 0%;
   border-radius: 10px;
-  transition: width 0.4s ease;
 }
 
-#emptyMsg {
+/* Toast */
+#toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  padding: 10px 20px;
+  border-radius: 5px;
   display: none;
-  margin-top: 40px;
+}
+
+#EmptyMsg {
+  display: none;
+  margin-top: 20px;
   color: #555;
-  font-size: 16px;
 }
 </style>
 </head>
@@ -170,37 +158,35 @@ button:hover {
   <option>Drama</option>
   <option>Horror</option>
 </select>
-<button onclick="AddMovie()">Add</button>
-<button onclick="RandomMovie()">🎲 Surprise Me</button>
+
+<button onclick="addMovie()">Add</button>
+<button onclick="randomMovie()">🎲 Surprise Me</button>
 
 <br>
 <input id="searchInput" placeholder="Search..." onkeyup="applyFilters()">
 
 <!-- Stats -->
 <div id="statsBar">
-  <div class="stat-chip">🎬 Total <span class="num" id="statTotal">0</span></div>
-  <div class="stat-chip">✅ Watched <span class="num" id="statWatched">0</span></div>
-  <div class="stat-chip">⏳ Unwatched <span class="num" id="statUnwatched">0</span></div>
-  <div class="stat-chip">★ Favorites <span class="num" id="statFavs">0</span></div>
+  <div class="stat-chip">🎬 Total <span id="statTotal">0</span></div>
+  <div class="stat-chip">✅ Watched <span id="statWatched">0</span></div>
+  <div class="stat-chip">⏳ Unwatched <span id="statUnwatched">0</span></div>
+  <div class="stat-chip">★ Favorites <span id="statFavs">0</span></div>
 </div>
 
 <!-- Progress -->
-<div id="ProgressBar"><div id="progress"></div></div>
+<div id="progressBar"><div id="progress"></div></div>
 
-<!-- Filter Pills -->
+<!-- Filters -->
 <div id="filters">
-  <button class="filter-pill active" data-filter="All" onclick="setFilter('all', this)">All</button>
-  <button class="filter-pill" data-filter="Watched" onclick="setFilter('watched', this)">✅ Watched</button>
-  <button class="filter-pill" data-filter="Unwatched" onclick="setFilter('unwatched', this)">⏳ Unwatched</button>
-  <button class="filter-pill" data-filter="favorites" onclick="setFilter('favorites', this)">★ Favorites</button>
-  <button class="filter-pill" data-filter="Action" onclick="setFilter('Action', this)">Action</button>
-  <button class="filter-pill" data-filter="Comedy" onclick="setFilter('Comedy', this)">Comedy</button>
-  <button class="filter-pill" data-filter="Drama" onclick="setFilter('Drama', this)">Drama</button>
-  <button class="filter-pill" data-filter="Horror" onclick="setFilter('Horror', this)">Horror</button>
+  <button class="filter-pill active" onclick="setFilter('all', this)">All</button>
+  <button class="filter-pill" onclick="setFilter('watched', this)">Watched</button>
+  <button class="filter-pill" onclick="setFilter('unwatched', this)">Unwatched</button>
+  <button class="filter-pill" onclick="setFilter('favorites', this)">Favorites</button>
 </div>
 
 <div class="container" id="MovieList"></div>
-<p id="EmptyMsg">No movies match this filter 🎭</p>
+<p id="EmptyMsg">No movies found 🎭</p>
+
 <div id="toast"></div>
 
 <script>
@@ -226,42 +212,46 @@ async function fetchMovieData(name) {
       `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(name)}`
     );
     let data = await res.json();
+
     if (data.results && data.results[0]) {
-      let movie = data.results[0];
+      let m = data.results[0];
       return {
-        poster: movie.poster_path
-          ? "https://image.tmdb.org/t/p/w500" + movie.poster_path
-          : "https://via.placeholder.com/300x450?text=No+Image",
-        rating: movie.vote_average,
-        year: movie.release_date ? movie.release_date.split("-")[0] : "N/A"
+        poster: m.poster_path
+          ? "https://image.tmdb.org/t/p/w500" + m.poster_path
+          : "https://via.placeholder.com/300x450",
+        rating: m.vote_average,
+        year: m.release_date ? m.release_date.split("-")[0] : "N/A"
       };
     }
   } catch {}
-  return { poster: "https://via.placeholder.com/300x450?text=No+Image", rating: "N/A", year: "N/A" };
+
+  return { poster: "https://via.placeholder.com/300x450", rating: "N/A", year: "N/A" };
 }
 
 async function addMovie() {
-  let name = movieInput.value.trim();
-  let cat = document.getElementById("category").value;
-  if (!name) return showToast("⚠️ Enter movie name");
-  if (movies.some(m => m.name.toLowerCase() === name.toLowerCase()))
-    return showToast("❌ Already exists");
+  let name = document.getElementById("movieInput").value.trim();
+  let cat = document.getElementById("Category").value;
 
-  showToast("⏳ Fetching...");
+  if (!name) return showToast("Enter movie name");
+
+  if (movies.some(m => m.name.toLowerCase() === name.toLowerCase()))
+    return showToast("Already exists");
+
+  showToast("Fetching...");
   let data = await fetchMovieData(name);
 
   movies.push({ name, category: cat, watched: false, favorite: false, ...data });
   save();
   displayMovies();
-  showToast("✅ Added!");
-  movieInput.value = "";
+
+  document.getElementById("movieInput").value = "";
+  showToast("Added!");
 }
 
 function deleteMovie(i) {
   movies.splice(i, 1);
   save();
   displayMovies();
-  showToast("🗑 Deleted");
 }
 
 function toggleWatched(i) {
@@ -287,15 +277,14 @@ function applyFilters() {
   let q = document.getElementById("searchInput").value.toLowerCase();
 
   let filtered = movies.filter(m => {
-    const matchSearch = m.name.toLowerCase().includes(q);
-    if (!matchSearch) return false;
+    if (!m.name.toLowerCase().includes(q)) return false;
 
     if (activeFilter === "all") return true;
     if (activeFilter === "watched") return m.watched;
     if (activeFilter === "unwatched") return !m.watched;
     if (activeFilter === "favorites") return m.favorite;
-    // category filters
-    return m.category === activeFilter;
+
+    return true;
   });
 
   displayMovies(filtered);
@@ -309,8 +298,9 @@ function updateStats() {
 }
 
 function displayMovies(list = movies) {
-  let container = document.getElementById("movieList");
-  let emptyMsg = document.getElementById("emptyMsg");
+  let container = document.getElementById("MovieList");
+  let emptyMsg = document.getElementById("EmptyMsg");
+
   container.innerHTML = "";
 
   let watchedCount = movies.filter(m => m.watched).length;
@@ -325,18 +315,29 @@ function displayMovies(list = movies) {
     emptyMsg.style.display = "none";
   }
 
-  // We need real indices into the `movies` array for mutations
-  list.forEach((m) => {
-    const realIndex = movies.indexOf(m);
+  list.forEach(m => {
+    let i = movies.indexOf(m);
+
     container.innerHTML += `
       <div class="card">
-        <img src="${m.poster}" alt="${m.name}">
-        <h3 class="${m.watched ? 'watched' : ''} ${m.favorite ? 'favorite' : ''}">${m.name}</h3>
-        <p>📅 ${m.year} | ⭐ ${typeof m.rating === 'number' ? m.rating.toFixed(1) : m.rating}</p>
-        <p style="color:#888;font-size:13px">${m.category}</p>
-        <button class="small-btn" onclick="toggleWatched(${realIndex})">${m.watched ? "Unwatch" : "✅ Watched"}</button>
-        <button class="small-btn" onclick="toggleFavorite(${realIndex})">${m.favorite ? "★ Unfav" : "☆ Fav"}</button>
-        <button class="small-btn" onclick="deleteMovie(${realIndex})">🗑 Delete</button>
+        <img src="${m.poster}">
+        <h3 class="${m.watched ? 'watched' : ''} ${m.favorite ? 'favorite' : ''}">
+          ${m.name}
+        </h3>
+        <p>${m.year} | ⭐ ${typeof m.rating === 'number' ? m.rating.toFixed(1) : m.rating}</p>
+        <p>${m.category}</p>
+
+        <button class="small-btn" onclick="toggleWatched(${i})">
+          ${m.watched ? "Unwatch" : "Watched"}
+        </button>
+
+        <button class="small-btn" onclick="toggleFavorite(${i})">
+          ${m.favorite ? "Unfav" : "Fav"}
+        </button>
+
+        <button class="small-btn" onclick="deleteMovie(${i})">
+          Delete
+        </button>
       </div>
     `;
   });
@@ -345,7 +346,7 @@ function displayMovies(list = movies) {
 function randomMovie() {
   if (!movies.length) return showToast("No movies!");
   let m = movies[Math.floor(Math.random() * movies.length)];
-  showToast("🎬 Watch: " + m.name);
+  showToast("Watch: " + m.name);
 }
 
 document.getElementById("movieInput").addEventListener("keypress", e => {
@@ -357,3 +358,4 @@ displayMovies();
 
 </body>
 </html>
+```
