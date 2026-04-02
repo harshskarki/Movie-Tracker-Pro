@@ -156,6 +156,17 @@ button:hover {
   color: #555;
   font-size: 16px;
 }
+
+/* Footer */
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #111;
+  color: #777;
+  font-size: 12px;
+  padding: 8px 0;
+}
 </style>
 </head>
 
@@ -202,6 +213,11 @@ button:hover {
 <div class="container" id="movieList"></div>
 <p id="emptyMsg">No movies match this filter 🎭</p>
 <div id="toast"></div>
+
+<!-- ✅ Added Footer -->
+<footer>
+  Made by harshskarki 🚀
+</footer>
 
 <script>
 const API_KEY = "279e916fb273ebd5f4db034459cad740";
@@ -294,7 +310,6 @@ function applyFilters() {
     if (activeFilter === "watched") return m.watched;
     if (activeFilter === "unwatched") return !m.watched;
     if (activeFilter === "favorites") return m.favorite;
-    // category filters
     return m.category === activeFilter;
   });
 
@@ -325,7 +340,6 @@ function displayMovies(list = movies) {
     emptyMsg.style.display = "none";
   }
 
-  // We need real indices into the `movies` array for mutations
   list.forEach((m) => {
     const realIndex = movies.indexOf(m);
     container.innerHTML += `
