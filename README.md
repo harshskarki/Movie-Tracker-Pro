@@ -67,21 +67,13 @@ It fetches real-time movie data using the TMDB API and stores everything locally
 ## 📂 Project Structure
 
 movie-tracker-pro/
-
 │── index.html
-
 │── style.css
-
 │── script.js
-
 │── screenshots/
-
     │── home.png
-    
     │── movies.png
-    
     │── filters.png
-
 
 ---
 
