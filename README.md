@@ -10,8 +10,8 @@
 ---
 
 ## 🚀 Live Demo  
-👉 https://movietrackerpro.netlify.app/
-👉 https://movie-tracker-pro.vercel.app/
+👉 https://movietrackerpro.netlify.app/ 
+👉 https://movie-tracker-pro.vercel.app/login.html
 
 ---
 
