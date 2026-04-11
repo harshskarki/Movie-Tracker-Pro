@@ -16,19 +16,15 @@
     }
 
     .card {
-      background: rgba(20, 20, 20, 0.9);
+      background: rgba(20, 20, 20, 0.95);
       padding: 40px;
       border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      width: 320px;
       text-align: center;
-      width: 300px;
-      backdrop-filter: blur(10px);
+      box-shadow: 0 0 30px rgba(0,0,0,0.6);
     }
 
-    h2 {
-      margin-bottom: 20px;
-      color: #e50914;
-    }
+    h2 { color: #e50914; }
 
     input {
       width: 100%;
@@ -38,12 +34,19 @@
       border: none;
       background: #2a2a2a;
       color: white;
-      font-size: 14px;
-      outline: none;
     }
 
-    input:focus {
-      border: 1px solid #e50914;
+    .password-box {
+      position: relative;
+    }
+
+    .toggle {
+      position: absolute;
+      right: 10px;
+      top: 14px;
+      cursor: pointer;
+      font-size: 12px;
+      color: #aaa;
     }
 
     button {
@@ -54,29 +57,34 @@
       border-radius: 6px;
       background: #e50914;
       color: white;
-      font-size: 15px;
       cursor: pointer;
       transition: 0.3s;
     }
 
     button:hover {
-      background: #ff1f1f;
       transform: scale(1.05);
+      background: #ff1f1f;
     }
 
-    .alt-btn {
-      background: transparent;
-      border: 1px solid #555;
+    .google-btn {
+      background: #fff;
+      color: black;
+      font-weight: bold;
     }
 
-    .alt-btn:hover {
-      background: #333;
+    .google-btn:hover {
+      background: #ddd;
     }
 
-    .footer {
-      margin-top: 15px;
-      font-size: 12px;
-      color: #777;
+    #error {
+      color: #ff4c4c;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    #loader {
+      display: none;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -87,14 +95,19 @@
   <h2>🎬 Movie Tracker</h2>
 
   <input id="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
+
+  <div class="password-box">
+    <input id="password" type="password" placeholder="Password">
+    <span class="toggle" onclick="togglePass()">SHOW</span>
+  </div>
 
   <button onclick="login()">Login</button>
-  <button class="alt-btn" onclick="signup()">Create Account</button>
+  <button onclick="signup()">Create Account</button>
 
-  <div class="footer">
-    Welcome back 👋
-  </div>
+  <button class="google-btn" onclick="googleLogin()">Sign in with Google</button>
+
+  <div id="loader">⏳ Loading...</div>
+  <div id="error"></div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -112,33 +125,56 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-// Auto redirect if logged in
+// Auto redirect
 firebase.auth().onAuthStateChanged(user => {
-  if (user) {
-    window.location.href = "index.html";
-  }
+  if (user) window.location.href = "index.html";
 });
 
+function showError(msg) {
+  document.getElementById("error").innerText = msg;
+}
+
+function showLoader(show) {
+  document.getElementById("loader").style.display = show ? "block" : "none";
+}
+
+function togglePass() {
+  let pass = document.getElementById("password");
+  pass.type = pass.type === "password" ? "text" : "password";
+}
+
 function login() {
-  let email = document.getElementById("email").value;
-  let pass = document.getElementById("password").value;
+  showLoader(true);
+  showError("");
+
+  let email = email.value;
+  let pass = password.value;
 
   firebase.auth().signInWithEmailAndPassword(email, pass)
-    .then(() => {
-      window.location.href = "index.html";
-    })
-    .catch(err => alert(err.message));
+    .then(() => window.location.href = "index.html")
+    .catch(err => showError(err.message))
+    .finally(() => showLoader(false));
 }
 
 function signup() {
-  let email = document.getElementById("email").value;
-  let pass = document.getElementById("password").value;
+  showLoader(true);
+  showError("");
+
+  let email = email.value;
+  let pass = password.value;
 
   firebase.auth().createUserWithEmailAndPassword(email, pass)
-    .then(() => {
-      window.location.href = "index.html";
-    })
-    .catch(err => alert(err.message));
+    .then(() => window.location.href = "index.html")
+    .catch(err => showError(err.message))
+    .finally(() => showLoader(false));
+}
+
+function googleLogin() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  firebase.auth().signInWithPopup(provider)
+    .then(() => window.location.href = "index.html")
+    .catch(err => showError(err.message));
 }
 </script>
 
