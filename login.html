@@ -34,6 +34,11 @@
       border: none;
       background: #2a2a2a;
       color: white;
+      outline: none;
+    }
+
+    input:focus {
+      border: 1px solid #e50914;
     }
 
     .password-box {
@@ -80,6 +85,7 @@
       color: #ff4c4c;
       font-size: 13px;
       margin-top: 10px;
+      min-height: 18px;
     }
 
     #loader {
@@ -125,7 +131,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-// Auto redirect
+// Auto redirect if logged in
 firebase.auth().onAuthStateChanged(user => {
   if (user) window.location.href = "index.html";
 });
@@ -147,10 +153,16 @@ function login() {
   showLoader(true);
   showError("");
 
-  let email = email.value;
-  let pass = password.value;
+  let emailVal = document.getElementById("email").value;
+  let passVal = document.getElementById("password").value;
 
-  firebase.auth().signInWithEmailAndPassword(email, pass)
+  if (!emailVal || !passVal) {
+    showError("Please fill all fields");
+    showLoader(false);
+    return;
+  }
+
+  firebase.auth().signInWithEmailAndPassword(emailVal, passVal)
     .then(() => window.location.href = "index.html")
     .catch(err => showError(err.message))
     .finally(() => showLoader(false));
@@ -160,10 +172,16 @@ function signup() {
   showLoader(true);
   showError("");
 
-  let email = email.value;
-  let pass = password.value;
+  let emailVal = document.getElementById("email").value;
+  let passVal = document.getElementById("password").value;
 
-  firebase.auth().createUserWithEmailAndPassword(email, pass)
+  if (!emailVal || !passVal) {
+    showError("Please fill all fields");
+    showLoader(false);
+    return;
+  }
+
+  firebase.auth().createUserWithEmailAndPassword(emailVal, passVal)
     .then(() => window.location.href = "index.html")
     .catch(err => showError(err.message))
     .finally(() => showLoader(false));
