@@ -1,17 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
+  <title>Login - Movie Tracker</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #000000, #1a1a1a);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: rgba(20, 20, 20, 0.9);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      text-align: center;
+      width: 300px;
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #e50914;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: none;
+      background: #2a2a2a;
+      color: white;
+      font-size: 14px;
+      outline: none;
+    }
+
+    input:focus {
+      border: 1px solid #e50914;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #e50914;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ff1f1f;
+      transform: scale(1.05);
+    }
+
+    .alt-btn {
+      background: transparent;
+      border: 1px solid #555;
+    }
+
+    .alt-btn:hover {
+      background: #333;
+    }
+
+    .footer {
+      margin-top: 15px;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
 </head>
-<body style="text-align:center; margin-top:100px; font-family:sans-serif;">
 
-<h2>Login</h2>
+<body>
 
-<input id="email" placeholder="Email"><br><br>
-<input id="password" type="password" placeholder="Password"><br><br>
+<div class="card">
+  <h2>🎬 Movie Tracker</h2>
 
-<button onclick="login()">Login</button>
-<button onclick="signup()">Signup</button>
+  <input id="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+
+  <button onclick="login()">Login</button>
+  <button class="alt-btn" onclick="signup()">Create Account</button>
+
+  <div class="footer">
+    Welcome back 👋
+  </div>
+</div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
@@ -20,12 +104,15 @@
 const firebaseConfig = {
   apiKey: "AIzaSyCcUfxJmbe-iHSGSr8U_xDRKvG1Uz7okwM",
   authDomain: "movie-tracker-pro.firebaseapp.com",
-  projectId: "movie-tracker-pro"
+  projectId: "movie-tracker-pro",
+  storageBucket: "movie-tracker-pro.appspot.com",
+  messagingSenderId: "261461241343",
+  appId: "1:261461241343:web:727b75c82896b91ac0cbca"
 };
 
 firebase.initializeApp(firebaseConfig);
 
-// ✅ Auto redirect if already logged in
+// Auto redirect if logged in
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     window.location.href = "index.html";
@@ -49,7 +136,7 @@ function signup() {
 
   firebase.auth().createUserWithEmailAndPassword(email, pass)
     .then(() => {
-      alert("Account created!");
+      window.location.href = "index.html";
     })
     .catch(err => alert(err.message));
 }
