@@ -220,6 +220,27 @@ footer {
   Made by harshskarki Ⓗ
 </footer>
 
+<!-- Firebase SDK (correct for your project) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "279e916fb273ebd5f4db034459cad740",
+  authDomain: "movie-tracker-pro.firebaseapp.com",
+  projectId: "movie-tracker-pro"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+// Protect page
+firebase.auth().onAuthStateChanged(user => {
+  if (!user) {
+    window.location.href = "login.html";
+  }
+});
+</script>
+  
 <script>
 const API_KEY = "279e916fb273ebd5f4db034459cad740";
 
@@ -366,36 +387,17 @@ function randomMovie() {
 document.getElementById("movieInput").addEventListener("keypress", e => {
   if (e.key === "Enter") addMovie();
 });
-
-displayMovies();
-
+  
   function logout() {
   firebase.auth().signOut().then(() => {
     window.location.href = "login.html";
   });
 }
+  
+displayMovies();
 
-  <!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
-<script>
-const firebaseConfig = {
-  apiKey: "279e916fb273ebd5f4db034459cad740",
-  authDomain: "movie-tracker-pro.firebaseapp.com",
-  projectId: "movie-tracker-pro"
-};
-
-firebase.initializeApp(firebaseConfig);
-
-// 🔐 Protect page
-firebase.auth().onAuthStateChanged(user => {
-  if (!user) {
-    window.location.href = "login.html";
-  }
-});
 </script>
-</script>
-
 </body>
 </html>
+
+
