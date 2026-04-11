@@ -11,7 +11,7 @@
 
 ## 🚀 Live Demo  
 👉 https://movietrackerpro.netlify.app/
-👉 https://movie-tracker-pro.vercel.app/index.html
+👉 https://movie-tracker-pro.vercel.app/
 
 ---
 
