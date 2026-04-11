@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+</head>
+<body style="text-align:center; margin-top:100px; font-family:sans-serif;">
+
+<h2>Login</h2>
+
+<input id="email" placeholder="Email"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
+
+<button onclick="login()">Login</button>
+<button onclick="signup()">Signup</button>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCcUfxJmbe-iHSGSr8U_xDRKvG1Uz7okwM",
+  authDomain: "movie-tracker-pro.firebaseapp.com",
+  projectId: "movie-tracker-pro"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+function login() {
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("password").value;
+
+  firebase.auth().signInWithEmailAndPassword(email, pass)
+    .then(() => {
+      window.location.href = "index.html";
+    })
+    .catch(err => alert(err.message));
+}
+
+function signup() {
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("password").value;
+
+  firebase.auth().createUserWithEmailAndPassword(email, pass)
+    .then(() => {
+      alert("Account created!");
+    })
+    .catch(err => alert(err.message));
+}
+</script>
+
+</body>
+</html>
