@@ -1,9 +1,5 @@
 # 🎬 Movie Tracker Pro
 
-![Made with JavaScript](https://img.shields.io/badge/Made%20with-JavaScript-yellow)
-![Frontend Only](https://img.shields.io/badge/Frontend-Only-blue)
-![No Backend](https://img.shields.io/badge/Backend-None-lightgrey)
-![Status](https://img.shields.io/badge/Status-Active-success)
 
 🍿 A zero-setup, single-file movie watchlist app to track, organize, and discover movies instantly.
 
