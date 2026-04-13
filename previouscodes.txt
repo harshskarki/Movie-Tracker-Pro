@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login - Movie Tracker</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #000000, #1a1a1a);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: rgba(20, 20, 20, 0.95);
+      padding: 40px;
+      border-radius: 15px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    }
+
+    h2 { color: #e50914; }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: none;
+      background: #2a2a2a;
+      color: white;
+      outline: none;
+    }
+
+    input:focus {
+      border: 1px solid #e50914;
+    }
+
+    .password-box {
+      position: relative;
+    }
+
+    .toggle {
+      position: absolute;
+      right: 10px;
+      top: 14px;
+      cursor: pointer;
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #e50914;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: #ff1f1f;
+    }
+
+    .google-btn {
+      background: #fff;
+      color: black;
+      font-weight: bold;
+    }
+
+    .google-btn:hover {
+      background: #ddd;
+    }
+
+    #error {
+      color: #ff4c4c;
+      font-size: 13px;
+      margin-top: 10px;
+      min-height: 18px;
+    }
+
+    #loader {
+      display: none;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>🎬 Movie Tracker</h2>
+
+  <input id="email" placeholder="Email">
+
+  <div class="password-box">
+    <input id="password" type="password" placeholder="Password">
+    <span class="toggle" onclick="togglePass()">SHOW</span>
+  </div>
+
+  <button onclick="login()">Login</button>
+  <button onclick="signup()">Create Account</button>
+
+  <button class="google-btn" onclick="googleLogin()">Sign in with Google</button>
+
+  <div id="loader">⏳ Loading...</div>
+  <div id="error"></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCcUfxJmbe-iHSGSr8U_xDRKvG1Uz7okwM",
+  authDomain: "movie-tracker-pro.firebaseapp.com",
+  projectId: "movie-tracker-pro",
+  storageBucket: "movie-tracker-pro.appspot.com",
+  messagingSenderId: "261461241343",
+  appId: "1:261461241343:web:727b75c82896b91ac0cbca"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+// Auto redirect if logged in
+firebase.auth().onAuthStateChanged(user => {
+  if (user) window.location.href = "index.html";
+});
+
+function showError(msg) {
+  document.getElementById("error").innerText = msg;
+}
+
+function showLoader(show) {
+  document.getElementById("loader").style.display = show ? "block" : "none";
+}
+
+function togglePass() {
+  let pass = document.getElementById("password");
+  pass.type = pass.type === "password" ? "text" : "password";
+}
+
+function login() {
+  showLoader(true);
+  showError("");
+
+  let emailVal = document.getElementById("email").value;
+  let passVal = document.getElementById("password").value;
+
+  if (!emailVal || !passVal) {
+    showError("Please fill all fields");
+    showLoader(false);
+    return;
+  }
+
+  firebase.auth().signInWithEmailAndPassword(emailVal, passVal)
+    .then(() => window.location.href = "index.html")
+    .catch(err => showError(err.message))
+    .finally(() => showLoader(false));
+}
+
+function signup() {
+  showLoader(true);
+  showError("");
+
+  let emailVal = document.getElementById("email").value;
+  let passVal = document.getElementById("password").value;
+
+  if (!emailVal || !passVal) {
+    showError("Please fill all fields");
+    showLoader(false);
+    return;
+  }
+
+  firebase.auth().createUserWithEmailAndPassword(emailVal, passVal)
+    .then(() => window.location.href = "index.html")
+    .catch(err => showError(err.message))
+    .finally(() => showLoader(false));
+}
+
+function googleLogin() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  firebase.auth().signInWithPopup(provider)
+    .then(() => window.location.href = "index.html")
+    .catch(err => showError(err.message));
+}
+</script>
+
+</body>
+</html>
