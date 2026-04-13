@@ -1,8 +1,23 @@
 # 🎬 Movie Tracker Pro
 
+![GitHub stars](https://img.shields.io/github/stars/harshskarki/Movie-Tracker-Pro?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/harshskarki/Movie-Tracker-Pro?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/harshskarki/Movie-Tracker-Pro?style=for-the-badge)
+![License](https://img.shields.io/github/license/harshskarki/Movie-Tracker-Pro?style=for-the-badge)
+![HTML](https://img.shields.io/badge/HTML-5-orange?style=for-the-badge)
+![CSS](https://img.shields.io/badge/CSS-3-blue?style=for-the-badge)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow?style=for-the-badge)
+![Firebase](https://img.shields.io/badge/Firebase-Backend-orange?style=for-the-badge)
+![Firestore](https://img.shields.io/badge/Firestore-Database-yellow?style=for-the-badge)
+![API](https://img.shields.io/badge/API-TMDB-blue?style=for-the-badge)
+![Visitors](https://komarev.com/ghpvc/?username=harshskarki&repo=Movie-Tracker-Pro&style=for-the-badge)
+
 🍿 A modern full-featured movie tracking web app with authentication, smart filtering, and real-time movie data powered by TMDB API.
 
 ---
+
+[![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=for-the-badge)](https://movie-tracker-pro.vercel.app/)
+![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 
 ## 🚀 Live Demo
 
@@ -132,11 +147,28 @@ This project demonstrates strong frontend engineering skills by integrating:
 ## 🏆 Project Highlights
 
 ✔ Implemented authentication system (Google + Email login)
+
 ✔ Integrated real-time database (Firestore)
+
 ✔ Built advanced filtering & search system
+
 ✔ Designed responsive and modern UI
+
 ✔ Developed full CRUD functionality
+
 ✔ Applied clean state management logic
+
+---
+
+## 🎯 Why This Project?
+
+This project demonstrates the ability to build a real-world full-stack application with authentication, real-time database integration, and dynamic API usage.
+
+It highlights skills in:
+- Frontend architecture and UI/UX design  
+- State management and filtering logic  
+- API integration and asynchronous programming  
+- Cloud-based backend using Firebase  
 
 ---
 
