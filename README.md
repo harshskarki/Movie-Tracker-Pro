@@ -10,6 +10,8 @@
 
 👉 https://movie-tracker-pro.vercel.app/login.html
 
+https://movie-tracker-pro.vercel.app/
+
 
 ## 📌 Overview
 
