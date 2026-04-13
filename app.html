@@ -241,12 +241,17 @@ const db = firebase.firestore();
 
 // Protect page
 firebase.auth().onAuthStateChanged(user => {
-  if (!user) {
-    window.location.href = "login.html";
+  if (user) {
+    loadMovies(); // ✅ only run when user exists
   } else {
-    loadMovies(); // 🔥 important
+    setTimeout(() => {
+      if (!firebase.auth().currentUser) {
+        window.location.href = "login.html";
+      }
+    }, 1500); // ⏳ wait for Firebase
   }
 });
+  
 </script>
   
 <script>
