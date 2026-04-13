@@ -3,6 +3,9 @@
 <head>
   <title>Movie Tracker Pro</title>
 
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
   <style>
     body {
       margin: 0;
@@ -13,7 +16,6 @@
       overflow-x: hidden;
     }
 
-    /* 🔥 Hero Section */
     .hero {
       padding: 120px 20px 80px;
     }
@@ -33,7 +35,6 @@
       line-height: 1.6;
     }
 
-    /* 🔥 Button (FIXED NAVIGATION) */
     .btn {
       display: inline-block;
       margin-top: 35px;
@@ -52,7 +53,6 @@
       box-shadow: 0 0 25px rgba(229, 9, 20, 0.7);
     }
 
-    /* 🔥 Features Section */
     .features {
       margin: 80px auto;
       display: flex;
@@ -82,7 +82,6 @@
       color: #e50914;
     }
 
-    /* 🔥 Footer */
     footer {
       margin-top: 50px;
       padding: 15px;
@@ -98,7 +97,6 @@
   <h1>🎬 Movie Tracker Pro</h1>
   <p>Track your movies, discover new ones, and manage your watchlist like a pro.</p>
 
-  <!-- ✅ FIXED BUTTON -->
   <a href="login.html" class="btn">🚀 Get Started</a>
 </div>
 
@@ -127,6 +125,25 @@
 <footer>
   Made by harshskarki Ⓗ
 </footer>
+
+<!-- ✅ SCRIPT AT BOTTOM -->
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCcUfxJmbe-iHSGSr8U_xDRKvG1Uz7okwM",
+  authDomain: "movie-tracker-pro.firebaseapp.com",
+  projectId: "movie-tracker-pro",
+};
+
+firebase.initializeApp(firebaseConfig);
+
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    const btn = document.querySelector(".btn");
+    btn.innerText = "🎬 Go to App";
+    btn.href = "app.html";
+  }
+});
+</script>
 
 </body>
 </html>
