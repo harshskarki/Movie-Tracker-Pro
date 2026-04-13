@@ -1,185 +1,144 @@
 # 🎬 Movie Tracker Pro
 
-🍿 A modern full-featured movie tracking web app with authentication, smart filtering, and real-time movie data powered by TMDB API. 
+🍿 A modern full-featured movie tracking web app with authentication, smart filtering, and real-time movie data powered by TMDB API.
 
+---
 
 ## 🚀 Live Demo
-
 
 👉 https://movietrackerpro.netlify.app/
 
 👉 https://movie-tracker-pro.vercel.app/
 
+---
+
 ## 📌 Overview
 
+**Movie Tracker Pro** is a fully interactive web application that allows users to manage a personalized movie watchlist with authentication and real-time data.
 
-Movie Tracker Pro is a fully interactive frontend web app that allows users to manage a personal movie watchlist with authentication and real-time movie data.
+This project demonstrates strong frontend engineering skills by integrating:
 
+* 🔐 Firebase Authentication
+* ☁️ Firestore Real-time Database
+* 🎬 TMDB API integration
+* 🎯 Advanced filtering & state management
 
-It combines:
+---
 
+## ✨ Key Features
 
--Firebase Authentication 🔐
+### 🔐 Authentication System
 
--TMDB API integration 🎬
+* Secure login & signup (Firebase Auth)
+* Google Sign-In support
+* Protected routes (only logged-in users can access dashboard)
+* Auto-login persistence
+* Logout functionality
 
--LocalStorage persistence 💾
-
--Advanced UI filtering system 🎯
-
-### ✨ Features
-
--🔐 Authentication System
-
--Email/password login & signup (Firebase Auth)
-
--Google Sign-In support
-
--Auto redirect if user already logged in
-
--Protected routes (index page requires login)
-
--Logout functionality
+---
 
 ### 🎬 Movie Management
 
--Add movies instantly by name
+* Add movies instantly by name
+* Auto-fetch poster, rating, and release year (TMDB API)
+* Prevent duplicate entries
+* Delete movies
+* 🎲 “Surprise Me” random movie picker
 
--Auto-fetch poster, rating, and year (TMDB API)
-
--Prevent duplicate entries
-
--Delete movies
-
--Random “🎲 Surprise Me” movie picker
+---
 
 ### 📊 Smart Tracking System
 
--Total movies counter
+* Total movies counter
+* Watched / Unwatched tracking
+* Favorites system ⭐
+* Real-time stats dashboard
+* Dynamic progress bar (watch completion %)
 
--Watched / Unwatched tracking
-
--Favorites system ⭐
-
--Progress bar (watch completion %)
-
--Real-time stats dashboard
+---
 
 ### 🔍 Search & Filters
 
--Live search bar
+* Live search functionality
+* Category filters (Action, Comedy, Drama, Horror)
+* Status filters:
 
--Category filters (Action, Comedy, Drama, Horror)
+  * Watched
+  * Unwatched
+  * Favorites
+* Combined filtering (search + category + status)
 
--Status filters:
-
--Watched
-
--Unwatched
-
--Favorites
-
--Combined filtering (search + category + status)
+---
 
 ### 🎨 UI/UX Enhancements
 
--Dark cinematic theme
+* Dark cinematic theme 🎬
+* Responsive grid layout (mobile + desktop)
+* Animated movie cards
+* Toast notification system
+* Filter pills UI
+* Stats chips UI
+* Smooth progress animations
 
--Responsive grid layout (mobile + desktop)
-
--Animated hover cards
-
--Toast notifications system
-
--Filter pills UI
-
--Stats chips UI
-
--Progress bar animation
-
--Fixed footer UI
-
-### 💾 Storage System
-
--Movies saved in browser localStorage
-
--Persistent across sessions (same device)
-
--Firebase handles authentication state
-
-
-
-## 📸 Screenshots
-
-<img width="1920" height="968" alt="Image" src="https://github.com/user-attachments/assets/0e0b586a-3d01-4d96-9e82-01b7ddb69450" />
-
-
+---
 
 ## ⚙️ How It Works
 
--User signs up / logs in (Firebase Auth)
+1. User signs up / logs in via Firebase Authentication
+2. Redirected to dashboard
+3. User adds a movie
+4. TMDB API fetches movie details
+5. Movie is stored in Firestore database
+6. UI updates instantly with real-time data
 
--Redirected to dashboard (index.html)
-
--Add movie name
-
--TMDB API fetches movie details
-
--Movie stored in localStorage
-
--UI updates instantly with filters & stats
+---
 
 ## 🛠️ Tech Stack
 
--HTML5
+* HTML5
+* CSS3
+* JavaScript (Vanilla JS)
+* Firebase Authentication
+* Firebase Firestore
+* TMDB API
 
--CSS3
+---
 
--JavaScript (Vanilla JS)
+## 📸 Screenshots
 
--Firebase Authentication
+<img width="1920" height="968" src="https://github.com/user-attachments/assets/0e0b586a-3d01-4d96-9e82-01b7ddb69450" />
 
--TMDB API
-
--Browser localStorage
-
-## 📂 Project Structure
-
-movie-tracker-pro/
-│── login.html        # Authentication page (Firebase Auth + Google login)
-│── index.html        # Main dashboard (movie tracker)
-│── script.js         # Core logic (embedded in HTML)
-│── style.css         # UI styling (inline in current version)
-│
-└── assets/
-    └── screenshots/
-
+---
 
 ## ⚠️ Limitations
 
--Data stored locally (not cloud synced yet)
+* API key exposed in frontend (not production secure)
+* Requires internet for TMDB API
+* Basic Firestore rules (can be improved for production security)
 
--API key exposed in frontend (not production secure)
+---
 
--Requires internet for TMDB API
+## 🚀 Future Improvements
 
--Firebase rules must be configured properly
+* 🤖 AI-based movie recommendations
+* 👥 Shared watchlists (multi-user collaboration)
+* 📱 Mobile app (React Native / Flutter)
+* 🔔 Notifications for upcoming releases
+* 🎯 Advanced filters (genre, rating, year)
+* 📈 Watch history analytics
 
-## 🚀 Future Improvements 🤔💭
+---
 
-☁️ Cloud database (Firestore sync across devices)
+## 🏆 Project Highlights
 
-👥 Multi-user shared watchlists
+✔ Implemented authentication system (Google + Email login)
+✔ Integrated real-time database (Firestore)
+✔ Built advanced filtering & search system
+✔ Designed responsive and modern UI
+✔ Developed full CRUD functionality
+✔ Applied clean state management logic
 
-🤖 AI movie recommendations
-
-📱 Mobile app version (React Native / Flutter)
-
-🎯 Watch history timeline
-
-🔔 Notifications for movie releases
-
-🔎 Advanced search (genre + year + rating filters)
+---
 
 ## 🤝 Connect With Me
 
@@ -189,24 +148,8 @@ movie-tracker-pro/
 
 💻 GitHub: https://github.com/harshskarki
 
-## 🏆 Project Highlights
+---
 
-✔ Firebase Authentication system (Google + Email login)
-
-✔ Real-time API integration (TMDB)
-
-✔ Advanced filtering + stats system
-
-✔ Fully responsive UI design
-
-✔ Clean frontend architecture
-
-✔ Strong CRUD + state management logic
-
-✔ Production-style project structure
-
-
-# ⚖️ Disclaimer
+## ⚖️ Disclaimer
 
 This product uses the TMDB API but is not endorsed or certified by TMDB.
-
