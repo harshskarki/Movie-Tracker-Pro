@@ -136,11 +136,18 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+const btn = document.querySelector(".btn");
+
+// Optional loading state (pro UX)
+btn.innerText = "⏳ Loading...";
+
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
-    const btn = document.querySelector(".btn");
     btn.innerText = "🎬 Go to App";
     btn.href = "app.html";
+  } else {
+    btn.innerText = "🚀 Get Started";
+    btn.href = "login.html";
   }
 });
 </script>
