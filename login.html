@@ -220,7 +220,7 @@ async function signup() {
     const pass = document.getElementById("password").value;
 
     await firebase.auth().createUserWithEmailAndPassword(email, pass);
-    window.location.href = "index.html";
+    window.location.href = "app.html";
 
   } catch (err) {
     showError(err.message);
