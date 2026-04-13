@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Tracker Pro</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #000, #1a1a1a);
+      color: white;
+      text-align: center;
+    }
+
+    .hero {
+      padding: 100px 20px;
+    }
+
+    h1 {
+      font-size: 50px;
+      color: #e50914;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #aaa;
+      font-size: 18px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .btn {
+      margin-top: 30px;
+      padding: 14px 28px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #e50914;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background: #ff1f1f;
+    }
+
+    .features {
+      margin-top: 80px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .feature {
+      max-width: 250px;
+      background: #111;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="hero">
+  <h1>🎬 Movie Tracker Pro</h1>
+  <p>Track your movies, discover new ones, and manage your watchlist like a pro.</p>
+
+  <button class="btn" onclick="goLogin()">🚀 Get Started</button>
+</div>
+
+<div class="features">
+  <div class="feature">🎬 Add & Track Movies</div>
+  <div class="feature">⭐ Favorites System</div>
+  <div class="feature">📊 Watch Progress</div>
+  <div class="feature">☁️ Cloud Sync</div>
+</div>
+
+<script>
+function goLogin() {
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
