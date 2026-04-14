@@ -184,7 +184,6 @@ footer {
 <button onclick="addMovie()">Add</button>
 <button onclick="randomMovie()">🎲 Surprise Me</button>
 <button onclick="logout()">🚪 Logout</button>
-<button onclick="editMovie(${realIndex})">✏️ Edit</button>
 
 <br>
 <input id="searchInput" placeholder="Search..." onkeyup="applyFilters()">
@@ -288,7 +287,6 @@ function loadMovies() {
 
 let activeFilter = "all";
 
-
 function showToast(msg) {
   let t = document.getElementById("toast");
   t.innerText = msg;
@@ -326,13 +324,14 @@ async function addMovie() {
   showToast("⏳ Fetching...");
   let data = await fetchMovieData(name);
 
-  let movieObj = { 
-  name, 
-  category: cat, 
-  watched: false, 
-  favorite: false, 
-  ...data 
-};
+  let movieObj = {
+  name,
+  category: cat,
+  watched: false,
+  favorite: false,
+  createdAt: Date.now(),
+  ...data
+}; 
 
 saveToDB(movieObj);
 showToast("✅ Added!");
@@ -340,6 +339,8 @@ movieInput.value = "";
 }
 
 function deleteMovie(i) {
+  if (!confirm("Delete this movie?")) return;
+
   const user = firebase.auth().currentUser;
   const movie = movies[i];
 
@@ -349,21 +350,7 @@ function deleteMovie(i) {
     .doc(movie.id)
     .delete();
 
-  displayMovies();
   showToast("🗑 Deleted");
-}
-
-function editMovie(i) {
-  let newName = prompt("Edit movie name:", movies[i].name);
-  if (!newName) return;
-
-  const user = firebase.auth().currentUser;
-
-  db.collection("users")
-    .doc(user.uid)
-    .collection("movies")
-    .doc(movies[i].id)
-    .update({ name: newName });
 }
   
 function toggleWatched(i) {
@@ -394,6 +381,19 @@ function toggleFavorite(i) {
     .update({ favorite: movie.favorite });
 
   displayMovies();
+}
+
+  function editMovie(i) {
+  let newName = prompt("Edit movie name:", movies[i].name);
+  if (!newName) return;
+
+  const user = firebase.auth().currentUser;
+
+  db.collection("users")
+    .doc(user.uid)
+    .collection("movies")
+    .doc(movies[i].id)
+    .update({ name: newName });
 }
 
 function setFilter(filter, el) {
@@ -454,6 +454,7 @@ function displayMovies(list = movies) {
         <p style="color:#888;font-size:13px">${m.category}</p>
         <button class="small-btn" onclick="toggleWatched(${realIndex})">${m.watched ? "Unwatch" : "✅ Watched"}</button>
         <button class="small-btn" onclick="toggleFavorite(${realIndex})">${m.favorite ? "★ Unfav" : "☆ Fav"}</button>
+        <button onclick="editMovie(${realIndex})">✏️ Edit</button>
         <button class="small-btn" onclick="deleteMovie(${realIndex})">🗑 Delete</button>
       </div>
     `;
