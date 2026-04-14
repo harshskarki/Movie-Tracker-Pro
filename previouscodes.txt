@@ -9,6 +9,11 @@ LANDING PAGE (INDEX.HTML)
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
   <style>
+
+    html {
+  scroll-behavior: smooth;
+}
+    
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -18,15 +23,51 @@ LANDING PAGE (INDEX.HTML)
       overflow-x: hidden;
     }
 
+    /* 🎬 Floating Posters Background */
+    .bg {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg img {
+      position: absolute;
+      width: 140px;
+      border-radius: 10px;
+      opacity: 0.15;
+      animation: float 20s linear infinite;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh) rotate(0deg);
+      }
+      to {
+        transform: translateY(-120vh) rotate(360deg);
+      }
+    }
+
+    /* Random positions */
+    .bg img:nth-child(1) { left: 10%; animation-duration: 18s; }
+    .bg img:nth-child(2) { left: 25%; animation-duration: 22s; }
+    .bg img:nth-child(3) { left: 40%; animation-duration: 20s; }
+    .bg img:nth-child(4) { left: 60%; animation-duration: 25s; }
+    .bg img:nth-child(5) { left: 75%; animation-duration: 19s; }
+    .bg img:nth-child(6) { left: 90%; animation-duration: 23s; }
+
+    /* Hero */
     .hero {
       padding: 120px 20px 80px;
+      backdrop-filter: blur(6px);
     }
 
     h1 {
-      font-size: 55px;
+      font-size: 60px;
       color: #e50914;
       margin-bottom: 10px;
-      text-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+      text-shadow: 0 0 25px rgba(229, 9, 20, 0.6);
     }
 
     p {
@@ -42,19 +83,20 @@ LANDING PAGE (INDEX.HTML)
       margin-top: 35px;
       padding: 14px 30px;
       font-size: 16px;
-      border-radius: 8px;
+      border-radius: 10px;
       background: linear-gradient(135deg, #e50914, #ff1f1f);
       color: white;
       text-decoration: none;
       transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
+      box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
     }
 
     .btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 25px rgba(229, 9, 20, 0.7);
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(229, 9, 20, 0.9);
     }
 
+    /* Glass Features */
     .features {
       margin: 80px auto;
       display: flex;
@@ -65,17 +107,17 @@ LANDING PAGE (INDEX.HTML)
     }
 
     .feature {
-      width: 220px;
-      background: rgba(255, 255, 255, 0.05);
+      width: 230px;
       padding: 25px;
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-      transition: 0.3s;
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255,255,255,0.1);
+      transition: 0.3s;
     }
 
     .feature:hover {
-      transform: translateY(-8px);
+      transform: translateY(-10px) scale(1.03);
       background: rgba(255,255,255,0.08);
     }
 
@@ -94,6 +136,16 @@ LANDING PAGE (INDEX.HTML)
 </head>
 
 <body>
+
+<!-- 🎬 Floating Background Posters -->
+<div class="bg">
+  <img src="https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg">
+  <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg">
+  <img src="https://image.tmdb.org/t/p/w500/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg">
+  <img src="https://image.tmdb.org/t/p/w500/5P8SmMzSNYikXpxil6BYzJ16611.jpg">
+  <img src="https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg">
+  <img src="https://image.tmdb.org/t/p/w500/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg">
+</div>
 
 <div class="hero">
   <h1>🎬 Movie Tracker Pro</h1>
@@ -122,13 +174,13 @@ LANDING PAGE (INDEX.HTML)
     <h3>☁️ Cloud Sync</h3>
     <p>Access your data anywhere securely</p>
   </div>
+  
 </div>
 
 <footer>
   Made by harshskarki Ⓗ
 </footer>
 
-<!-- ✅ SCRIPT AT BOTTOM -->
 <script>
 const firebaseConfig = {
   apiKey: "AIzaSyCcUfxJmbe-iHSGSr8U_xDRKvG1Uz7okwM",
@@ -140,7 +192,6 @@ firebase.initializeApp(firebaseConfig);
 
 const btn = document.querySelector(".btn");
 
-// Optional loading state (pro UX)
 btn.innerText = "⏳ Loading...";
 
 firebase.auth().onAuthStateChanged(user => {
@@ -156,6 +207,8 @@ firebase.auth().onAuthStateChanged(user => {
 
 </body>
 </html>
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
 
 PREVIOUS LOGIN.HTML
 
