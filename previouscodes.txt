@@ -201,8 +201,9 @@ function googleLogin() {
 </body>
 </html>
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-PREVIOUS INDEX.HTML
+PREVIOUS INDEX.HTML - (NOW APP.HTML)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -447,12 +448,17 @@ const db = firebase.firestore();
 
 // Protect page
 firebase.auth().onAuthStateChanged(user => {
-  if (!user) {
-    window.location.href = "login.html";
+  if (user) {
+    loadMovies(); // ✅ only run when user exists
   } else {
-    loadMovies(); // 🔥 important
+    setTimeout(() => {
+      if (!firebase.auth().currentUser) {
+        window.location.href = "login.html";
+      }
+    }, 1500); // ⏳ wait for Firebase
   }
 });
+  
 </script>
   
 <script>
@@ -477,8 +483,7 @@ function loadMovies() {
   db.collection("users")
     .doc(user.uid)
     .collection("movies")
-    .get()
-    .then(snapshot => {
+    .onSnapshot(snapshot => {
       movies = [];
       snapshot.forEach(doc => {
         movies.push({ id: doc.id, ...doc.data() });
@@ -488,10 +493,6 @@ function loadMovies() {
 }
 
 let activeFilter = "all";
-
-function save() {
-  localStorage.setItem("movies", JSON.stringify(movies));
-}
 
 function showToast(msg) {
   let t = document.getElementById("toast");
@@ -530,40 +531,76 @@ async function addMovie() {
   showToast("⏳ Fetching...");
   let data = await fetchMovieData(name);
 
-  let movieObj = { 
-  name, 
-  category: cat, 
-  watched: false, 
-  favorite: false, 
-  ...data 
-};
+  let movieObj = {
+  name,
+  category: cat,
+  watched: false,
+  favorite: false,
+  createdAt: Date.now(),
+  ...data
+}; 
 
-movies.push(movieObj);
 saveToDB(movieObj);
-  
-  save();
-  displayMovies();
-  showToast("✅ Added!");
-  movieInput.value = "";
+showToast("✅ Added!");
+movieInput.value = "";
 }
 
 function deleteMovie(i) {
-  movies.splice(i, 1);
-  save();
-  displayMovies();
+  if (!confirm("Delete this movie?")) return;
+
+  const user = firebase.auth().currentUser;
+  const movie = movies[i];
+
+  db.collection("users")
+    .doc(user.uid)
+    .collection("movies")
+    .doc(movie.id)
+    .delete();
+
   showToast("🗑 Deleted");
 }
-
+  
 function toggleWatched(i) {
-  movies[i].watched = !movies[i].watched;
-  save();
+  const user = firebase.auth().currentUser;
+  const movie = movies[i];
+
+  movie.watched = !movie.watched;
+
+  db.collection("users")
+    .doc(user.uid)
+    .collection("movies")
+    .doc(movie.id)
+    .update({ watched: movie.watched });
+
   displayMovies();
 }
 
 function toggleFavorite(i) {
-  movies[i].favorite = !movies[i].favorite;
-  save();
+  const user = firebase.auth().currentUser;
+  const movie = movies[i];
+
+  movie.favorite = !movie.favorite;
+
+  db.collection("users")
+    .doc(user.uid)
+    .collection("movies")
+    .doc(movie.id)
+    .update({ favorite: movie.favorite });
+
   displayMovies();
+}
+
+  function editMovie(i) {
+  let newName = prompt("Edit movie name:", movies[i].name);
+  if (!newName) return;
+
+  const user = firebase.auth().currentUser;
+
+  db.collection("users")
+    .doc(user.uid)
+    .collection("movies")
+    .doc(movies[i].id)
+    .update({ name: newName });
 }
 
 function setFilter(filter, el) {
@@ -624,6 +661,7 @@ function displayMovies(list = movies) {
         <p style="color:#888;font-size:13px">${m.category}</p>
         <button class="small-btn" onclick="toggleWatched(${realIndex})">${m.watched ? "Unwatch" : "✅ Watched"}</button>
         <button class="small-btn" onclick="toggleFavorite(${realIndex})">${m.favorite ? "★ Unfav" : "☆ Fav"}</button>
+        <button onclick="editMovie(${realIndex})">✏️ Edit</button>
         <button class="small-btn" onclick="deleteMovie(${realIndex})">🗑 Delete</button>
       </div>
     `;
