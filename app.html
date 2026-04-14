@@ -167,6 +167,12 @@ footer {
   font-size: 12px;
   padding: 8px 0;
 }
+  
+.light {
+  background: #f5f5f5;
+  color: black;
+}
+  
 </style>
 </head>
 
@@ -184,10 +190,17 @@ footer {
 <button onclick="addMovie()">Add</button>
 <button onclick="randomMovie()">🎲 Surprise Me</button>
 <button onclick="logout()">🚪 Logout</button>
-
+<button onclick="toggleTheme()">🌙 Theme</button>
+  
 <br>
 <input id="searchInput" placeholder="Search..." onkeyup="applyFilters()">
 
+<select id="sortSelect" onchange="sortMovies()">
+  <option value="default">Sort By</option>
+  <option value="rating">⭐ Rating</option>
+  <option value="year">📅 Year</option>
+</select>
+  
 <!-- Stats -->
 <div id="statsBar">
   <div class="stat-chip">🎬 Total <span class="num" id="statTotal">0</span></div>
@@ -213,6 +226,7 @@ footer {
 
 <div class="container" id="movieList"></div>
 <p id="emptyMsg">No movies match this filter 🎭</p>
+<div id="loader" style="display:none;">⏳ Loading...</div>
 <div id="toast"></div>
 
 <!-- ✅ Added Footer -->
@@ -317,25 +331,28 @@ async function fetchMovieData(name) {
 async function addMovie() {
   let name = movieInput.value.trim();
   let cat = document.getElementById("category").value;
-  if (!name) return showToast("⚠️ Enter movie name");
-  if (movies.some(m => m.name.toLowerCase() === name.toLowerCase()))
-    return showToast("❌ Already exists");
 
-  showToast("⏳ Fetching...");
+  if (!name) return showToast("⚠️ Enter movie name");
+
+  document.getElementById("loader").style.display = "block";
+
   let data = await fetchMovieData(name);
 
-  let movieObj = {
-  name,
-  category: cat,
-  watched: false,
-  favorite: false,
-  createdAt: Date.now(),
-  ...data
-}; 
+  let movieObj = { 
+    name,
+    category: cat,
+    watched: false,
+    favorite: false,
+    createdAt: Date.now(),
+    ...data
+  };
 
-saveToDB(movieObj);
-showToast("✅ Added!");
-movieInput.value = "";
+  saveToDB(movieObj);
+
+  document.getElementById("loader").style.display = "none";
+
+  showToast("✅ Added!");
+  movieInput.value = "";
 }
 
 function deleteMovie(i) {
@@ -420,6 +437,22 @@ function applyFilters() {
   displayMovies(filtered);
 }
 
+function sortMovies() {
+  let type = document.getElementById("sortSelect").value;
+
+  if (type === "rating") {
+    movies.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+  } else if (type === "year") {
+    movies.sort((a, b) => (b.year || 0) - (a.year || 0));
+  }
+
+  displayMovies();
+}
+
+function toggleTheme() {
+  document.body.classList.toggle("light");
+}
+  
 function updateStats() {
   document.getElementById("statTotal").textContent = movies.length;
   document.getElementById("statWatched").textContent = movies.filter(m => m.watched).length;
@@ -449,7 +482,10 @@ function displayMovies(list = movies) {
     container.innerHTML += `
       <div class="card">
         <img src="${m.poster}" alt="${m.name}">
-        <h3 class="${m.watched ? 'watched' : ''} ${m.favorite ? 'favorite' : ''}">${m.name}</h3>
+        <h3 class="${m.watched ? 'watched' : ''} ${m.favorite ? 'favorite' : ''}">
+  ${m.name}
+  ${m.createdAt && Date.now() - m.createdAt < 86400000 ? "<span style='color:red;font-size:12px'> NEW</span>" : ""}
+</h3>
         <p>📅 ${m.year} | ⭐ ${typeof m.rating === 'number' ? m.rating.toFixed(1) : m.rating}</p>
         <p style="color:#888;font-size:13px">${m.category}</p>
         <button class="small-btn" onclick="toggleWatched(${realIndex})">${m.watched ? "Unwatch" : "✅ Watched"}</button>
