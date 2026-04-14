@@ -1,3 +1,162 @@
+LANDING PAGE (INDEX.HTML)
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Tracker Pro</title>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top, #1a1a1a, #000);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      padding: 120px 20px 80px;
+    }
+
+    h1 {
+      font-size: 55px;
+      color: #e50914;
+      margin-bottom: 10px;
+      text-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+    }
+
+    p {
+      color: #bbb;
+      font-size: 18px;
+      max-width: 600px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 35px;
+      padding: 14px 30px;
+      font-size: 16px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #e50914, #ff1f1f);
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
+    }
+
+    .btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 25px rgba(229, 9, 20, 0.7);
+    }
+
+    .features {
+      margin: 80px auto;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      max-width: 1000px;
+    }
+
+    .feature {
+      width: 220px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 25px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      transition: 0.3s;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .feature:hover {
+      transform: translateY(-8px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+      color: #e50914;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 15px;
+      font-size: 13px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="hero">
+  <h1>🎬 Movie Tracker Pro</h1>
+  <p>Track your movies, discover new ones, and manage your watchlist like a pro.</p>
+
+  <a href="login.html" class="btn">🚀 Get Started</a>
+</div>
+
+<div class="features">
+  <div class="feature">
+    <h3>🎬 Track Movies</h3>
+    <p>Add and manage your watchlist easily</p>
+  </div>
+
+  <div class="feature">
+    <h3>⭐ Favorites</h3>
+    <p>Mark and revisit your favorite movies</p>
+  </div>
+
+  <div class="feature">
+    <h3>📊 Progress</h3>
+    <p>Track watched vs unwatched movies</p>
+  </div>
+
+  <div class="feature">
+    <h3>☁️ Cloud Sync</h3>
+    <p>Access your data anywhere securely</p>
+  </div>
+</div>
+
+<footer>
+  Made by harshskarki Ⓗ
+</footer>
+
+<!-- ✅ SCRIPT AT BOTTOM -->
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCcUfxJmbe-iHSGSr8U_xDRKvG1Uz7okwM",
+  authDomain: "movie-tracker-pro.firebaseapp.com",
+  projectId: "movie-tracker-pro",
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const btn = document.querySelector(".btn");
+
+// Optional loading state (pro UX)
+btn.innerText = "⏳ Loading...";
+
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    btn.innerText = "🎬 Go to App";
+    btn.href = "app.html";
+  } else {
+    btn.innerText = "🚀 Get Started";
+    btn.href = "login.html";
+  }
+});
+</script>
+
+</body>
+</html>
+
 PREVIOUS LOGIN.HTML
 
 <!DOCTYPE html>
