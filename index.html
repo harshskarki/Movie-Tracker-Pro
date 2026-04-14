@@ -7,11 +7,8 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
   <style>
+    html { scroll-behavior: smooth; }
 
-    html {
-  scroll-behavior: smooth;
-}
-    
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -21,87 +18,71 @@
       overflow-x: hidden;
     }
 
-    /* 🎬 Floating Posters Background */
     .bg {
       position: fixed;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      z-index: -2;
       overflow: hidden;
     }
 
     .bg img {
       position: absolute;
       width: 140px;
-      border-radius: 10px;
-      opacity: 0.15;
+      border-radius: 12px;
+      opacity: 0.18;
       animation: float 20s linear infinite;
+      transition: transform 0.2s ease;
     }
 
     @keyframes float {
-      from {
-        transform: translateY(100vh) rotate(0deg);
-      }
-      to {
-        transform: translateY(-120vh) rotate(360deg);
-      }
+      from { transform: translateY(100vh) rotate(0deg); }
+      to { transform: translateY(-120vh) rotate(360deg); }
     }
 
-    /* Random positions */
-    .bg img:nth-child(1) { left: 10%; animation-duration: 18s; }
-    .bg img:nth-child(2) { left: 25%; animation-duration: 22s; }
-    .bg img:nth-child(3) { left: 40%; animation-duration: 20s; }
-    .bg img:nth-child(4) { left: 60%; animation-duration: 25s; }
-    .bg img:nth-child(5) { left: 75%; animation-duration: 19s; }
-    .bg img:nth-child(6) { left: 90%; animation-duration: 23s; }
-
-    /* Hero */
     .hero {
       padding: 120px 20px 80px;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(8px);
     }
 
     h1 {
       font-size: 60px;
       color: #e50914;
-      margin-bottom: 10px;
-      text-shadow: 0 0 25px rgba(229, 9, 20, 0.6);
+      text-shadow: 0 0 25px rgba(229,9,20,0.7);
     }
 
-    p {
+    #typing {
       color: #bbb;
       font-size: 18px;
       max-width: 600px;
       margin: auto;
-      line-height: 1.6;
+      min-height: 24px;
     }
 
     .btn {
       display: inline-block;
       margin-top: 35px;
       padding: 14px 30px;
-      font-size: 16px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #e50914, #ff1f1f);
+      border-radius: 12px;
+      background: linear-gradient(135deg,#e50914,#ff1f1f);
       color: white;
       text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(229,9,20,0.5);
     }
 
     .btn:hover {
       transform: scale(1.1);
-      box-shadow: 0 0 30px rgba(229, 9, 20, 0.9);
+      box-shadow: 0 0 30px rgba(229,9,20,1);
     }
 
-    /* Glass Features */
     .features {
       margin: 80px auto;
       display: flex;
-      justify-content: center;
       gap: 30px;
       flex-wrap: wrap;
-      max-width: 1000px;
+      justify-content: center;
     }
 
     .feature {
@@ -109,33 +90,26 @@
       padding: 25px;
       border-radius: 20px;
       backdrop-filter: blur(15px);
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      transition: 0.3s;
+      background: rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.1);
+      transition:0.3s;
     }
 
     .feature:hover {
-      transform: translateY(-10px) scale(1.03);
-      background: rgba(255,255,255,0.08);
-    }
-
-    .feature h3 {
-      margin-bottom: 10px;
-      color: #e50914;
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 0 20px rgba(229,9,20,0.6);
     }
 
     footer {
-      margin-top: 50px;
-      padding: 15px;
-      font-size: 13px;
-      color: #666;
+      margin-top:50px;
+      padding:15px;
+      color:#666;
     }
   </style>
 </head>
 
 <body>
 
-<!-- 🎬 Floating Background Posters -->
 <div class="bg">
   <img src="https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg">
   <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg">
@@ -147,37 +121,18 @@
 
 <div class="hero">
   <h1>🎬 Movie Tracker Pro</h1>
-  <p>Track your movies, discover new ones, and manage your watchlist like a pro.</p>
-
+  <p id="typing"></p>
   <a href="login.html" class="btn">🚀 Get Started</a>
 </div>
 
 <div class="features">
-  <div class="feature">
-    <h3>🎬 Track Movies</h3>
-    <p>Add and manage your watchlist easily</p>
-  </div>
-
-  <div class="feature">
-    <h3>⭐ Favorites</h3>
-    <p>Mark and revisit your favorite movies</p>
-  </div>
-
-  <div class="feature">
-    <h3>📊 Progress</h3>
-    <p>Track watched vs unwatched movies</p>
-  </div>
-
-  <div class="feature">
-    <h3>☁️ Cloud Sync</h3>
-    <p>Access your data anywhere securely</p>
-  </div>
-  
+  <div class="feature"><h3>🎬 Track</h3><p>Manage watchlist</p></div>
+  <div class="feature"><h3>⭐ Favorites</h3><p>Save top picks</p></div>
+  <div class="feature"><h3>📊 Progress</h3><p>Track watching</p></div>
+  <div class="feature"><h3>☁️ Cloud</h3><p>Access anywhere</p></div>
 </div>
 
-<footer>
-  Made by harshskarki Ⓗ
-</footer>
+<footer>Made by harshskarki Ⓗ</footer>
 
 <script>
 const firebaseConfig = {
@@ -185,20 +140,40 @@ const firebaseConfig = {
   authDomain: "movie-tracker-pro.firebaseapp.com",
   projectId: "movie-tracker-pro",
 };
-
 firebase.initializeApp(firebaseConfig);
 
 const btn = document.querySelector(".btn");
 
-btn.innerText = "⏳ Loading...";
+// typing effect
+const text = "Track your movies like a pro 🎯";
+let i = 0;
+function type(){
+  if(i < text.length){
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type,40);
+  }
+}
+type();
 
-firebase.auth().onAuthStateChanged(user => {
-  if (user) {
-    btn.innerText = "🎬 Go to App";
-    btn.href = "app.html";
+// parallax
+document.addEventListener("mousemove", e=>{
+  document.querySelectorAll(".bg img").forEach(img=>{
+    let x = (window.innerWidth - e.pageX*0.02)/100;
+    let y = (window.innerHeight - e.pageY*0.02)/100;
+    img.style.transform = `translate(${x}px,${y}px)`;
+  });
+});
+
+// auth
+btn.innerText = "⏳ Loading...";
+firebase.auth().onAuthStateChanged(user=>{
+  if(user){
+    btn.innerText="🎬 Go to App";
+    btn.href="app.html";
   } else {
-    btn.innerText = "🚀 Get Started";
-    btn.href = "login.html";
+    btn.innerText="🚀 Get Started";
+    btn.href="login.html";
   }
 });
 </script>
