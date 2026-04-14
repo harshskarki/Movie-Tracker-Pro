@@ -184,6 +184,7 @@ footer {
 <button onclick="addMovie()">Add</button>
 <button onclick="randomMovie()">🎲 Surprise Me</button>
 <button onclick="logout()">🚪 Logout</button>
+<button onclick="editMovie(${realIndex})">✏️ Edit</button>
 
 <br>
 <input id="searchInput" placeholder="Search..." onkeyup="applyFilters()">
@@ -352,6 +353,19 @@ function deleteMovie(i) {
   showToast("🗑 Deleted");
 }
 
+function editMovie(i) {
+  let newName = prompt("Edit movie name:", movies[i].name);
+  if (!newName) return;
+
+  const user = firebase.auth().currentUser;
+
+  db.collection("users")
+    .doc(user.uid)
+    .collection("movies")
+    .doc(movies[i].id)
+    .update({ name: newName });
+}
+  
 function toggleWatched(i) {
   const user = firebase.auth().currentUser;
   const movie = movies[i];
