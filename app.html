@@ -26,18 +26,21 @@ input, select {
 
 button {
   padding: 10px;
-  background: #e50914;
+  background: linear-gradient(45deg, #e50914, #ff3c3c);
   border: none;
   color: white;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 8px;
   transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
 
+
 button:hover {
-  transform: scale(1.05);
-  background: #ff1f1f;
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(255, 0, 0, 0.5);
 }
+
 
 /* ── Stats Bar ── */
 #statsBar {
@@ -101,17 +104,27 @@ button:hover {
 }
 
 .card {
-  background: #1c1c1c;
-  padding: 10px;
-  border-radius: 10px;
-  transition: 0.3s;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
-.card:hover { transform: scale(1.05); }
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(229, 9, 20, 0.4);
+}
 
 .card img {
   width: 100%;
   border-radius: 10px;
+  transition: 0.3s;
+}
+
+.card:hover img {
+  transform: scale(1.05);
 }
 
 .watched { text-decoration: line-through; color: gray; }
