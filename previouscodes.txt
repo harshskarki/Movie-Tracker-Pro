@@ -212,6 +212,7 @@ firebase.auth().onAuthStateChanged(user => {
 
 PREVIOUS LOGIN.HTML
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -533,7 +534,6 @@ function googleLogin() {
 
 </body>
 </html>
-
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
