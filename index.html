@@ -68,6 +68,7 @@
       text-shadow: 0 0 25px rgba(229, 9, 20, 0.6);
     }
 
+    
     p {
       color: #bbb;
       font-size: 18px;
@@ -94,6 +95,17 @@
       box-shadow: 0 0 30px rgba(229, 9, 20, 0.9);
     }
 
+    .stats {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 40px;
+}
+
+.stats h2 {
+  color: #e50914;
+}
+
     /* Glass Features */
     .features {
       margin: 80px auto;
@@ -104,6 +116,32 @@
       max-width: 1000px;
     }
 
+    .highlight {
+  color: #e50914;
+  font-weight: bold;
+  }
+
+    .cursor-glow {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(229,9,20,0.25), transparent);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.feature {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.6s;
+}
+
+.feature.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+    
     .feature {
       width: 230px;
       padding: 25px;
@@ -135,6 +173,16 @@
 
 <body>
 
+  <body>
+
+<div class="navbar">
+  <div class="logo">🎬 MTP</div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="login.html">Login</a>
+  </div>
+</div>
+  
 <!-- 🎬 Floating Background Posters -->
 <div class="bg">
   <img src="https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg">
@@ -145,14 +193,42 @@
   <img src="https://image.tmdb.org/t/p/w500/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg">
 </div>
 
+<div class="navbar">
+  <div class="logo">🎬 MTP</div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="login.html">Login</a>
+  </div>
+</div>
+
+ <div class="cursor-glow"></div>
+  
 <div class="hero">
   <h1>🎬 Movie Tracker Pro</h1>
-  <p>Track your movies, discover new ones, and manage your watchlist like a pro.</p>
+  <p>
+  Track. Discover. <span class="highlight">Never forget a movie again.</span>
+</p>
 
   <a href="login.html" class="btn">🚀 Get Started</a>
 </div>
 
-<div class="features">
+    <div class="stats">
+  <div>
+    <h2>10K+</h2>
+    <p>Movies Tracked</p>
+  </div>
+  <div>
+    <h2>5K+</h2>
+    <p>Users</p>
+  </div>
+  <div>
+    <h2>99%</h2>
+    <p>Satisfaction</p>
+  </div>
+</div>
+
+<div class="features" id="features">  
+
   <div class="feature">
     <h3>🎬 Track Movies</h3>
     <p>Add and manage your watchlist easily</p>
@@ -172,7 +248,7 @@
     <h3>☁️ Cloud Sync</h3>
     <p>Access your data anywhere securely</p>
   </div>
-  
+
 </div>
 
 <footer>
@@ -186,6 +262,12 @@ const firebaseConfig = {
   projectId: "movie-tracker-pro",
 };
 
+document.addEventListener("mousemove", e => {
+  const glow = document.querySelector(".cursor-glow");
+  glow.style.left = e.clientX + "px";
+  glow.style.top = e.clientY + "px";
+});
+  
 firebase.initializeApp(firebaseConfig);
 
 const btn = document.querySelector(".btn");
@@ -201,6 +283,18 @@ firebase.auth().onAuthStateChanged(user => {
     btn.href = "login.html";
   }
 });
+
+  const features = document.querySelectorAll(".feature");
+
+window.addEventListener("scroll", () => {
+  features.forEach(f => {
+    const rect = f.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 50) {
+      f.classList.add("show");
+    }
+  });
+});
+  
 </script>
 
 </body>
