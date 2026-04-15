@@ -145,11 +145,13 @@
   font-weight: bold;
   }
 
-    .cursor-glow {
+   .cursor-glow {
   position: fixed;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(229,9,20,0.25), transparent);
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(229,9,20,0.35), transparent 70%);
+  border-radius: 50%; /* ✅ makes it circular */
+  filter: blur(40px); /* ✅ smooth glow */
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 0;
@@ -215,14 +217,6 @@
   <img src="https://image.tmdb.org/t/p/w500/5P8SmMzSNYikXpxil6BYzJ16611.jpg">
   <img src="https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg">
   <img src="https://image.tmdb.org/t/p/w500/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg">
-</div>
-
-<div class="navbar">
-  <div class="logo">🎬 MTP</div>
-  <div class="nav-links">
-    <a href="#features">Features</a>
-    <a href="login.html">Login</a>
-  </div>
 </div>
 
  <div class="cursor-glow"></div>
@@ -292,11 +286,31 @@ const firebaseConfig = {
   projectId: "movie-tracker-pro",
 };
 
+const glow = document.querySelector(".cursor-glow");
+
+let mouseX = 0;
+let mouseY = 0;
+let posX = 0;
+let posY = 0;
+
 document.addEventListener("mousemove", e => {
-  const glow = document.querySelector(".cursor-glow");
-  glow.style.left = e.clientX + "px";
-  glow.style.top = e.clientY + "px";
+  mouseX = e.clientX;
+  mouseY = e.clientY;
 });
+
+function animate() {
+  // smooth follow (lerp effect)
+  posX += (mouseX - posX) * 0.1;
+  posY += (mouseY - posY) * 0.1;
+
+  glow.style.left = posX + "px";
+  glow.style.top = posY + "px";
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+  
   
 firebase.initializeApp(firebaseConfig);
 
