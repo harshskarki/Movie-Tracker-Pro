@@ -125,12 +125,14 @@
       background: #ddd;
     }
 
-   #error {
+  #error {
+  display: block; /* ✅ ADD THIS LINE */
   color: #ff4c4c;
   font-size: 13px;
   margin-top: 10px;
   text-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
   animation: shake 0.3s, fadeIn 0.3s;
+  min-height: 18px; /* keeps space even when empty */
 }
 
 /* 💥 Shake animation */
@@ -292,35 +294,40 @@ async function login() {
       window.location.href = "app.html";
     }, 800);
 
-  } catch (err) {
-    console.log("ERROR CODE:", err.code);
+  }catch (err) {
+  console.log("ERROR FULL:", err); // debug full error
 
-    let msg = "❌ Login failed";
+  let msg = "❌ Login failed";
 
-    // 🎯 CLEAN ERROR MAPPING
-    if (err.code === "empty-fields") {
-      msg = "⚠️ Please fill all fields";
-    }
-    else if (err.code === "invalid-email-format") {
-      msg = "⚠️ Enter a valid email";
-    }
-    else if (err.code === "weak-password") {
-      msg = "🔒 Password must be at least 6 characters";
-    }
-    else if (err.code === "auth/invalid-email") {
-      msg = "⚠️ Invalid email format";
-    }
-    else if (
-      err.code === "auth/invalid-credential" ||
-      err.code === "auth/wrong-password" ||
-      err.code === "auth/user-not-found"
-    ) {
-      msg = "❌ Invalid email or password";
-    }
+  const code = err.code || err.message; // ✅ fallback
 
-    showError(msg);
+  if (code === "empty-fields") {
+    msg = "⚠️ Please fill all fields";
+  }
+  else if (code === "invalid-email-format") {
+    msg = "⚠️ Enter a valid email";
+  }
+  else if (code === "weak-password") {
+    msg = "🔒 Password must be at least 6 characters";
+  }
+  else if (code.includes("auth/invalid-email")) {
+    msg = "⚠️ Invalid email format";
+  }
+  else if (
+    code.includes("auth/invalid-credential") ||
+    code.includes("auth/wrong-password") ||
+    code.includes("auth/user-not-found")
+  ) {
+    msg = "❌ Invalid email or password";
+  }
 
-    // 🔥 INPUT ERROR EFFECT
+  showError(msg);
+
+  // 🔥 force error visible (IMPORTANT)
+  document.getElementById("error").style.display = "block";
+}
+  
+  // 🔥 INPUT ERROR EFFECT
     emailEl.classList.add("input-error");
     passEl.classList.add("input-error");
 
