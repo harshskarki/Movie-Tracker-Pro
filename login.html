@@ -176,9 +176,16 @@
   <div class="input-box">
     <input id="password" type="password" placeholder=" " aria-label="Password" />
     <label>Password</label>
-    <span class="toggle" onclick="togglePass()" role="button" aria-label="Toggle password visibility">
-  SHOW
+   
+    <span 
+  class="toggle" 
+  onclick="togglePass()" 
+  role="button" 
+  aria-label="Toggle password visibility"
+>
+  👁️
 </span>
+    
   </div>
 
   <button id="loginBtn" onclick="login()" aria-label="Login to your account">
@@ -251,10 +258,10 @@ function togglePass() {
 
   if (pass.type === "password") {
     pass.type = "text";
-    toggle.innerText = "HIDE";
+    toggle.innerText = "🙈"; // hidden icon
   } else {
     pass.type = "password";
-    toggle.innerText = "SHOW";
+    toggle.innerText = "👁️"; // show icon
   }
 }
 
