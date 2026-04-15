@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>Movie Tracker Pro</title>
+  <meta name="theme-color" content="#e50914">
   <meta name="google-site-verification" content="9N9cH-E9lxId5UbMGNAblaOCcH7KGzlN9LU49xvJTHo" />
   <meta name="keywords" content="movie tracker, watchlist app, movie app, track movies, movie manager">
   <meta name="author" content="harshskarki Ⓗ">
@@ -73,7 +74,7 @@
 
     
     p {
-      color: #bbb;
+      color: #e0e0e0;
       font-size: 18px;
       max-width: 600px;
       margin: auto;
@@ -86,7 +87,7 @@
       padding: 14px 30px;
       font-size: 16px;
       border-radius: 10px;
-      background: linear-gradient(135deg, #e50914, #ff1f1f);
+      background: linear-gradient(135deg, #ff1a1a, #ff3333);
       color: white;
       text-decoration: none;
       transition: all 0.3s ease;
@@ -97,6 +98,13 @@
       transform: scale(1.1);
       box-shadow: 0 0 30px rgba(229, 9, 20, 0.9);
     }
+
+    button:focus,
+a:focus,
+input:focus {
+  outline: 2px solid #ff1f1f;
+  outline-offset: 2px;
+}
 
  .stats {
   display: flex;
@@ -129,7 +137,7 @@
 }
 
 .stat-card p {
-  color: #bbb;
+  color: #e0e0e0;
   font-size: 14px;
 }
 
@@ -237,7 +245,7 @@
       margin-top: 50px;
       padding: 15px;
       font-size: 13px;
-      color: #666;
+      color: #aaa;
     }
   </style>
 </head>
@@ -257,12 +265,12 @@
   
 <!-- 🎬 Floating Background Posters -->
 <div class="bg">
-  <img src="https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg">
-  <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg">
-  <img src="https://image.tmdb.org/t/p/w500/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg">
-  <img src="https://image.tmdb.org/t/p/w500/5P8SmMzSNYikXpxil6BYzJ16611.jpg">
-  <img src="https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg">
-  <img src="https://image.tmdb.org/t/p/w500/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg">
+  <img src="https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="" loading="lazy">
+  <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg" alt="" loading="lazy">
+  <img src="https://image.tmdb.org/t/p/w500/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg" alt="" loading="lazy">
+  <img src="https://image.tmdb.org/t/p/w500/5P8SmMzSNYikXpxil6BYzJ16611.jpg" alt="" loading="lazy">
+  <img src="https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg" alt="" loading="lazy">
+  <img src="https://image.tmdb.org/t/p/w500/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg" alt="" loading="lazy">
 </div>
 
  <div class="cursor-glow"></div>
