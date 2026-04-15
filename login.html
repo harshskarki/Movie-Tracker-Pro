@@ -332,16 +332,16 @@ async function login() {
     passEl.classList.remove("input-error");
   }, 1500);
 
-  document.getElementById("error").style.display = "block";
   
-  } finally {
-  showLoader(false);
-  btn.disabled = false;
-  btn.classList.remove("loading");
+    } finally {
+    showLoader(false);
+    btn.disabled = false;
+    btn.classList.remove("loading");
 
-  if (!isSuccess) { // ✅ 👈 CHECK HERE
-    btn.innerText = "Login";
-    btn.style.background = "#e50914";
+    if (!isSuccess) { // ✅ 👈 CHECK HERE
+      btn.innerText = "Login";
+      btn.style.background = "#e50914";
+    }
   }
 }
   
