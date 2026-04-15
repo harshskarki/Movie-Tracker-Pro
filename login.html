@@ -169,23 +169,29 @@
   <h2>🎬 Movie Tracker</h2>
 
   <div class="input-box">
-    <input id="email" placeholder=" " />
+    <input id="email" placeholder=" " aria-label="Email address" />
     <label>Email</label>
   </div>
 
   <div class="input-box">
-    <input id="password" type="password" placeholder=" " />
+    <input id="password" type="password" placeholder=" " aria-label="Password" />
     <label>Password</label>
-    <span class="toggle" onclick="togglePass()">SHOW</span>
+    <span class="toggle" onclick="togglePass()" role="button" aria-label="Toggle password visibility">
+  SHOW
+</span>
   </div>
 
-  <button id="loginBtn" onclick="login()">Login</button>
+  <button id="loginBtn" onclick="login()" aria-label="Login to your account">
+  Login
+</button>
   <button onclick="signup()">Create Account</button>
 
-  <button class="google-btn" onclick="googleLogin()">Sign in with Google</button>
+  <button class="google-btn" onclick="googleLogin()" aria-label="Sign in with Google">
+  Sign in with Google
+</button>
 
-  <div id="loader">⏳ Loading...</div>
-  <div id="error" style="
+  <div id="loader" aria-live="polite">⏳ Loading...</div>
+ <div id="error" role="alert" aria-live="assertive" style="
   color: #ff4d4d;
   margin-top: 10px;
   font-size: 14px;
