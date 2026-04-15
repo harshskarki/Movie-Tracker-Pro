@@ -123,15 +123,29 @@
   color: #ff4c4c;
   font-size: 13px;
   margin-top: 10px;
-  animation: shake 0.3s;
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+  animation: shake 0.3s, fadeIn 0.3s;
 }
 
+/* 💥 Shake animation */
 @keyframes shake {
   0% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  50% { transform: translateX(4px); }
-  75% { transform: translateX(-4px); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
   100% { transform: translateX(0); }
+}
+
+/* ✨ Smooth fade in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
     #loader {
