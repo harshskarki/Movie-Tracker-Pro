@@ -95,15 +95,39 @@
       box-shadow: 0 0 30px rgba(229, 9, 20, 0.9);
     }
 
-    .stats {
+ .stats {
   display: flex;
   justify-content: center;
-  gap: 50px;
-  margin-top: 40px;
+  gap: 30px;
+  margin: 60px 20px;
+  flex-wrap: wrap;
 }
 
-.stats h2 {
+.stat-card {
+  width: 200px;
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: 0.3s;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.stat-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 30px rgba(229, 9, 20, 0.5);
+}
+
+.stat-card h2 {
+  font-size: 40px;
   color: #e50914;
+  margin-bottom: 5px;
+}
+
+.stat-card p {
+  color: #bbb;
+  font-size: 14px;
 }
 
     /* Glass Features */
@@ -212,21 +236,27 @@
   <a href="login.html" class="btn">🚀 Get Started</a>
 </div>
 
-    <div class="stats">
-  <div>
-    <h2>10K+</h2>
+    
+ <div class="stats">
+
+  <div class="stat-card">
+    <h2 class="counter" data-target="10000">0</h2>
     <p>Movies Tracked</p>
   </div>
-  <div>
-    <h2>5K+</h2>
+
+  <div class="stat-card">
+    <h2 class="counter" data-target="5000">0</h2>
     <p>Users</p>
   </div>
-  <div>
-    <h2>99%</h2>
-    <p>Satisfaction</p>
+
+  <div class="stat-card">
+    <h2 class="counter" data-target="99">0</h2>
+    <p>Satisfaction %</p>
   </div>
+
 </div>
 
+    
 <div class="features" id="features">  
 
   <div class="feature">
@@ -293,6 +323,29 @@ window.addEventListener("scroll", () => {
       f.classList.add("show");
     }
   });
+});
+
+// 🔢 STATS COUNTING ANIMATION
+const counters = document.querySelectorAll(".counter");
+
+counters.forEach(counter => {
+  const update = () => {
+    const target = +counter.getAttribute("data-target");
+    const current = +counter.innerText;
+
+    const increment = target / 100;
+
+    if (current < target) {
+      counter.innerText = Math.ceil(current + increment);
+      setTimeout(update, 20);
+    } else {
+      counter.innerText = target >= 1000 
+        ? (target/1000) + "K+" 
+        : target + (target === 99 ? "%" : "+");
+    }
+  };
+
+  update();
 });
   
 </script>
