@@ -24,6 +24,11 @@
       100% { background-position: 0% 50% }
     }
 
+    .input-error {
+    box-shadow: 0 0 12px red !important;
+    border: 1px solid red !important;
+  }
+    
     .card {
       backdrop-filter: blur(20px);
       background: rgba(20,20,20,0.8);
@@ -229,59 +234,109 @@ function showError(msg) {
 function showLoader(show) {
   const loader = document.getElementById("loader");
   loader.style.display = show ? "block" : "none";
-  loader.innerText = show ? "⏳ Logging in..." : "";
+  loader.innerText = show ? "⏳ Authenticating..." : "";
 }
 
 function togglePass() {
   let pass = document.getElementById("password");
-  pass.type = pass.type === "password" ? "text" : "password";
+  let toggle = document.querySelector(".toggle");
+
+  if (pass.type === "password") {
+    pass.type = "text";
+    toggle.innerText = "HIDE";
+  } else {
+    pass.type = "password";
+    toggle.innerText = "SHOW";
+  }
 }
 
 async function login() {
-  const btn = document.getElementById("loginBtn"); // 👈 add here
-
+  const btn = document.getElementById("loginBtn");
+  const emailEl = document.getElementById("email");
+  const passEl = document.getElementById("password");
+  let isSuccess = false;
+  
   try {
     showLoader(true);
     showError("");
 
-    btn.disabled = true; // 👈 disable button
+    btn.disabled = true;
+    btn.classList.add("loading");
+    
+    const email = emailEl.value.trim();
+    const pass = passEl.value.trim();
 
-    const email = document.getElementById("email").value;
-    const pass = document.getElementById("password").value;
-
+    // ✅ FRONTEND VALIDATION (FAANG STYLE)
     if (!email || !pass) {
-      showLoader(false);
-      btn.disabled = false;
-      return showError("⚠️ Please fill all fields");
+      throw { code: "empty-fields" };
     }
 
+    if (!email.includes("@") || !email.includes(".")) {
+      throw { code: "invalid-email-format" };
+    }
+
+    if (pass.length < 6) {
+      throw { code: "weak-password" };
+    }
+
+    // 🔐 Firebase login
     await firebase.auth().signInWithEmailAndPassword(email, pass);
+    isSuccess = true;
+    
+    // ✅ SUCCESS ANIMATION
+    showLoader(false);
+    btn.innerText = "✅ Success!";
+    btn.style.background = "green";
 
     setTimeout(() => {
       window.location.href = "app.html";
     }, 800);
 
   } catch (err) {
+    console.log("ERROR CODE:", err.code);
+
     let msg = "❌ Login failed";
 
-    if (err.code === "auth/user-not-found") {
-      msg = "⚠️ No account found with this email";
+    // 🎯 CLEAN ERROR MAPPING
+    if (err.code === "empty-fields") {
+      msg = "⚠️ Please fill all fields";
     }
-    else if (err.code === "auth/wrong-password") {
-      msg = "🔒 Incorrect password";
+    else if (err.code === "invalid-email-format") {
+      msg = "⚠️ Enter a valid email";
+    }
+    else if (err.code === "weak-password") {
+      msg = "🔒 Password must be at least 6 characters";
     }
     else if (err.code === "auth/invalid-email") {
       msg = "⚠️ Invalid email format";
     }
-    else if (err.code === "auth/invalid-credential") {
+    else if (
+      err.code === "auth/invalid-credential" ||
+      err.code === "auth/wrong-password" ||
+      err.code === "auth/user-not-found"
+    ) {
       msg = "❌ Invalid email or password";
     }
 
     showError(msg);
 
+    // 🔥 INPUT ERROR EFFECT
+    emailEl.classList.add("input-error");
+    passEl.classList.add("input-error");
+
+    setTimeout(() => {
+      emailEl.classList.remove("input-error");
+      passEl.classList.remove("input-error");
+    }, 1500);
+
   } finally {
-    showLoader(false);
-    btn.disabled = false; // 👈 enable again
+  showLoader(false);
+  btn.disabled = false;
+  btn.classList.remove("loading");
+
+  if (!isSuccess) { // ✅ 👈 CHECK HERE
+    btn.innerText = "Login";
+    btn.style.background = "#e50914";
   }
 }
   
