@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -238,7 +239,7 @@ function togglePass() {
 
 async function login() {
   const btn = document.getElementById("loginBtn"); // 👈 add here
-  
+
   try {
     showLoader(true);
     showError("");
@@ -261,28 +262,23 @@ async function login() {
     }, 800);
 
   } catch (err) {
-  console.log(err.code); // 🔍 debug
+    let msg = "❌ Login failed";
 
-  let msg = "❌ Login failed";
+    if (err.code === "auth/user-not-found") {
+      msg = "⚠️ No account found with this email";
+    }
+    else if (err.code === "auth/wrong-password") {
+      msg = "🔒 Incorrect password";
+    }
+    else if (err.code === "auth/invalid-email") {
+      msg = "⚠️ Invalid email format";
+    }
+    else if (err.code === "auth/invalid-credential") {
+      msg = "❌ Invalid email or password";
+    }
 
-  if (err.code === "auth/invalid-email") {
-    msg = "⚠️ Invalid email format";
-  } 
-  else if (err.code === "auth/invalid-credential") {
-    msg = "❌ Invalid email or password";
-  }
+    showError(msg);
 
-  showError(msg);
-
-  // 🔥 red glow effect
-  document.getElementById("email").classList.add("input-error");
-  document.getElementById("password").classList.add("input-error");
-
-  setTimeout(() => {
-    document.getElementById("email").classList.remove("input-error");
-    document.getElementById("password").classList.remove("input-error");
-  }, 2000);
-}
   } finally {
     showLoader(false);
     btn.disabled = false; // 👈 enable again
