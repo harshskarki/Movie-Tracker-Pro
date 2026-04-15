@@ -215,54 +215,86 @@ PREVIOUS LOGIN.HTML
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login - Movie Tracker</title>
+  <title>Login - Movie Tracker Pro</title>
 
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #000000, #1a1a1a);
-      color: white;
+      background: linear-gradient(-45deg, #000000, #1a1a1a, #e50914, #000000);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      color: white;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50% }
+      50% { background-position: 100% 50% }
+      100% { background-position: 0% 50% }
     }
 
     .card {
-      background: rgba(20, 20, 20, 0.95);
+      backdrop-filter: blur(20px);
+      background: rgba(20,20,20,0.8);
       padding: 40px;
-      border-radius: 15px;
+      border-radius: 20px;
       width: 320px;
       text-align: center;
-      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+      box-shadow: 0 0 40px rgba(0,0,0,0.7);
+      animation: fadeIn 0.6s ease;
     }
 
-    h2 { color: #e50914; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-    input {
+    h2 {
+      color: #e50914;
+      margin-bottom: 25px;
+    }
+
+    .input-box {
+      position: relative;
+      margin: 15px 0;
+    }
+
+    .input-box input {
       width: 100%;
       padding: 12px;
-      margin: 10px 0;
-      border-radius: 6px;
+      border-radius: 8px;
       border: none;
       background: #2a2a2a;
       color: white;
       outline: none;
     }
 
-    input:focus {
-      border: 1px solid #e50914;
+    .input-box label {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      color: #aaa;
+      font-size: 13px;
+      pointer-events: none;
+      transition: 0.3s;
     }
 
-    .password-box {
-      position: relative;
+    .input-box input:focus + label,
+    .input-box input:not(:placeholder-shown) + label {
+      top: -8px;
+      font-size: 11px;
+      color: #e50914;
     }
 
     .toggle {
       position: absolute;
       right: 10px;
-      top: 14px;
+      top: 12px;
       cursor: pointer;
       font-size: 12px;
       color: #aaa;
@@ -271,13 +303,15 @@ PREVIOUS LOGIN.HTML
     button {
       width: 100%;
       padding: 12px;
-      margin-top: 10px;
+      margin-top: 12px;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       background: #e50914;
       color: white;
       cursor: pointer;
+      font-weight: bold;
       transition: 0.3s;
+      position: relative;
     }
 
     button:hover {
@@ -285,22 +319,48 @@ PREVIOUS LOGIN.HTML
       background: #ff1f1f;
     }
 
+    button.loading {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
     .google-btn {
-      background: #fff;
+      background: white;
       color: black;
-      font-weight: bold;
     }
 
     .google-btn:hover {
       background: #ddd;
     }
 
-    #error {
-      color: #ff4c4c;
-      font-size: 13px;
-      margin-top: 10px;
-      min-height: 18px;
-    }
+   #error {
+  color: #ff4c4c;
+  font-size: 13px;
+  margin-top: 10px;
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+  animation: shake 0.3s, fadeIn 0.3s;
+}
+
+/* 💥 Shake animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* ✨ Smooth fade in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
     #loader {
       display: none;
@@ -314,20 +374,30 @@ PREVIOUS LOGIN.HTML
 <div class="card">
   <h2>🎬 Movie Tracker</h2>
 
-  <input id="email" placeholder="Email">
+  <div class="input-box">
+    <input id="email" placeholder=" " />
+    <label>Email</label>
+  </div>
 
-  <div class="password-box">
-    <input id="password" type="password" placeholder="Password">
+  <div class="input-box">
+    <input id="password" type="password" placeholder=" " />
+    <label>Password</label>
     <span class="toggle" onclick="togglePass()">SHOW</span>
   </div>
 
-  <button onclick="login()">Login</button>
+  <button id="loginBtn" onclick="login()">Login</button>
   <button onclick="signup()">Create Account</button>
 
   <button class="google-btn" onclick="googleLogin()">Sign in with Google</button>
 
   <div id="loader">⏳ Loading...</div>
-  <div id="error"></div>
+  <div id="error" style="
+  color: #ff4d4d;
+  margin-top: 10px;
+  font-size: 14px;
+  min-height: 18px;
+  transition: 0.3s;
+"></div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -338,24 +408,41 @@ const firebaseConfig = {
   apiKey: "AIzaSyCcUfxJmbe-iHSGSr8U_xDRKvG1Uz7okwM",
   authDomain: "movie-tracker-pro.firebaseapp.com",
   projectId: "movie-tracker-pro",
-  storageBucket: "movie-tracker-pro.appspot.com",
-  messagingSenderId: "261461241343",
-  appId: "1:261461241343:web:727b75c82896b91ac0cbca"
 };
 
 firebase.initializeApp(firebaseConfig);
 
-// Auto redirect if logged in
 firebase.auth().onAuthStateChanged(user => {
-  if (user) window.location.href = "index.html";
+  if (user) {
+    setTimeout(() => {
+      window.location.href = "app.html";
+    }, 800);
+  }
 });
 
 function showError(msg) {
-  document.getElementById("error").innerText = msg;
-}
+  const el = document.getElementById("error");
 
+  // set message
+  el.innerText = msg;
+
+  // 🔥 RESET animation so it triggers EVERY time
+  el.style.animation = "none";
+  el.offsetHeight; // force reflow
+  el.style.animation = "shake 0.3s";
+
+  // ⏳ auto clear after 3 sec
+  if (msg) {
+    setTimeout(() => {
+      el.innerText = "";
+    }, 3000);
+  }
+}
+  
 function showLoader(show) {
-  document.getElementById("loader").style.display = show ? "block" : "none";
+  const loader = document.getElementById("loader");
+  loader.style.display = show ? "block" : "none";
+  loader.innerText = show ? "⏳ Logging in..." : "";
 }
 
 function togglePass() {
@@ -363,55 +450,90 @@ function togglePass() {
   pass.type = pass.type === "password" ? "text" : "password";
 }
 
-function login() {
-  showLoader(true);
-  showError("");
+async function login() {
+  const btn = document.getElementById("loginBtn"); // 👈 add here
 
-  let emailVal = document.getElementById("email").value;
-  let passVal = document.getElementById("password").value;
+  try {
+    showLoader(true);
+    showError("");
 
-  if (!emailVal || !passVal) {
-    showError("Please fill all fields");
+    btn.disabled = true; // 👈 disable button
+
+    const email = document.getElementById("email").value;
+    const pass = document.getElementById("password").value;
+
+    if (!email || !pass) {
+      showLoader(false);
+      btn.disabled = false;
+      return showError("⚠️ Please fill all fields");
+    }
+
+    await firebase.auth().signInWithEmailAndPassword(email, pass);
+
+    setTimeout(() => {
+      window.location.href = "app.html";
+    }, 800);
+
+  } catch (err) {
+    let msg = "❌ Login failed";
+
+    if (err.code === "auth/user-not-found") {
+      msg = "⚠️ No account found with this email";
+    }
+    else if (err.code === "auth/wrong-password") {
+      msg = "🔒 Incorrect password";
+    }
+    else if (err.code === "auth/invalid-email") {
+      msg = "⚠️ Invalid email format";
+    }
+    else if (err.code === "auth/invalid-credential") {
+      msg = "❌ Invalid email or password";
+    }
+
+    showError(msg);
+
+  } finally {
     showLoader(false);
-    return;
+    btn.disabled = false; // 👈 enable again
   }
-
-  firebase.auth().signInWithEmailAndPassword(emailVal, passVal)
-    .then(() => window.location.href = "index.html")
-    .catch(err => showError(err.message))
-    .finally(() => showLoader(false));
 }
+  
+async function signup() {
+  try {
+    showLoader(true);
+    showError("");
 
-function signup() {
-  showLoader(true);
-  showError("");
+    const email = document.getElementById("email").value;
+    const pass = document.getElementById("password").value;
 
-  let emailVal = document.getElementById("email").value;
-  let passVal = document.getElementById("password").value;
+    await firebase.auth().createUserWithEmailAndPassword(email, pass);
+    setTimeout(() => {
+  window.location.href = "app.html";
+}, 800);
 
-  if (!emailVal || !passVal) {
-    showError("Please fill all fields");
+  } catch (err) {
+    showError(err.message);
+  } finally {
     showLoader(false);
-    return;
   }
-
-  firebase.auth().createUserWithEmailAndPassword(emailVal, passVal)
-    .then(() => window.location.href = "index.html")
-    .catch(err => showError(err.message))
-    .finally(() => showLoader(false));
 }
 
 function googleLogin() {
   const provider = new firebase.auth.GoogleAuthProvider();
 
   firebase.auth().signInWithPopup(provider)
-    .then(() => window.location.href = "index.html")
+    .then(() => {
+  setTimeout(() => {
+    window.location.href = "app.html";
+  }, 800);
+})
     .catch(err => showError(err.message));
 }
 </script>
 
 </body>
 </html>
+
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
