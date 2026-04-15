@@ -294,12 +294,12 @@ async function login() {
       window.location.href = "app.html";
     }, 800);
 
-  }catch (err) {
-  console.log("ERROR FULL:", err); // debug full error
+  } catch (err) {
+  console.log("ERROR FULL:", err);
 
   let msg = "❌ Login failed";
 
-  const code = err.code || err.message; // ✅ fallback
+  const code = err.code || err.message;
 
   if (code === "empty-fields") {
     msg = "⚠️ Please fill all fields";
@@ -323,19 +323,18 @@ async function login() {
 
   showError(msg);
 
-  // 🔥 force error visible (IMPORTANT)
+  // ✅ MOVE INPUT ERROR EFFECT HERE
+  emailEl.classList.add("input-error");
+  passEl.classList.add("input-error");
+
+  setTimeout(() => {
+    emailEl.classList.remove("input-error");
+    passEl.classList.remove("input-error");
+  }, 1500);
+
   document.getElementById("error").style.display = "block";
 }
   
-  // 🔥 INPUT ERROR EFFECT
-    emailEl.classList.add("input-error");
-    passEl.classList.add("input-error");
-
-    setTimeout(() => {
-      emailEl.classList.remove("input-error");
-      passEl.classList.remove("input-error");
-    }, 1500);
-
   } finally {
   showLoader(false);
   btn.disabled = false;
