@@ -18,6 +18,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=for-the-badge)](https://movie-tracker-pro.vercel.app/)
 ![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
+![Figma](https://java-carol-28888285.figma.site/)
 
 ## 🚀 Live Demo
 
