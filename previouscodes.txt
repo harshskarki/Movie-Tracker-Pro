@@ -1,9 +1,14 @@
-LANDING PAGE (INDEX.HTML)
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+INDEX.HTML
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>Movie Tracker Pro</title>
+  <meta name="theme-color" content="#e50914">
+  <meta name="google-site-verification" content="9N9cH-E9lxId5UbMGNAblaOCcH7KGzlN9LU49xvJTHo" />
+  <meta name="keywords" content="movie tracker, watchlist app, movie app, track movies, movie manager">
+  <meta name="author" content="harshskarki Ⓗ">
 
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
@@ -22,7 +27,7 @@ LANDING PAGE (INDEX.HTML)
       text-align: center;
       overflow-x: hidden;
     }
-
+    
     /* 🎬 Floating Posters Background */
     .bg {
       position: fixed;
@@ -70,8 +75,9 @@ LANDING PAGE (INDEX.HTML)
       text-shadow: 0 0 25px rgba(229, 9, 20, 0.6);
     }
 
+    
     p {
-      color: #bbb;
+      color: #e0e0e0;
       font-size: 18px;
       max-width: 600px;
       margin: auto;
@@ -84,7 +90,7 @@ LANDING PAGE (INDEX.HTML)
       padding: 14px 30px;
       font-size: 16px;
       border-radius: 10px;
-      background: linear-gradient(135deg, #e50914, #ff1f1f);
+      background: linear-gradient(135deg, #ff1a1a, #ff3333);
       color: white;
       text-decoration: none;
       transition: all 0.3s ease;
@@ -96,6 +102,48 @@ LANDING PAGE (INDEX.HTML)
       box-shadow: 0 0 30px rgba(229, 9, 20, 0.9);
     }
 
+    button:focus,
+a:focus,
+input:focus {
+  outline: 2px solid #ff1f1f;
+  outline-offset: 2px;
+}
+
+ .stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 60px 20px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  width: 200px;
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: 0.3s;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.stat-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 30px rgba(229, 9, 20, 0.5);
+}
+
+.stat-card h2 {
+  font-size: 40px;
+  color: #e50914;
+  margin-bottom: 5px;
+}
+
+.stat-card p {
+  color: #e0e0e0;
+  font-size: 14px;
+}
+
     /* Glass Features */
     .features {
       margin: 80px auto;
@@ -106,6 +154,34 @@ LANDING PAGE (INDEX.HTML)
       max-width: 1000px;
     }
 
+    .highlight {
+  color: #e50914;
+  font-weight: bold;
+  }
+
+   .cursor-glow {
+  position: fixed;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(229,9,20,0.35), transparent 70%);
+  border-radius: 50%; /* ✅ makes it circular */
+  filter: blur(40px); /* ✅ smooth glow */
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.feature {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.6s;
+}
+
+.feature.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+    
     .feature {
       width: 230px;
       padding: 25px;
@@ -126,35 +202,114 @@ LANDING PAGE (INDEX.HTML)
       color: #e50914;
     }
 
+      /* 🔝 NAVBAR */
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 15px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* 👈 push links right */
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+    /* 🎬 CENTER LOGO */
+.nav h3 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  color: white;
+  text-shadow: 0 0 10px rgba(229, 9, 20, 0.7);
+}
+
+.nav a {
+  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+/* 🔥 FIX PURPLE VISITED COLOR */
+.nav a:visited {
+  color: white;
+}
+
+/* ✨ HOVER EFFECT */
+.nav a:hover {
+  color: #e50914;
+  text-shadow: 0 0 10px #e50914;
+}
+    
+    
     footer {
       margin-top: 50px;
       padding: 15px;
       font-size: 13px;
-      color: #666;
+      color: #aaa;
     }
   </style>
 </head>
 
 <body>
 
+  <body>
+
+<div class="nav">
+  <h3>🎬 MTP</h3>
+
+  <div>
+    <a href="#features">Features</a>
+    <a href="login.html">Login</a>
+  </div>
+</div>
+  
 <!-- 🎬 Floating Background Posters -->
 <div class="bg">
-  <img src="https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg">
-  <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg">
-  <img src="https://image.tmdb.org/t/p/w500/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg">
-  <img src="https://image.tmdb.org/t/p/w500/5P8SmMzSNYikXpxil6BYzJ16611.jpg">
-  <img src="https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg">
-  <img src="https://image.tmdb.org/t/p/w500/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg">
+  <img src="https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="" loading="lazy">
+  <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg" alt="" loading="lazy">
+  <img src="https://image.tmdb.org/t/p/w500/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg" alt="" loading="lazy">
+  <img src="https://image.tmdb.org/t/p/w500/5P8SmMzSNYikXpxil6BYzJ16611.jpg" alt="" loading="lazy">
+  <img src="https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg" alt="" loading="lazy">
+  <img src="https://image.tmdb.org/t/p/w500/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg" alt="" loading="lazy">
 </div>
 
+ <div class="cursor-glow"></div>
+  
 <div class="hero">
   <h1>🎬 Movie Tracker Pro</h1>
-  <p>Track your movies, discover new ones, and manage your watchlist like a pro.</p>
+  <p>
+  Track. Discover. <span class="highlight">Never forget a movie again.</span>
+</p>
 
   <a href="login.html" class="btn">🚀 Get Started</a>
 </div>
 
-<div class="features">
+    
+ <div class="stats">
+
+  <div class="stat-card">
+    <h2 class="counter" data-target="10000">0</h2>
+    <p>Movies Tracked</p>
+  </div>
+
+  <div class="stat-card">
+    <h2 class="counter" data-target="5000">0</h2>
+    <p>Users</p>
+  </div>
+
+  <div class="stat-card">
+    <h2 class="counter" data-target="99">0</h2>
+    <p>Satisfaction %</p>
+  </div>
+
+</div>
+
+    
+<div class="features" id="features">  
+
   <div class="feature">
     <h3>🎬 Track Movies</h3>
     <p>Add and manage your watchlist easily</p>
@@ -174,7 +329,7 @@ LANDING PAGE (INDEX.HTML)
     <h3>☁️ Cloud Sync</h3>
     <p>Access your data anywhere securely</p>
   </div>
-  
+
 </div>
 
 <footer>
@@ -188,6 +343,32 @@ const firebaseConfig = {
   projectId: "movie-tracker-pro",
 };
 
+const glow = document.querySelector(".cursor-glow");
+
+let mouseX = 0;
+let mouseY = 0;
+let posX = 0;
+let posY = 0;
+
+document.addEventListener("mousemove", e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function animate() {
+  // smooth follow (lerp effect)
+  posX += (mouseX - posX) * 0.1;
+  posY += (mouseY - posY) * 0.1;
+
+  glow.style.left = posX + "px";
+  glow.style.top = posY + "px";
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+  
+  
 firebase.initializeApp(firebaseConfig);
 
 const btn = document.querySelector(".btn");
@@ -203,15 +384,48 @@ firebase.auth().onAuthStateChanged(user => {
     btn.href = "login.html";
   }
 });
+
+  const features = document.querySelectorAll(".feature");
+
+window.addEventListener("scroll", () => {
+  features.forEach(f => {
+    const rect = f.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 50) {
+      f.classList.add("show");
+    }
+  });
+});
+
+// 🔢 STATS COUNTING ANIMATION
+const counters = document.querySelectorAll(".counter");
+
+counters.forEach(counter => {
+  const update = () => {
+    const target = +counter.getAttribute("data-target");
+    const current = +counter.innerText;
+
+    const increment = target / 100;
+
+    if (current < target) {
+      counter.innerText = Math.ceil(current + increment);
+      setTimeout(update, 20);
+    } else {
+      counter.innerText = target >= 1000 
+        ? (target/1000) + "K+" 
+        : target + (target === 99 ? "%" : "+");
+    }
+  };
+
+  update();
+});
+  
 </script>
 
 </body>
 </html>
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
-
-PREVIOUS LOGIN.HTML
-
+LOGIN.HTML
 
 <!DOCTYPE html>
 <html>
@@ -238,6 +452,11 @@ PREVIOUS LOGIN.HTML
       100% { background-position: 0% 50% }
     }
 
+    .input-error {
+    box-shadow: 0 0 12px red !important;
+    border: 1px solid red !important;
+  }
+    
     .card {
       backdrop-filter: blur(20px);
       background: rgba(20,20,20,0.8);
@@ -297,10 +516,16 @@ PREVIOUS LOGIN.HTML
       right: 10px;
       top: 12px;
       cursor: pointer;
-      font-size: 12px;
+      font-size: 16px;
       color: #aaa;
+      user-select: none;
+      transition: 0.2s;
     }
 
+    .toggle:hover {
+  transform: scale(1.2);
+}
+    
     button {
       width: 100%;
       padding: 12px;
@@ -334,12 +559,14 @@ PREVIOUS LOGIN.HTML
       background: #ddd;
     }
 
-   #error {
+  #error {
+  display: block; /* ✅ ADD THIS LINE */
   color: #ff4c4c;
   font-size: 13px;
   margin-top: 10px;
   text-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
   animation: shake 0.3s, fadeIn 0.3s;
+  min-height: 18px; /* keeps space even when empty */
 }
 
 /* 💥 Shake animation */
@@ -376,23 +603,36 @@ PREVIOUS LOGIN.HTML
   <h2>🎬 Movie Tracker</h2>
 
   <div class="input-box">
-    <input id="email" placeholder=" " />
+    <input id="email" placeholder=" " aria-label="Email address" />
     <label>Email</label>
   </div>
 
   <div class="input-box">
-    <input id="password" type="password" placeholder=" " />
+    <input id="password" type="password" placeholder=" " aria-label="Password" />
     <label>Password</label>
-    <span class="toggle" onclick="togglePass()">SHOW</span>
+   
+    <span 
+  class="toggle" 
+  onclick="togglePass()" 
+  role="button" 
+  aria-label="Toggle password visibility"
+>
+  👁️
+</span>
+    
   </div>
 
-  <button id="loginBtn" onclick="login()">Login</button>
+  <button id="loginBtn" onclick="login()" aria-label="Login to your account">
+  Login
+</button>
   <button onclick="signup()">Create Account</button>
 
-  <button class="google-btn" onclick="googleLogin()">Sign in with Google</button>
+  <button class="google-btn" onclick="googleLogin()" aria-label="Sign in with Google">
+  Sign in with Google
+</button>
 
-  <div id="loader">⏳ Loading...</div>
-  <div id="error" style="
+  <div id="loader" aria-live="polite">⏳ Loading...</div>
+ <div id="error" role="alert" aria-live="assertive" style="
   color: #ff4d4d;
   margin-top: 10px;
   font-size: 14px;
@@ -443,59 +683,112 @@ function showError(msg) {
 function showLoader(show) {
   const loader = document.getElementById("loader");
   loader.style.display = show ? "block" : "none";
-  loader.innerText = show ? "⏳ Logging in..." : "";
+  loader.innerText = show ? "⏳ Authenticating..." : "";
 }
 
 function togglePass() {
   let pass = document.getElementById("password");
-  pass.type = pass.type === "password" ? "text" : "password";
+  let toggle = document.querySelector(".toggle");
+
+  if (pass.type === "password") {
+    pass.type = "text";
+    toggle.innerText = "🙈"; // hidden icon
+  } else {
+    pass.type = "password";
+    toggle.innerText = "👁️"; // show icon
+  }
 }
 
 async function login() {
-  const btn = document.getElementById("loginBtn"); // 👈 add here
-
+  const btn = document.getElementById("loginBtn");
+  const emailEl = document.getElementById("email");
+  const passEl = document.getElementById("password");
+  let isSuccess = false;
+  
   try {
     showLoader(true);
     showError("");
 
-    btn.disabled = true; // 👈 disable button
+    btn.disabled = true;
+    btn.classList.add("loading");
+    
+    const email = emailEl.value.trim();
+    const pass = passEl.value.trim();
 
-    const email = document.getElementById("email").value;
-    const pass = document.getElementById("password").value;
-
+    // ✅ FRONTEND VALIDATION (FAANG STYLE)
     if (!email || !pass) {
-      showLoader(false);
-      btn.disabled = false;
-      return showError("⚠️ Please fill all fields");
+      throw { code: "empty-fields" };
     }
 
+    if (!email.includes("@") || !email.includes(".")) {
+      throw { code: "invalid-email-format" };
+    }
+
+    if (pass.length < 6) {
+      throw { code: "weak-password" };
+    }
+
+    // 🔐 Firebase login
     await firebase.auth().signInWithEmailAndPassword(email, pass);
+    isSuccess = true;
+    
+    // ✅ SUCCESS ANIMATION
+    showLoader(false);
+    btn.innerText = "✅ Success!";
+    btn.style.background = "green";
 
     setTimeout(() => {
       window.location.href = "app.html";
     }, 800);
 
   } catch (err) {
-    let msg = "❌ Login failed";
+  console.log("ERROR FULL:", err);
 
-    if (err.code === "auth/user-not-found") {
-      msg = "⚠️ No account found with this email";
-    }
-    else if (err.code === "auth/wrong-password") {
-      msg = "🔒 Incorrect password";
-    }
-    else if (err.code === "auth/invalid-email") {
-      msg = "⚠️ Invalid email format";
-    }
-    else if (err.code === "auth/invalid-credential") {
-      msg = "❌ Invalid email or password";
-    }
+  let msg = "❌ Login failed";
 
-    showError(msg);
+  const code = err.code || err.message;
 
-  } finally {
+  if (code === "empty-fields") {
+    msg = "⚠️ Please fill all fields";
+  }
+  else if (code === "invalid-email-format") {
+    msg = "⚠️ Enter a valid email";
+  }
+  else if (code === "weak-password") {
+    msg = "🔒 Password must be at least 6 characters";
+  }
+  else if (code.includes("auth/invalid-email")) {
+    msg = "⚠️ Invalid email format";
+  }
+  else if (
+    code.includes("auth/invalid-credential") ||
+    code.includes("auth/wrong-password") ||
+    code.includes("auth/user-not-found")
+  ) {
+    msg = "❌ Invalid email or password";
+  }
+
+  showError(msg);
+
+  // ✅ MOVE INPUT ERROR EFFECT HERE
+  emailEl.classList.add("input-error");
+  passEl.classList.add("input-error");
+
+  setTimeout(() => {
+    emailEl.classList.remove("input-error");
+    passEl.classList.remove("input-error");
+  }, 1500);
+
+  
+    } finally {
     showLoader(false);
-    btn.disabled = false; // 👈 enable again
+    btn.disabled = false;
+    btn.classList.remove("loading");
+
+    if (!isSuccess) { // ✅ 👈 CHECK HERE
+      btn.innerText = "Login";
+      btn.style.background = "#e50914";
+    }
   }
 }
   
@@ -552,7 +845,6 @@ body {
   text-align: center;
   margin: 0;
   padding: 0 0 60px 0;
-  transition: all 0.3s ease; /* ✅ ADD THIS ONLY */
 }
 
 h1 { color: #e50914; margin-bottom: 5px; }
@@ -568,18 +860,21 @@ input, select {
 
 button {
   padding: 10px;
-  background: #e50914;
+  background: linear-gradient(45deg, #e50914, #ff3c3c);
   border: none;
   color: white;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 8px;
   transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
 
+
 button:hover {
-  transform: scale(1.05);
-  background: #ff1f1f;
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(255, 0, 0, 0.5);
 }
+
 
 /* ── Stats Bar ── */
 #statsBar {
@@ -643,17 +938,27 @@ button:hover {
 }
 
 .card {
-  background: #1c1c1c;
-  padding: 10px;
-  border-radius: 10px;
-  transition: 0.3s;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
-.card:hover { transform: scale(1.05); }
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(229, 9, 20, 0.4);
+}
 
 .card img {
   width: 100%;
   border-radius: 10px;
+  transition: 0.3s;
+}
+
+.card:hover img {
+  transform: scale(1.05);
 }
 
 .watched { text-decoration: line-through; color: gray; }
