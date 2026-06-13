@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login - Movie Tracker Pro</title>
+  <link rel="stylesheet" href="css/login.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<div class="card">
+  <h2>🎬 Movie Tracker</h2>
+
+  <div class="input-box">
+    <input id="email" placeholder=" " aria-label="Email address" />
+    <label>Email</label>
+  </div>
+
+  <div class="input-box">
+    <input id="password" type="password" placeholder=" " aria-label="Password" />
+    <label>Password</label>
+   
+    <span 
+  class="toggle" 
+  onclick="togglePass()" 
+  role="button" 
+  aria-label="Toggle password visibility"
+>
+  👁️
+</span>
+    
+  </div>
+
+  <button id="loginBtn" onclick="login()" aria-label="Login to your account">
+    Login
+  </button>
+
+  <button type="button" onclick="signup()">
+    Create Account
+  </button>
+
+  <button class="google-btn" onclick="googleLogin()" aria-label="Sign in with Google">
+    Sign in with Google
+  </button>
+
+  <div id="loader" aria-live="polite">⏳ Loading...</div>
+ <div id="error" role="alert" aria-live="assertive"></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="js/firebase-config.js"></script>
+<script src="js/login.js"></script>
+
+</body>
+</html>

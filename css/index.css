@@ -1,0 +1,278 @@
+:root {
+  --primary: #e50914;
+  --text-light: #e0e0e0;
+  --glass-bg: rgba(255,255,255,0.05);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+    img {
+  max-width: 100%;
+  height: auto;
+}
+    
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top, #1a1a1a, #000);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    
+    /* 🎬 Floating Posters Background */
+    .bg {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg img {
+      position: absolute;
+      width: 140px;
+      border-radius: 10px;
+      opacity: 0.15;
+      animation: float 20s linear infinite;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh) rotate(0deg);
+      }
+      to {
+        transform: translateY(-120vh) rotate(360deg);
+      }
+    }
+
+    /* Random positions */
+    .bg img:nth-child(1) { left: 10%; animation-duration: 18s; }
+    .bg img:nth-child(2) { left: 25%; animation-duration: 22s; }
+    .bg img:nth-child(3) { left: 40%; animation-duration: 20s; }
+    .bg img:nth-child(4) { left: 60%; animation-duration: 25s; }
+    .bg img:nth-child(5) { left: 75%; animation-duration: 19s; }
+    .bg img:nth-child(6) { left: 90%; animation-duration: 23s; }
+
+    /* Hero */
+    .hero {
+      padding: 120px 20px 80px;
+      backdrop-filter: blur(6px);
+    }
+
+    h1 {
+      font-size: 60px;
+      color: var(--primary);
+      margin-bottom: 10px;
+      text-shadow: 0 0 25px rgba(229, 9, 20, 0.6);
+    }
+
+    
+    p {
+      color: var(--text-light);
+      font-size: 18px;
+      max-width: 600px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 35px;
+      padding: 14px 30px;
+      font-size: 16px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #ff1a1a, #ff3333);
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(229, 9, 20, 0.9);
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+    outline: 2px solid #ff1f1f;
+    outline-offset: 2px;
+    }
+
+ .stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 60px 20px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  width: 200px;
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  background: var(--glass-bg);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: 0.3s;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.stat-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 30px rgba(229, 9, 20, 0.5);
+}
+
+.stat-card h2 {
+  font-size: 40px;
+  color: var(--primary);
+  margin-bottom: 5px;
+}
+
+.stat-card p {
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+    /* Glass Features */
+    .features {
+      margin: 80px auto;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      max-width: 1000px;
+    }
+
+    .highlight {
+  color: var(--primary);
+  font-weight: bold;
+  }
+
+   .cursor-glow {
+  position: fixed;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(229,9,20,0.35), transparent 70%);
+  border-radius: 50%; /* ✅ makes it circular */
+  filter: blur(40px); /* ✅ smooth glow */
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+
+.feature.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+    
+    .feature {
+  width: 230px;
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  background: var(--glass-bg);
+  border: 1px solid rgba(255,255,255,0.1);
+
+  opacity: 0;
+  transform: translateY(40px);
+
+  transition: 0.6s;
+    }
+
+    .feature:hover {
+      transform: translateY(-10px) scale(1.03);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+      /* 🔝 NAVBAR */
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 15px 40px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* 👈 push links right */
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+    /* 🎬 CENTER LOGO */
+.nav h3 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  color: white;
+  text-shadow: 0 0 10px rgba(229, 9, 20, 0.7);
+}
+
+.nav a {
+  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+/* 🔥 FIX PURPLE VISITED COLOR */
+.nav a:visited {
+  color: white;
+}
+
+/* ✨ HOVER EFFECT */
+.nav a:hover {
+  color: var(--primary);
+  text-shadow: 0 0 10px #e50914;
+}
+    
+    
+    footer {
+      margin-top: 50px;
+      padding: 15px;
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    @media (max-width: 768px) {
+
+  .nav {
+    padding: 15px;
+  }
+
+  .nav h3 {
+    font-size: 18px;
+  }
+
+  .hero {
+    padding: 100px 15px 50px;
+  }
+
+  h1 {
+    font-size: 42px;
+  }
+
+  .feature,
+  .stat-card {
+    width: 90%;
+  }
+
+  .cursor-glow {
+    display: none;
+  }
+}

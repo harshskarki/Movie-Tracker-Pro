@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎬 Movie Tracker Pro</title>
+<link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+
+<h1>🎬 Movie Tracker Pro</h1>
+
+<input
+  id="movieInput"
+  placeholder="Movie name"
+  aria-label="Movie name">
+
+<select id="category">
+  <option>Action</option>
+  <option>Comedy</option>
+  <option>Drama</option>
+  <option>Horror</option>
+</select>
+
+<button type="button" onclick="addMovie()">Add</button>
+<button type="button" onclick="randomMovie()">🎲 Surprise Me</button>
+<button type="button" onclick="logout()">🚪 Logout</button>
+<button type="button" onclick="toggleTheme()">🌙 Theme</button>
+
+<br>
+<input
+  id="searchInput"
+  placeholder="Search..."
+  aria-label="Search movies"
+  onkeyup="applyFilters()">
+
+<select id="sortSelect" onchange="sortMovies()">
+  <option value="default">Sort By</option>
+  <option value="rating">⭐ Rating</option>
+  <option value="year">📅 Year</option>
+</select>
+  
+<!-- Stats -->
+<div id="statsBar">
+  <div class="stat-chip">🎬 Total <span class="num" id="statTotal">0</span></div>
+  <div class="stat-chip">✅ Watched <span class="num" id="statWatched">0</span></div>
+  <div class="stat-chip">⏳ Unwatched <span class="num" id="statUnwatched">0</span></div>
+  <div class="stat-chip">★ Favorites <span class="num" id="statFavs">0</span></div>
+</div>
+
+<!-- Progress -->
+<div id="progressBar"><div id="progress"></div></div>
+
+<!-- Filter Pills -->
+<div id="filters">
+  <button class="filter-pill active" data-filter="all" onclick="setFilter('all', this)">All</button>
+  <button class="filter-pill" data-filter="watched" onclick="setFilter('watched', this)">✅ Watched</button>
+  <button class="filter-pill" data-filter="unwatched" onclick="setFilter('unwatched', this)">⏳ Unwatched</button>
+  <button class="filter-pill" data-filter="favorites" onclick="setFilter('favorites', this)">★ Favorites</button>
+  <button class="filter-pill" data-filter="Action" onclick="setFilter('Action', this)">Action</button>
+  <button class="filter-pill" data-filter="Comedy" onclick="setFilter('Comedy', this)">Comedy</button>
+  <button class="filter-pill" data-filter="Drama" onclick="setFilter('Drama', this)">Drama</button>
+  <button class="filter-pill" data-filter="Horror" onclick="setFilter('Horror', this)">Horror</button>
+</div>
+
+<div class="container" id="movieList"></div>
+<p id="emptyMsg">No movies match this filter 🎭</p>
+<div id="loader">⏳ Loading...</div>
+<div id="toast"></div>
+
+<!-- ✅ Added Footer -->
+<footer>
+  Made by harshskarki Ⓗ
+</footer>
+
+<!-- Firebase SDK (correct for your project) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script src="js/firebase-config.js"></script>
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

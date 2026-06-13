@@ -1,0 +1,190 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #e50914;
+}
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(-45deg, #000000, #1a1a1a, #e50914, #000000);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: white;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50% }
+      50% { background-position: 100% 50% }
+      100% { background-position: 0% 50% }
+    }
+
+    .input-error {
+    box-shadow: 0 0 12px red !important;
+    border: 1px solid red !important;
+  }
+    
+    .card {
+  backdrop-filter: blur(20px);
+  background: rgba(20,20,20,0.8);
+  padding: 40px;
+  border-radius: 20px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(0,0,0,0.7);
+  animation: cardFadeIn 0.6s ease;
+}
+
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 25px;
+    }
+
+    .input-box {
+      position: relative;
+      margin: 15px 0;
+    }
+
+    .input-box input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #2a2a2a;
+  color: white;
+  outline: none;
+}
+
+    .input-box input:focus {
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+
+    .input-box label {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      color: #aaa;
+      font-size: 13px;
+      pointer-events: none;
+      transition: 0.3s;
+    }
+
+    .input-box input:focus + label,
+    .input-box input:not(:placeholder-shown) + label {
+      top: -8px;
+      font-size: 11px;
+      color: var(--primary);
+    }
+
+    .toggle {
+      position: absolute;
+      right: 10px;
+      top: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      color: #aaa;
+      user-select: none;
+      transition: 0.2s;
+    }
+
+    .toggle:hover {
+  transform: scale(1.2);
+}
+    
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 8px;
+      background: var(--primary);
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: #ff1f1f;
+    }
+
+    button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+    button.loading {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .google-btn {
+      background: white;
+      color: black;
+    }
+
+    .google-btn:hover {
+      background: #ddd;
+    }
+
+  #error {
+  display: block;
+  color: #ff4c4c;
+  font-size: 13px;
+  margin-top: 10px;
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+  animation: shake 0.3s, fadeIn 0.3s;
+  min-height: 18px;
+  transition: 0.3s;
+}
+
+/* 💥 Shake animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* ✨ Smooth fade in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    #loader {
+      display: none;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 480px) {
+  .card {
+    width: 90%;
+    padding: 25px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+}
