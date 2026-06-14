@@ -61,6 +61,14 @@ async function addMovie() {
   let name = document.getElementById("movieInput").value.trim();
   let cat = document.getElementById("category").value;
 
+  const exists = movies.some(
+  movie => movie.name.toLowerCase() === name.toLowerCase()
+);
+
+if (exists) {
+  return showToast("⚠️ Movie already exists");
+}
+
   if (!name) return showToast("⚠️ Enter movie name");
 
   document.getElementById("loader").style.display = "block";

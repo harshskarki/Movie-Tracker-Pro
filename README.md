@@ -22,8 +22,6 @@
 
 ## 🚀 Live Demo
 
-👉 https://movietrackerpro.netlify.app/
-
 👉 https://movie-tracker-pro.vercel.app/
 
 ---
@@ -120,6 +118,61 @@ This project demonstrates strong frontend engineering skills by integrating:
 
 ---
 
+## 🏗️ Architecture
+
+```text
+User
+  ↓
+Firebase Authentication
+  ↓
+Movie Tracker Pro
+  ↓
+TMDB API (Movie Data)
+  ↓
+Firestore Database
+  ↓
+Real-Time UI Updates
+```
+---
+
+## 📂 Project Structure
+
+```text
+Movie-Tracker-Pro
+│
+├── index.html
+├── login.html
+├── app.html
+│
+├── css
+│   ├── login.css
+│   └── app.css
+│
+├── js
+│   ├── firebase-config.js
+│   ├── login.js
+│   ├── auth.js
+│   └── app.js
+│
+├── sitemap.xml
+└── README.md
+```
+---
+
+## 🚀 Local Setup
+
+```bash
+git clone https://github.com/harshskarki/Movie-Tracker-Pro.git
+
+cd Movie-Tracker-Pro
+```
+
+1. Configure Firebase Project
+2. Add your TMDB API Key
+3. Open `index.html` in your browser
+
+---
+
 ## 📸 Screenshots
 
 <img width="1920" height="968" src="https://github.com/user-attachments/assets/0e0b586a-3d01-4d96-9e82-01b7ddb69450" />
@@ -130,7 +183,9 @@ This project demonstrates strong frontend engineering skills by integrating:
 
 * API key exposed in frontend (not production secure)
 * Requires internet for TMDB API
-* Basic Firestore rules (can be improved for production security)
+* Uses client-side Firebase SDK configuration
+* Requires internet connection for TMDB API requests
+* No server-side API proxy for TMDB requests
 
 ---
 
