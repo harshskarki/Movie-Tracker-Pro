@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
   <meta property="og:title" content="Movie Tracker Pro">
   <meta property="og:description" content="Track movies and manage watchlists"> 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+=======
+  <title>Movie Tracker Pro</title>
+>>>>>>> 84fc7219d255f7d8ad5888030ffce1d36c427399
   <meta name="theme-color" content="#e50914">
   <meta name="google-site-verification" content="9N9cH-E9lxId5UbMGNAblaOCcH7KGzlN9LU49xvJTHo" />
   <meta name="keywords" content="movie tracker, watchlist app, movie app, track movies, movie manager">
   <meta name="author" content="harshskarki Ⓗ">
 
+<<<<<<< HEAD
   <title>Movie Tracker Pro</title>
 
   <link rel="stylesheet" href="css/index.css">
@@ -21,11 +26,259 @@
 
 </head>
 
+=======
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+  <style>
+
+    html {
+  scroll-behavior: smooth;
+}
+    
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top, #1a1a1a, #000);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    
+    /* 🎬 Floating Posters Background */
+    .bg {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg img {
+      position: absolute;
+      width: 140px;
+      border-radius: 10px;
+      opacity: 0.15;
+      animation: float 20s linear infinite;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh) rotate(0deg);
+      }
+      to {
+        transform: translateY(-120vh) rotate(360deg);
+      }
+    }
+
+    /* Random positions */
+    .bg img:nth-child(1) { left: 10%; animation-duration: 18s; }
+    .bg img:nth-child(2) { left: 25%; animation-duration: 22s; }
+    .bg img:nth-child(3) { left: 40%; animation-duration: 20s; }
+    .bg img:nth-child(4) { left: 60%; animation-duration: 25s; }
+    .bg img:nth-child(5) { left: 75%; animation-duration: 19s; }
+    .bg img:nth-child(6) { left: 90%; animation-duration: 23s; }
+
+    /* Hero */
+    .hero {
+      padding: 120px 20px 80px;
+      backdrop-filter: blur(6px);
+    }
+
+    h1 {
+      font-size: 60px;
+      color: #e50914;
+      margin-bottom: 10px;
+      text-shadow: 0 0 25px rgba(229, 9, 20, 0.6);
+    }
+
+    
+    p {
+      color: #e0e0e0;
+      font-size: 18px;
+      max-width: 600px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 35px;
+      padding: 14px 30px;
+      font-size: 16px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #ff1a1a, #ff3333);
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(229, 9, 20, 0.9);
+    }
+
+    button:focus,
+a:focus,
+input:focus {
+  outline: 2px solid #ff1f1f;
+  outline-offset: 2px;
+}
+
+ .stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 60px 20px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  width: 200px;
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: 0.3s;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.stat-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 30px rgba(229, 9, 20, 0.5);
+}
+
+.stat-card h2 {
+  font-size: 40px;
+  color: #e50914;
+  margin-bottom: 5px;
+}
+
+.stat-card p {
+  color: #e0e0e0;
+  font-size: 14px;
+}
+
+    /* Glass Features */
+    .features {
+      margin: 80px auto;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      max-width: 1000px;
+    }
+
+    .highlight {
+  color: #e50914;
+  font-weight: bold;
+  }
+
+   .cursor-glow {
+  position: fixed;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(229,9,20,0.35), transparent 70%);
+  border-radius: 50%; /* ✅ makes it circular */
+  filter: blur(40px); /* ✅ smooth glow */
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.feature {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.6s;
+}
+
+.feature.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+    
+    .feature {
+      width: 230px;
+      padding: 25px;
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: 0.3s;
+    }
+
+    .feature:hover {
+      transform: translateY(-10px) scale(1.03);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+      color: #e50914;
+    }
+
+      /* 🔝 NAVBAR */
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 15px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* 👈 push links right */
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+    /* 🎬 CENTER LOGO */
+.nav h3 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  color: white;
+  text-shadow: 0 0 10px rgba(229, 9, 20, 0.7);
+}
+
+.nav a {
+  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+/* 🔥 FIX PURPLE VISITED COLOR */
+.nav a:visited {
+  color: white;
+}
+
+/* ✨ HOVER EFFECT */
+.nav a:hover {
+  color: #e50914;
+  text-shadow: 0 0 10px #e50914;
+}
+    
+    
+    footer {
+      margin-top: 50px;
+      padding: 15px;
+      font-size: 13px;
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+
+>>>>>>> 84fc7219d255f7d8ad5888030ffce1d36c427399
   <body>
 
 <div class="nav">
   <h3>🎬 MTP</h3>
 
+<<<<<<< HEAD
   <nav>
   <a href="#features" aria-label="View Features">
     Features
@@ -35,28 +288,52 @@
     Login
   </a>
 </nav>
+=======
+  <div>
+    <a href="#features">Features</a>
+    <a href="login.html">Login</a>
+  </div>
+>>>>>>> 84fc7219d255f7d8ad5888030ffce1d36c427399
 </div>
   
 <!-- 🎬 Floating Background Posters -->
 <div class="bg">
+<<<<<<< HEAD
   <img src="https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="Movie background poster" loading="lazy">
   <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg" alt="Movie background poster" loading="lazy">
   <img src="https://image.tmdb.org/t/p/w500/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg" alt="Movie background poster" loading="lazy">
   <img src="https://image.tmdb.org/t/p/w500/5P8SmMzSNYikXpxil6BYzJ16611.jpg" alt="Movie background poster" loading="lazy">
   <img src="https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg" alt="Movie background poster" loading="lazy">
   <img src="https://image.tmdb.org/t/p/w500/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg" alt="Movie background poster" loading="lazy">
+=======
+  <img src="https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="" loading="lazy">
+  <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg" alt="" loading="lazy">
+  <img src="https://image.tmdb.org/t/p/w500/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg" alt="" loading="lazy">
+  <img src="https://image.tmdb.org/t/p/w500/5P8SmMzSNYikXpxil6BYzJ16611.jpg" alt="" loading="lazy">
+  <img src="https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg" alt="" loading="lazy">
+  <img src="https://image.tmdb.org/t/p/w500/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg" alt="" loading="lazy">
+>>>>>>> 84fc7219d255f7d8ad5888030ffce1d36c427399
 </div>
 
  <div class="cursor-glow"></div>
   
+<<<<<<< HEAD
 <header class="hero">
+=======
+<div class="hero">
+>>>>>>> 84fc7219d255f7d8ad5888030ffce1d36c427399
   <h1>🎬 Movie Tracker Pro</h1>
   <p>
   Track. Discover. <span class="highlight">Never forget a movie again.</span>
 </p>
 
   <a href="login.html" class="btn">🚀 Get Started</a>
+<<<<<<< HEAD
 </header>
+=======
+</div>
+
+>>>>>>> 84fc7219d255f7d8ad5888030ffce1d36c427399
     
  <div class="stats">
 
@@ -106,11 +383,98 @@
   Made by harshskarki Ⓗ
 </footer>
 
+<<<<<<< HEAD
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 <script src="js/firebase-config.js"></script>
 <script src="js/index.js"></script>
+=======
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCcUfxJmbe-iHSGSr8U_xDRKvG1Uz7okwM",
+  authDomain: "movie-tracker-pro.firebaseapp.com",
+  projectId: "movie-tracker-pro",
+};
+
+const glow = document.querySelector(".cursor-glow");
+
+let mouseX = 0;
+let mouseY = 0;
+let posX = 0;
+let posY = 0;
+
+document.addEventListener("mousemove", e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function animate() {
+  // smooth follow (lerp effect)
+  posX += (mouseX - posX) * 0.1;
+  posY += (mouseY - posY) * 0.1;
+
+  glow.style.left = posX + "px";
+  glow.style.top = posY + "px";
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+  
+  
+firebase.initializeApp(firebaseConfig);
+
+const btn = document.querySelector(".btn");
+
+btn.innerText = "⏳ Loading...";
+
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    btn.innerText = "🎬 Go to App";
+    btn.href = "app.html";
+  } else {
+    btn.innerText = "🚀 Get Started";
+    btn.href = "login.html";
+  }
+});
+
+  const features = document.querySelectorAll(".feature");
+
+window.addEventListener("scroll", () => {
+  features.forEach(f => {
+    const rect = f.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 50) {
+      f.classList.add("show");
+    }
+  });
+});
+
+// 🔢 STATS COUNTING ANIMATION
+const counters = document.querySelectorAll(".counter");
+
+counters.forEach(counter => {
+  const update = () => {
+    const target = +counter.getAttribute("data-target");
+    const current = +counter.innerText;
+
+    const increment = target / 100;
+
+    if (current < target) {
+      counter.innerText = Math.ceil(current + increment);
+      setTimeout(update, 20);
+    } else {
+      counter.innerText = target >= 1000 
+        ? (target/1000) + "K+" 
+        : target + (target === 99 ? "%" : "+");
+    }
+  };
+
+  update();
+});
+  
+</script>
+>>>>>>> 84fc7219d255f7d8ad5888030ffce1d36c427399
 
 </body>
 </html>

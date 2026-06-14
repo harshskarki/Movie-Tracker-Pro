@@ -244,6 +244,3 @@ document.getElementById("movieInput").addEventListener("keypress", e => {
   
 displayMovies();
 
-document
-  .getElementById("addBtn")
-  .addEventListener("click", addMovie);
