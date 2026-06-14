@@ -3,32 +3,20 @@
 
   <url>
     <loc>https://movie-tracker-pro.vercel.app/</loc>
-<<<<<<< HEAD
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-=======
->>>>>>> 84fc7219d255f7d8ad5888030ffce1d36c427399
   </url>
 
   <url>
     <loc>https://movie-tracker-pro.vercel.app/login.html</loc>
-<<<<<<< HEAD
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-=======
->>>>>>> 84fc7219d255f7d8ad5888030ffce1d36c427399
   </url>
 
   <url>
     <loc>https://movie-tracker-pro.vercel.app/app.html</loc>
-<<<<<<< HEAD
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
 </urlset>
-=======
-  </url>
-
-</urlset>
->>>>>>> 84fc7219d255f7d8ad5888030ffce1d36c427399

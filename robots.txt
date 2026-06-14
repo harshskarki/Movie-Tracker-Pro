@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://movie-tracker-pro.vercel.app/sitemap.xml
