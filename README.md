@@ -174,6 +174,148 @@ Track / Favorite / Delete
 ```
 ---
 
+## 📖 Project Case Study
+
+### Background
+
+Movie Tracker Pro was built to solve a common problem faced by movie enthusiasts: keeping track of watched movies, favorites, and personal watchlists in one place. Instead of using spreadsheets or notes, users can manage their movie collection through a modern web application.
+
+### Objective
+
+The goal was to build a full-stack movie management application using modern web technologies while implementing real-world software engineering concepts such as authentication, cloud databases, API integrations, deployment, and security.
+
+### Solution
+
+Movie Tracker Pro allows users to:
+
+* Create a secure account using Firebase Authentication
+* Search and manage movies
+* Store personal movie collections in Firestore
+* Mark movies as watched or favorite
+* Filter and search movies instantly
+* Access the application from any device through a cloud-hosted deployment
+
+### Result
+
+The project successfully demonstrates:
+
+* Frontend development using HTML, CSS, and JavaScript
+* Cloud database integration with Firebase Firestore
+* Third-party API integration with TMDB
+* User authentication and authorization
+* Secure serverless API architecture using Vercel Functions
+* Production deployment and SEO optimization
+
+---
+
+## 🎯 Recruiter Highlights
+
+This project demonstrates practical experience with modern web development and cloud technologies.
+
+### Skills Demonstrated
+
+* Frontend Development (HTML, CSS, JavaScript)
+* Firebase Authentication
+* Cloud Firestore Database Design
+* REST API Integration (TMDB)
+* Serverless Functions with Vercel
+* Security Hardening and Data Validation
+* Git and GitHub Workflow
+* Deployment and Production Management
+* Search, Filtering, and State Management
+* Responsive UI Design
+
+### Engineering Concepts Applied
+
+* Authentication & Authorization
+* CRUD Operations
+* Database Security Rules
+* API Proxy Architecture
+* Client-Server Communication
+* Error Handling
+* SEO Optimization
+* Documentation and System Design
+
+This project was designed, developed, secured, documented, and deployed independently as an end-to-end full-stack application.
+
+---
+
+## 📊 Project Metrics
+
+### Application Features
+
+* Secure User Authentication
+* Cloud Firestore Integration
+* TMDB Movie API Integration
+* Movie Search & Filtering
+* Favorites Management
+* Watch Status Tracking
+* Responsive Design
+* Dark Theme Support
+* Serverless API Proxy
+* SEO Optimization
+
+### Technical Metrics
+
+* Frontend: HTML, CSS, JavaScript
+* Backend Services: Firebase & Vercel Functions
+* Database: Cloud Firestore
+* Authentication: Firebase Auth
+* Deployment: Vercel
+* Version Control: Git & GitHub
+
+### Security Metrics
+
+* User-based Firestore Access Control
+* Data Validation Rules
+* Protected Routes
+* Hidden API Keys
+* Serverless API Architecture
+
+---
+
+## 🛠️ Challenges & Solutions
+
+### Challenge 1: Secure User Data
+
+**Problem:**
+Users should only be able to access their own movie collections.
+
+**Solution:**
+Implemented Firebase Authentication and Firestore Security Rules to ensure users can only read and write documents associated with their own account.
+
+---
+
+### Challenge 2: Protecting API Keys
+
+**Problem:**
+The TMDB API key was initially exposed in the frontend application.
+
+**Solution:**
+Created a Vercel Serverless Function (`api/movie.js`) and moved all TMDB requests to the backend, keeping API keys hidden from users.
+
+---
+
+### Challenge 3: Data Validation
+
+**Problem:**
+Invalid or malformed movie data could be written directly to Firestore.
+
+**Solution:**
+Implemented Firestore validation rules to enforce correct data types and required fields before data can be stored.
+
+---
+
+### Challenge 4: Deployment & Production Readiness
+
+**Problem:**
+The application needed to be secure, deployable, and accessible publicly.
+
+**Solution:**
+Deployed the project on Vercel, configured environment variables, implemented SEO improvements, and hardened API endpoints for production use.
+
+---
+
 ## 🛠️ Tech Stack
 
 * HTML5
