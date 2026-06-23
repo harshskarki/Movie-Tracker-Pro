@@ -40,7 +40,7 @@ function showToast(msg) {
 async function fetchMovieData(name) {
   try {
     let res = await fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(name)}`
+      `/api/movie?q=${encodeURIComponent(name)}`
     );
     let data = await res.json();
     if (data.results && data.results[0]) {
@@ -54,7 +54,9 @@ async function fetchMovieData(name) {
       };
     }
   } catch {}
-  return { poster: "https://via.placeholder.com/300x450?text=No+Image", rating: "N/A", year: "N/A" };
+  return { poster: "https://via.placeholder.com/300x450?text=No+Image", 
+    rating: "N/A", 
+    year: "N/A" };
 }
 
 async function addMovie() {
