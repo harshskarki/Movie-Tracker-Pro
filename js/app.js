@@ -1,5 +1,3 @@
-const API_KEY = "279e916fb273ebd5f4db034459cad740";
-
 let movies = [];
 
 function saveToDB(movie) {
