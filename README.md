@@ -107,6 +107,73 @@ This project demonstrates strong frontend engineering skills by integrating:
 
 ---
 
+## 🏗️ Architecture
+
+```text
+User
+  │
+  ▼
+Firebase Authentication
+  │
+  ▼
+Movie Tracker Pro
+  │
+  ├──► TMDB API
+  │
+  ▼
+Firestore Database
+  │
+  ▼
+Real-Time UI Updates
+```
+---
+
+## 🗄️ Database Structure
+
+```text
+users
+ └── userId
+      └── movies
+           └── movieId
+                ├── name
+                ├── category
+                ├── poster
+                ├── rating
+                ├── watched
+                ├── favorite
+                ├── year
+                └── createdAt
+```
+---
+
+## 🔄 Application Flow
+
+```text
+User Login
+    │
+    ▼
+Firebase Authentication
+    │
+    ▼
+Dashboard Access
+    │
+    ▼
+Search Movie
+    │
+    ▼
+TMDB API Fetch
+    │
+    ▼
+Save to Firestore
+    │
+    ▼
+Display Movie Card
+    │
+    ▼
+Track / Favorite / Delete
+```
+---
+
 ## 🛠️ Tech Stack
 
 * HTML5
@@ -116,23 +183,6 @@ This project demonstrates strong frontend engineering skills by integrating:
 * Firebase Firestore
 * TMDB API
 
----
-
-## 🏗️ Architecture
-
-```text
-User
-  ↓
-Firebase Authentication
-  ↓
-Movie Tracker Pro
-  ↓
-TMDB API (Movie Data)
-  ↓
-Firestore Database
-  ↓
-Real-Time UI Updates
-```
 ---
 
 ## 📂 Project Structure
