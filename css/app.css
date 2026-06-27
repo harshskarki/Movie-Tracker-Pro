@@ -93,8 +93,54 @@ select:focus-visible {
 }
 
 .skeleton-card {
-  height: 420px;
+  background: #222;
   border-radius: 12px;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.skeleton-poster {
+  height: 260px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  background: linear-gradient(
+    90deg,
+    #2a2a2a 25%,
+    #3a3a3a 50%,
+    #2a2a2a 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeleton-line {
+  height: 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  background: linear-gradient(
+    90deg,
+    #2a2a2a 25%,
+    #3a3a3a 50%,
+    #2a2a2a 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeleton-line.short {
+  width: 60%;
+}
+
+.skeleton-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.skeleton-btn {
+  flex: 1;
+  height: 32px;
+  border-radius: 8px;
   background: linear-gradient(
     90deg,
     #2a2a2a 25%,
