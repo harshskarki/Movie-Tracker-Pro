@@ -66,8 +66,15 @@
 </div>
 
 <div class="container" id="movieList"></div>
-<p id="emptyMsg">No movies match this filter 🎭</p>
-<div id="loader">⏳ Loading...</div>
+<div id="emptyMsg" class="empty-state">
+  <h3>🎬 No Movies Found</h3>
+  <p>Try adding a movie or changing your search/filter.</p>
+</div>
+<div id="loader" class="skeleton-container">
+  <div class="skeleton-card"></div>
+  <div class="skeleton-card"></div>
+  <div class="skeleton-card"></div>
+</div>
 <div id="toast"></div>
 
 <!-- ✅ Added Footer -->

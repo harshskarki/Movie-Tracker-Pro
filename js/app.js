@@ -188,6 +188,12 @@ function sortMovies() {
 
 function toggleTheme() {
   document.body.classList.toggle("light");
+
+  if (document.body.classList.contains("light")) {
+    localStorage.setItem("theme", "light");
+  } else {
+    localStorage.setItem("theme", "dark");
+  }
 }
   
 function updateStats() {
@@ -243,12 +249,16 @@ function randomMovie() {
 document.getElementById("movieInput").addEventListener("keypress", e => {
   if (e.key === "Enter") addMovie();
 });
-  
-  function logout() {
+
+function logout() {
   firebase.auth().signOut().then(() => {
     window.location.href = "login.html";
   });
 }
-  
-displayMovies();
 
+// Load saved theme
+if (localStorage.getItem("theme") === "light") {
+  document.body.classList.add("light");
+}
+
+displayMovies();
