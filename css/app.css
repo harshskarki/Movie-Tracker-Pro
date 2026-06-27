@@ -82,7 +82,7 @@ select:focus-visible {
 }
 
 #loader {
-  display: none;
+  display: flex;
 }
 
 .skeleton-container {

@@ -1,5 +1,10 @@
 let movies = [];
 
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("loader").style.display = "flex";
+  document.getElementById("movieList").style.display = "none";
+});
+
 function saveToDB(movie) {
   const user = firebase.auth().currentUser;
   if (!user) return;
