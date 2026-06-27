@@ -19,9 +19,10 @@ document.getElementById("loader").style.display = "flex";
 document.getElementById("movieList").style.display = "none";
 
   db.collection("users")
-    .doc(user.uid)
-    .collection("movies")
-    .onSnapshot(snapshot => {
+  .doc(user.uid)
+  .collection("movies")
+  .orderBy("createdAt", "desc")
+  .onSnapshot(snapshot => {
       movies = [];
       snapshot.forEach(doc => {
         movies.push({ id: doc.id, ...doc.data() });
