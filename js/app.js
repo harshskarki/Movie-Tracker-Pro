@@ -10,9 +10,13 @@ function saveToDB(movie) {
     .add(movie);
 }
 
+
 function loadMovies() {
   const user = firebase.auth().currentUser;
   if (!user) return;
+
+document.getElementById("loader").style.display = "flex";
+document.getElementById("movieList").style.display = "none";
 
   db.collection("users")
     .doc(user.uid)
@@ -22,6 +26,10 @@ function loadMovies() {
       snapshot.forEach(doc => {
         movies.push({ id: doc.id, ...doc.data() });
       });
+
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("movieList").style.display = "grid";
+
       displayMovies();
     });
 }
