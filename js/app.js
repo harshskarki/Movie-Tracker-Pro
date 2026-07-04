@@ -1,6 +1,7 @@
 let movies = [];
 let deletedMovie = null;
 let undoTimeout = null;
+let undoToastTimer = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("loader").style.display = "flex";
@@ -54,10 +55,12 @@ function showToast(msg) {
 function showUndoToast() {
   const toast = document.getElementById("undoToast");
 
+  clearTimeout(undoToastTimer);
+
   toast.style.display = "flex";
 
-  setTimeout(() => {
-  toast.style.display = "none";
+  undoToastTimer = setTimeout(() => {
+    toast.style.display = "none";
   }, 10000);
 }
 

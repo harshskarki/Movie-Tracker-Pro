@@ -203,12 +203,14 @@ body.light .skeleton-card {
   color: white;
   border: none;
 
-  padding: 12px 22px;
+  padding: 12px 24px;
 
   border-radius: 10px;
 
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
+
+  min-width: 120px;
 
   cursor: pointer;
   transition: 0.25s;
