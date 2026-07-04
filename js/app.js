@@ -1,4 +1,6 @@
 let movies = [];
+let deletedMovie = null;
+let undoTimeout = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("loader").style.display = "flex";
@@ -47,6 +49,16 @@ function showToast(msg) {
   t.innerText = msg;
   t.style.display = "block";
   setTimeout(() => t.style.display = "none", 2000);
+}
+
+function showUndoToast() {
+  const toast = document.getElementById("undoToast");
+
+  toast.style.display = "flex";
+
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 5000);
 }
 
 async function fetchMovieData(name) {
@@ -112,13 +124,37 @@ function deleteMovie(i) {
   const user = firebase.auth().currentUser;
   const movie = movies[i];
 
+  deletedMovie = { ...movie };
+
   db.collection("users")
     .doc(user.uid)
     .collection("movies")
     .doc(movie.id)
     .delete();
 
-  showToast("🗑 Deleted");
+  showUndoToast();
+
+  clearTimeout(undoTimeout);
+
+  undoTimeout = setTimeout(() => {
+    deletedMovie = null;
+  }, 5000);
+}
+
+function undoDelete() {
+  if (!deletedMovie) return;
+
+  const movieToRestore = { ...deletedMovie };
+
+  delete movieToRestore.id;
+
+  saveToDB(movieToRestore);
+
+  deletedMovie = null;
+
+  document.getElementById("undoToast").style.display = "none";
+
+  showToast("↩️ Movie Restored");
 }
   
 function toggleWatched(i) {

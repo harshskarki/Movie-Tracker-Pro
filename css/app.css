@@ -170,6 +170,31 @@ body.light .skeleton-card {
   background-size: 200% 100%;
 }
 
+/* Undo Delete Toast */
+#undoToast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  z-index: 9999;
+}
+
+#undoToast button {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 /* ── Filter Pills ── */
 #filters {
   display: flex;
