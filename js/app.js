@@ -157,7 +157,7 @@ function undoDelete() {
 
   document.getElementById("undoToast").style.display = "none";
 
-  showToast("↩️ Movie Restored");
+  showToast("✅ Movie restored successfully");
 }
   
 function toggleWatched(i) {
