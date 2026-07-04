@@ -57,8 +57,8 @@ function showUndoToast() {
   toast.style.display = "flex";
 
   setTimeout(() => {
-    toast.style.display = "none";
-  }, 5000);
+  toast.style.display = "none";
+  }, 10000);
 }
 
 async function fetchMovieData(name) {

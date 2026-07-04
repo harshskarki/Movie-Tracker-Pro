@@ -173,32 +173,45 @@ body.light .skeleton-card {
 /* Undo Delete Toast */
 #undoToast {
   position: fixed;
-  bottom: 25px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
+
   background: #111827;
   color: white;
-  padding: 16px 24px;
-  border-radius: 14px;
+
+  padding: 20px 28px;
+  border-radius: 16px;
+
   display: none;
   align-items: center;
-  gap: 15px;
+  gap: 18px;
+
   z-index: 9999;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
-  font-size: 15px;
-  font-weight: 500;
-  min-width: 280px;
+
+  min-width: 420px;
+  max-width: 90vw;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
 }
 
 #undoToast button {
   background: #4f46e5;
   color: white;
   border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
+
+  padding: 12px 22px;
+
+  border-radius: 10px;
+
+  font-size: 15px;
+  font-weight: 700;
+
   cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
+  transition: 0.25s;
 }
 
 #undoToast button:hover {
