@@ -1,4 +1,5 @@
 let movies = [];
+let editingMovieId = null;
 let deletedMovie = null;
 let undoTimeout = null;
 let undoToastTimer = null;
@@ -190,17 +191,47 @@ function toggleFavorite(i) {
   displayMovies();
 }
 
-  function editMovie(i) {
-  let newName = prompt("Edit movie name:", movies[i].name);
-  if (!newName) return;
+function editMovie(i) {
+  const movie = movies[i];
+
+  editingMovieId = movie.id;
+
+  document.getElementById("editMovieInput").value =
+    movie.name;
+
+  document.getElementById("editModal").style.display =
+    "flex";
+}
+
+function closeEditModal() {
+  document.getElementById("editModal").style.display =
+    "none";
+}
+
+function saveMovieEdit() {
+  const newName =
+    document.getElementById("editMovieInput")
+      .value
+      .trim();
+
+  if (!newName) {
+    showToast("⚠️ Enter movie name");
+    return;
+  }
 
   const user = firebase.auth().currentUser;
 
   db.collection("users")
     .doc(user.uid)
     .collection("movies")
-    .doc(movies[i].id)
-    .update({ name: newName });
+    .doc(editingMovieId)
+    .update({
+      name: newName
+    });
+
+  closeEditModal();
+
+  showToast("✏️ Movie Updated");
 }
 
 function setFilter(filter, el) {

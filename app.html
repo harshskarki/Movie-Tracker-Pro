@@ -111,6 +111,23 @@
   <button onclick="undoDelete()">↩ Restore Movie</button>
 </div>
 
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <h2>✏️ Edit Movie</h2>
+
+    <input
+      type="text"
+      id="editMovieInput"
+      placeholder="Movie Name"
+    >
+
+    <div class="modal-actions">
+      <button onclick="closeEditModal()">Cancel</button>
+      <button onclick="saveMovieEdit()">Save</button>
+    </div>
+  </div>
+</div>
+
 <div id="toast"></div>
 
 <!-- ✅ Added Footer -->

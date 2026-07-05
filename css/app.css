@@ -404,6 +404,51 @@ footer {
   }
 }
 
+
+.modal {
+  display: none;
+
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0,0,0,0.7);
+
+  justify-content: center;
+  align-items: center;
+
+  z-index: 10000;
+}
+
+.modal-content {
+  background: #1f2937;
+
+  padding: 25px;
+
+  border-radius: 14px;
+
+  width: 400px;
+  max-width: 90%;
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 12px;
+
+  border-radius: 8px;
+  border: none;
+
+  margin-bottom: 15px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
 .empty-state {
   text-align: center;
   padding: 40px 20px;
