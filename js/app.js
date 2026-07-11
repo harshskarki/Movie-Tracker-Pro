@@ -235,6 +235,52 @@ function closeEditModal() {
     "none";
 }
 
+function openMovieDetails(i) {
+  const movie = movies[i];
+
+  document.getElementById("detailsTitle").textContent =
+    movie.name;
+
+  document.getElementById("detailsPoster").src =
+    movie.poster;
+
+  document.getElementById("detailsInfo").innerHTML = `
+    <p>⭐ ${movie.rating}</p>
+
+    <p>📅 ${movie.year}</p>
+
+    <p>⏱ ${movie.runtime || "N/A"} min</p>
+
+    <p>
+      🎭 ${(movie.genres || []).join(", ")}
+    </p>
+
+    <p>
+      🎬 ${movie.director || "Unknown"}
+    </p>
+
+    <p>
+      👨‍🎤 ${(movie.cast || []).join(", ")}
+    </p>
+
+    <hr style="margin:15px 0">
+
+    <p>
+      ${movie.overview || "No overview available"}
+    </p>
+  `;
+
+  document.getElementById(
+    "movieDetailsModal"
+  ).style.display = "flex";
+}
+
+function closeMovieDetails() {
+  document.getElementById(
+    "movieDetailsModal"
+  ).style.display = "none";
+}
+
 function saveMovieEdit() {
   const newName =
     document.getElementById("editMovieInput")
@@ -364,13 +410,9 @@ function displayMovies(list = movies) {
             👨‍🎤 ${(m.cast || []).join(", ")}
         </p>
 
-        <p style="
-            color:#ccc;
-            font-size:13px;
-            margin-top:8px;
-        ">
-            ${(m.overview || "").substring(0,120)}...
-        </p>
+        <button class="small-btn" onclick="openMovieDetails(${realIndex})">
+          ℹ️ Details
+        </button>
         <button class="small-btn" onclick="toggleWatched(${realIndex})">${m.watched ? "Unwatch" : "✅ Watched"}</button>
         <button class="small-btn" onclick="toggleFavorite(${realIndex})">${m.favorite ? "★ Unfav" : "☆ Fav"}</button>
         <button onclick="editMovie(${realIndex})">✏️ Edit</button>
