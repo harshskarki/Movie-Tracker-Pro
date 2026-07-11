@@ -67,24 +67,51 @@ function showUndoToast() {
 
 async function fetchMovieData(name) {
   try {
-    let res = await fetch(
+    const res = await fetch(
       `/api/movie?q=${encodeURIComponent(name)}`
     );
-    let data = await res.json();
-    if (data.results && data.results[0]) {
-      let movie = data.results[0];
-      return {
-        poster: movie.poster_path
-          ? "https://image.tmdb.org/t/p/w500" + movie.poster_path
-          : "https://via.placeholder.com/300x450?text=No+Image",
-        rating: movie.vote_average,
-        year: movie.release_date ? movie.release_date.split("-")[0] : "N/A"
-      };
-    }
-  } catch {}
-  return { poster: "https://via.placeholder.com/300x450?text=No+Image", 
-    rating: "N/A", 
-    year: "N/A" };
+
+    const movie = await res.json();
+
+    return {
+      poster:
+        movie.poster ||
+        "https://via.placeholder.com/300x450?text=No+Image",
+
+      rating: movie.rating,
+
+      year: movie.year,
+
+      overview: movie.overview,
+
+      runtime: movie.runtime,
+
+      genres: movie.genres,
+
+      director: movie.director,
+
+      cast: movie.cast
+    };
+  } catch {
+    return {
+      poster:
+        "https://via.placeholder.com/300x450?text=No+Image",
+
+      rating: "N/A",
+
+      year: "N/A",
+
+      overview: "",
+
+      runtime: "",
+
+      genres: [],
+
+      director: "",
+
+      cast: []
+    };
+  }
 }
 
 async function addMovie() {
@@ -313,8 +340,37 @@ function displayMovies(list = movies) {
   ${m.name}
   ${m.createdAt && Date.now() - m.createdAt < 86400000 ? "<span style='color:red;font-size:12px'> NEW</span>" : ""}
 </h3>
-        <p>📅 ${m.year} | ⭐ ${typeof m.rating === 'number' ? m.rating.toFixed(1) : m.rating}</p>
-        <p style="color:#888;font-size:13px">${m.category}</p>
+        <p>
+            📅 ${m.year}
+            |
+            ⭐ ${typeof m.rating === 'number'
+              ? m.rating.toFixed(1)
+              : m.rating}
+        </p>
+
+        <p style="color:#888;font-size:13px">
+            🎭 ${(m.genres || []).slice(0,2).join(", ")}
+        </p>
+
+        <p style="color:#888;font-size:13px">
+            ⏱ ${m.runtime || "N/A"} min
+        </p>
+
+        <p style="color:#aaa;font-size:13px">
+            🎬 ${m.director || "Unknown"}
+        </p>
+
+        <p style="color:#aaa;font-size:13px">
+            👨‍🎤 ${(m.cast || []).join(", ")}
+        </p>
+
+        <p style="
+            color:#ccc;
+            font-size:13px;
+            margin-top:8px;
+        ">
+            ${(m.overview || "").substring(0,120)}...
+        </p>
         <button class="small-btn" onclick="toggleWatched(${realIndex})">${m.watched ? "Unwatch" : "✅ Watched"}</button>
         <button class="small-btn" onclick="toggleFavorite(${realIndex})">${m.favorite ? "★ Unfav" : "☆ Fav"}</button>
         <button onclick="editMovie(${realIndex})">✏️ Edit</button>
