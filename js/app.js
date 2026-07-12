@@ -245,35 +245,29 @@ function openMovieDetails(i) {
     movie.poster;
 
   document.getElementById("detailsInfo").innerHTML = `
-    <p>⭐ ${movie.rating}</p>
+    <p><strong>⭐ Rating:</strong> ${movie.rating}</p>
 
-    <p>📅 ${movie.year}</p>
+    <p><strong>📅 Year:</strong> ${movie.year}</p>
 
-    <p>⏱ ${movie.runtime || "N/A"} min</p>
+    <p><strong>⏱ Runtime:</strong> ${movie.runtime || "N/A"} min</p>
 
-    <p>
-      🎭 ${(movie.genres || []).join(", ")}
-    </p>
+    <p><strong>🎭 Genres:</strong> ${(movie.genres || []).join(", ")}</p>
 
-    <p>
-      🎬 ${movie.director || "Unknown"}
-    </p>
+    <p><strong>🎬 Director:</strong> ${movie.director || "Unknown"}</p>
 
-    <p>
-      👨‍🎤 ${(movie.cast || []).join(", ")}
-    </p>
+    <p><strong>👨‍🎤 Cast:</strong> ${(movie.cast || []).join(", ")}</p>
 
     <hr style="margin:15px 0">
 
-    <p>
-      ${movie.overview || "No overview available"}
-    </p>
+    <h3>📝 Overview</h3>
+
+    <p>${movie.overview || "No overview available"}</p>
   `;
 
-  document.getElementById(
-    "movieDetailsModal"
-  ).style.display = "flex";
-}
+    document.getElementById(
+      "movieDetailsModal"
+    ).style.display = "flex";
+  }
 
 function closeMovieDetails() {
   document.getElementById(

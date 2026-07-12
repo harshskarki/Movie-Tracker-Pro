@@ -503,3 +503,34 @@ footer {
 body.light .empty-state h3 {
   color: #222;
 }
+
+.movie-details-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+#detailsPoster {
+  width: 220px;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+
+#detailsInfo {
+  flex: 1;
+}
+
+#detailsInfo p {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+#detailsTitle {
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+#movieDetailsModal .modal-content {
+  width: 850px;
+  max-width: 95%;
+}
