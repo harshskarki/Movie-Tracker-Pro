@@ -45,6 +45,19 @@ export default async function handler(req, res) {
 
     const credits = await creditsRes.json();
 
+    const videosRes = await fetch(
+      `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${apiKey}`
+    );
+
+    const videos = await videosRes.json();
+
+    const trailer =
+      videos.results?.find(
+        v =>
+          v.site === "YouTube" &&
+          v.type === "Trailer"
+      ) || null;
+
     const director =
       credits.crew?.find(person => person.job === "Director")
         ?.name || "Unknown";
@@ -58,6 +71,8 @@ export default async function handler(req, res) {
       id: movie.id,
 
       title: movie.title,
+
+      trailerKey: trailer?.key || null,
 
       poster: movie.poster_path
         ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`

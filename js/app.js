@@ -82,6 +82,8 @@ async function fetchMovieData(name) {
 
       year: movie.year,
 
+      trailerKey: movie.trailerKey,
+
       overview: movie.overview,
 
       runtime: movie.runtime,
@@ -235,44 +237,63 @@ function closeEditModal() {
     "none";
 }
 
-function openMovieDetails(i) {
-  const movie = movies[i];
+document.getElementById("detailsInfo").innerHTML = `
+  <p><strong>⭐ Rating:</strong> ${movie.rating}</p>
 
-  document.getElementById("detailsTitle").textContent =
-    movie.name;
+  <p><strong>📅 Year:</strong> ${movie.year}</p>
 
-  document.getElementById("detailsPoster").src =
-    movie.poster;
+  <p><strong>⏱ Runtime:</strong> ${movie.runtime || "N/A"} min</p>
 
-  document.getElementById("detailsInfo").innerHTML = `
-    <p><strong>⭐ Rating:</strong> ${movie.rating}</p>
+  <p><strong>🎭 Genres:</strong> ${(movie.genres || []).join(", ")}</p>
 
-    <p><strong>📅 Year:</strong> ${movie.year}</p>
+  <p><strong>🎬 Director:</strong> ${movie.director || "Unknown"}</p>
 
-    <p><strong>⏱ Runtime:</strong> ${movie.runtime || "N/A"} min</p>
+  <p><strong>👨‍🎤 Cast:</strong> ${(movie.cast || []).join(", ")}</p>
 
-    <p><strong>🎭 Genres:</strong> ${(movie.genres || []).join(", ")}</p>
+  <hr style="margin:15px 0">
 
-    <p><strong>🎬 Director:</strong> ${movie.director || "Unknown"}</p>
+  <h3>📝 Overview</h3>
 
-    <p><strong>👨‍🎤 Cast:</strong> ${(movie.cast || []).join(", ")}</p>
+  <p>${movie.overview || "No overview available"}</p>
 
-    <hr style="margin:15px 0">
-
-    <h3>📝 Overview</h3>
-
-    <p>${movie.overview || "No overview available"}</p>
-  `;
-
-    document.getElementById(
-      "movieDetailsModal"
-    ).style.display = "flex";
+  ${
+    movie.trailerKey
+      ? `
+        <button
+          onclick="watchTrailer('${movie.trailerKey}')"
+          style="
+            margin-top:15px;
+            padding:12px 18px;
+            border:none;
+            border-radius:10px;
+            background:#ef4444;
+            color:white;
+            cursor:pointer;
+            font-weight:600;
+          "
+        >
+          ▶ Watch Trailer
+        </button>
+      `
+      : ""
   }
+`;
+
+ document.getElementById(
+  "movieDetailsModal"
+).style.display = "flex";
 
 function closeMovieDetails() {
   document.getElementById(
     "movieDetailsModal"
   ).style.display = "none";
+}
+
+function watchTrailer(key) {
+  window.open(
+    `https://www.youtube.com/watch?v=${key}`,
+    "_blank"
+  );
 }
 
 function saveMovieEdit() {
