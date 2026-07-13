@@ -237,7 +237,16 @@ function closeEditModal() {
     "none";
 }
 
-document.getElementById("detailsInfo").innerHTML = `
+function openMovieDetails(i) {
+  const movie = movies[i];
+
+  document.getElementById("detailsTitle").textContent =
+    movie.name;
+
+  document.getElementById("detailsPoster").src =
+    movie.poster;
+
+  document.getElementById("detailsInfo").innerHTML = `
   <p><strong>⭐ Rating:</strong> ${movie.rating}</p>
 
   <p><strong>📅 Year:</strong> ${movie.year}</p>
@@ -279,9 +288,10 @@ document.getElementById("detailsInfo").innerHTML = `
   }
 `;
 
- document.getElementById(
-  "movieDetailsModal"
-).style.display = "flex";
+  document.getElementById(
+    "movieDetailsModal"
+  ).style.display = "flex";
+}
 
 function closeMovieDetails() {
   document.getElementById(
