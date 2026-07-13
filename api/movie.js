@@ -51,6 +51,17 @@ export default async function handler(req, res) {
 
     const videos = await videosRes.json();
 
+    const similarRes = await fetch(
+      `https://api.themoviedb.org/3/movie/${movie.id}/similar?api_key=${apiKey}`
+    );
+
+    const similarData = await similarRes.json();
+
+    const similarMovies =
+      similarData.results
+        ?.slice(0, 5)
+        .map(movie => movie.title) || [];
+
     const trailer =
       videos.results?.find(
         v =>
@@ -71,6 +82,8 @@ export default async function handler(req, res) {
       id: movie.id,
 
       title: movie.title,
+
+      similarMovies,
 
       trailerKey: trailer?.key || null,
 

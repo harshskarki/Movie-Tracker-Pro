@@ -82,6 +82,8 @@ async function fetchMovieData(name) {
 
       year: movie.year,
 
+      similarMovies: movie.similarMovies,
+
       trailerKey: movie.trailerKey,
 
       overview: movie.overview,
@@ -266,26 +268,42 @@ function openMovieDetails(i) {
   <p>${movie.overview || "No overview available"}</p>
 
   ${
-    movie.trailerKey
-      ? `
-        <button
-          onclick="watchTrailer('${movie.trailerKey}')"
-          style="
-            margin-top:15px;
-            padding:12px 18px;
-            border:none;
-            border-radius:10px;
-            background:#ef4444;
-            color:white;
-            cursor:pointer;
-            font-weight:600;
-          "
-        >
-          ▶ Watch Trailer
-        </button>
-      `
-      : ""
-  }
+      movie.trailerKey
+        ? `
+          <button
+            onclick="watchTrailer('${movie.trailerKey}')"
+            style="
+              margin-top:15px;
+              padding:12px 18px;
+              border:none;
+              border-radius:10px;
+              background:#ef4444;
+              color:white;
+              cursor:pointer;
+              font-weight:600;
+            "
+          >
+            ▶ Watch Trailer
+          </button>
+        `
+        : ""
+    }
+
+  ${
+      movie.similarMovies?.length
+        ? `
+          <hr style="margin:20px 0">
+
+          <h3>🎯 Similar Movies</h3>
+
+          <ul>
+            ${movie.similarMovies
+              .map(name => `<li>${name}</li>`)
+              .join("")}
+          </ul>
+        `
+        : ""
+    }
 `;
 
   document.getElementById(
