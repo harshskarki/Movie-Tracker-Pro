@@ -533,6 +533,24 @@ body.light .empty-state h3 {
 #movieDetailsModal .modal-content {
   width: 850px;
   max-width: 95%;
+  max-height: 85vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+#detailsInfo {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+#detailsInfo::-webkit-scrollbar {
+  width: 8px;
+}
+
+#detailsInfo::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 10px;
 }
 
 @media (max-width: 768px) {
