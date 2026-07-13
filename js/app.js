@@ -84,6 +84,8 @@ async function fetchMovieData(name) {
 
       similarMovies: movie.similarMovies,
 
+      recommendations: movie.recommendations,
+
       trailerKey: movie.trailerKey,
 
       overview: movie.overview,
@@ -298,6 +300,22 @@ function openMovieDetails(i) {
 
           <ul>
             ${movie.similarMovies
+              .map(name => `<li>${name}</li>`)
+              .join("")}
+          </ul>
+        `
+        : ""
+    }
+
+    ${
+      movie.recommendations?.length
+        ? `
+          <hr style="margin:20px 0">
+
+          <h3>🤖 Recommended For You</h3>
+
+          <ul>
+            ${movie.recommendations
               .map(name => `<li>${name}</li>`)
               .join("")}
           </ul>
