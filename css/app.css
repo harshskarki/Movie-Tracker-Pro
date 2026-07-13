@@ -420,12 +420,35 @@ body.light .skeleton-card {
 
 /* Footer */
 footer {
-  margin-top: 40px;
-  width: 100%;
-  background: #111;
-  color: #777;
-  font-size: 12px;
-  padding: 12px 0;
+  margin-top: 50px;
+
+  padding: 20px;
+
+  text-align: center;
+
+  color: #9ca3af;
+
+  font-size: 14px;
+
+  border-top: 1px solid rgba(255,255,255,0.08);
+
+  background: rgba(255,255,255,0.02);
+
+  backdrop-filter: blur(8px);
+}
+
+.footer-brand {
+  color: #ef4444;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+}
+
+.footer-brand:hover {
+  color: #f59e0b;
+
+  transition: 0.2s ease;
 }
   
 .light {
