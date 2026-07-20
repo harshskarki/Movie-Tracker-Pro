@@ -14,9 +14,21 @@ function saveToDB(movie) {
   if (!user) return;
 
   db.collection("users")
-    .doc(user.uid)
-    .collection("movies")
-    .add(movie);
+  .doc(user.uid)
+  .collection("movies")
+  .add({
+    name: movie.name,
+    category: movie.category,
+    poster: movie.poster,
+    rating: movie.rating,
+    year: movie.year,
+
+    watched: false,
+    favorite: false,
+
+    createdAt:
+      firebase.firestore.FieldValue.serverTimestamp()
+  });
 }
 
 
@@ -41,7 +53,32 @@ document.getElementById("movieList").style.display = "none";
       document.getElementById("movieList").style.display = "grid";
 
       displayMovies();
+      renderWatchHistory();
     });
+}
+
+function renderWatchHistory() {
+
+  const container =
+    document.getElementById("historyList");
+
+  if (!container) return;
+
+  const latestMovies =
+    movies.slice(0, 5);
+
+  if (!latestMovies.length) {
+    container.innerHTML =
+      "No history available";
+    return;
+  }
+
+  container.innerHTML =
+    latestMovies.map(movie => `
+      <div class="history-item">
+        <span>🎬 ${movie.name}</span>
+      </div>
+    `).join("");
 }
 
 let activeFilter = "all";

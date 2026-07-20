@@ -143,6 +143,45 @@ select:focus-visible {
   font-size: 15px;
 }
 
+#watchHistory {
+  max-width: 900px;
+
+  margin: 30px auto;
+
+  text-align: left;
+
+  background: #1b1b1b;
+
+  border-radius: 16px;
+
+  padding: 20px;
+
+  border: 1px solid #333;
+}
+
+#watchHistory h2 {
+  margin-bottom: 15px;
+}
+
+.history-item {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 10px 0;
+
+  border-bottom: 1px solid #333;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-date {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
 #loader {
   display: flex;
 }
@@ -321,6 +360,34 @@ body.light .skeleton-card {
   background: #e50914;
   border-color: #e50914;
   color: white;
+}
+
+/* History */
+
+#watchHistory {
+  max-width: 1000px;
+
+  margin: 25px auto;
+
+  background: #1c1c1c;
+
+  border: 1px solid #333;
+
+  border-radius: 16px;
+
+  padding: 20px;
+
+  text-align: left;
+}
+
+#watchHistory h2 {
+  margin-bottom: 15px;
+
+  color: #fff;
+}
+
+#historyList {
+  color: #9ca3af;
 }
 
 .container {
