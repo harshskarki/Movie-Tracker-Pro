@@ -10,25 +10,40 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function saveToDB(movie) {
-  const user = firebase.auth().currentUser;
+
+  const user =
+    firebase.auth().currentUser;
+
   if (!user) return;
 
   db.collection("users")
-  .doc(user.uid)
-  .collection("movies")
-  .add({
-    name: movie.name,
-    category: movie.category,
-    poster: movie.poster,
-    rating: movie.rating,
-    year: movie.year,
+    .doc(user.uid)
+    .collection("movies")
+    .add({
 
-    watched: false,
-    favorite: false,
+      name:
+        movie.name || "Unknown",
 
-    createdAt:
-      firebase.firestore.FieldValue.serverTimestamp()
-  });
+      category:
+        movie.category || "Other",
+
+      poster:
+        movie.poster || "",
+
+      rating:
+        Number(movie.rating) || 0,
+
+      year:
+        String(movie.year || "N/A"),
+
+      watched: false,
+
+      favorite: false,
+
+      createdAt:
+        Date.now()
+
+    });
 }
 
 
