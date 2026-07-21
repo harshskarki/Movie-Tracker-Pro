@@ -83,10 +83,56 @@ function renderWatchHistory() {
 
       let dateLabel = "Recently Added";
 
-      if (
-        movie.createdAt &&
-        typeof movie.createdAt.toDate === "function"
-      ) {
+      if (movie.createdAt) {
+
+        let created;
+
+        if (
+          typeof movie.createdAt.toDate === "function"
+        ) {
+
+          created =
+            movie.createdAt.toDate();
+
+        } else {
+
+          created =
+            new Date(movie.createdAt);
+        }
+
+        const now =
+          new Date();
+
+        const diffMs =
+          now - created;
+
+        const diffHours =
+          Math.floor(
+            diffMs / (1000 * 60 * 60)
+          );
+
+        const diffDays =
+          Math.floor(
+            diffHours / 24
+          );
+
+        if (diffHours < 24) {
+
+          dateLabel =
+            diffHours <= 1
+              ? "1 hour ago"
+              : `${diffHours} hours ago`;
+
+        } else if (diffDays === 1) {
+
+          dateLabel = "Yesterday";
+
+        } else {
+
+          dateLabel =
+            `${diffDays} days ago`;
+        }
+      } {
 
         const created =
           movie.createdAt.toDate();
@@ -160,13 +206,13 @@ function renderActivityStats() {
 
   movies.forEach(movie => {
 
-    if (
-      !movie.createdAt ||
-      typeof movie.createdAt.toDate !== "function"
-    ) return;
+    if (!movie.createdAt)
+      return;
 
     const created =
-      movie.createdAt.toDate();
+      typeof movie.createdAt.toDate === "function"
+        ? movie.createdAt.toDate()
+        : new Date(movie.createdAt);
 
     const diffMs =
       now - created;
