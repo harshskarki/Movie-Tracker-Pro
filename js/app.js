@@ -21,27 +21,37 @@ function saveToDB(movie) {
     .collection("movies")
     .add({
 
-      name:
-        movie.name || "Unknown",
+      name: movie.name || "Unknown",
 
-      category:
-        movie.category || "Other",
+      category: movie.category || "Other",
 
-      poster:
-        movie.poster || "",
+      poster: movie.poster || "",
 
-      rating:
-        Number(movie.rating) || 0,
+      rating: Number(movie.rating) || 0,
 
-      year:
-        String(movie.year || "N/A"),
+      year: String(movie.year || "N/A"),
 
-      watched: false,
+      overview: movie.overview || "",
 
-      favorite: false,
+      runtime: movie.runtime || 0,
 
-      createdAt:
-        Date.now()
+      genres: movie.genres || [],
+
+      director: movie.director || "Unknown",
+
+      cast: movie.cast || [],
+
+      trailerKey: movie.trailerKey || null,
+
+      similarMovies: movie.similarMovies || [],
+
+      recommendations: movie.recommendations || [],
+
+      watched: movie.watched || false,
+
+      favorite: movie.favorite || false,
+
+      createdAt: Date.now()
 
     });
 }
