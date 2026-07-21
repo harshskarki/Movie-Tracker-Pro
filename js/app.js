@@ -586,10 +586,16 @@ function renderMonthlyStats() {
       "monthlyGrowth"
     );
 
+  const mostActiveElement =
+    document.getElementById(
+      "mostActiveMonth"
+    );
+
   if (
     !thisMonthElement ||
     !lastMonthElement ||
-    !growthElement
+    !growthElement ||
+    !mostActiveElement
   ) return;
 
   const now = new Date();
@@ -677,6 +683,68 @@ function renderMonthlyStats() {
     growth = 100;
   }
 
+  const monthlyCounts = {};
+
+  movies.forEach(movie => {
+
+    if (!movie.createdAt)
+      return;
+
+    let created;
+
+    if (
+      typeof movie.createdAt.toDate ===
+      "function"
+    ) {
+
+      created =
+        movie.createdAt.toDate();
+
+    } else {
+
+      created =
+        new Date(movie.createdAt);
+    }
+
+    const key =
+      `${created.getFullYear()}-${created.getMonth()}`;
+
+    monthlyCounts[key] =
+      (monthlyCounts[key] || 0) + 1;
+
+  });
+
+  let mostActiveLabel = "--";
+  let highestCount = 0;
+
+  Object.entries(monthlyCounts)
+    .forEach(([key, count]) => {
+
+      if (count > highestCount) {
+
+        highestCount = count;
+
+        const [year, month] =
+          key.split("-");
+
+        const date =
+          new Date(
+            Number(year),
+            Number(month)
+          );
+
+        mostActiveLabel =
+          date.toLocaleString(
+            "default",
+            {
+              month: "long",
+              year: "numeric"
+            }
+          );
+      }
+
+    });
+
   thisMonthElement.textContent =
     thisMonth;
 
@@ -685,6 +753,9 @@ function renderMonthlyStats() {
 
   growthElement.textContent =
     `${growth}%`;
+
+  mostActiveElement.textContent =
+    mostActiveLabel;
 }
 
 function renderGenreFilters() {
