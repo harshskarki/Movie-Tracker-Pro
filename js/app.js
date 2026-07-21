@@ -54,6 +54,8 @@ document.getElementById("movieList").style.display = "none";
 
       displayMovies();
 
+      renderGenreFilters();
+
       renderWatchHistory();
 
       renderActivityStats();
@@ -192,6 +194,40 @@ function renderActivityStats() {
   document.getElementById(
     "totalCount"
   ).textContent = movies.length;
+}
+
+function renderGenreFilters() {
+
+  const container =
+    document.getElementById("dynamicGenres");
+
+  if (!container) return;
+
+  const genres = new Set();
+
+  movies.forEach(movie => {
+
+    if (!movie.genres) return;
+
+    movie.genres.forEach(genre => {
+      genres.add(genre);
+    });
+
+  });
+
+  const sortedGenres =
+    [...genres].sort();
+
+  container.innerHTML =
+    sortedGenres.map(genre => `
+      <button
+        class="filter-pill"
+        data-filter="${genre}"
+        onclick="setFilter('${genre}', this)"
+      >
+        ${genre}
+      </button>
+    `).join("");
 }
 
 let activeFilter = "all";
@@ -536,7 +572,11 @@ function applyFilters() {
     if (activeFilter === "watched") return m.watched;
     if (activeFilter === "unwatched") return !m.watched;
     if (activeFilter === "favorites") return m.favorite;
-    return m.category === activeFilter;
+
+    return (
+      m.genres &&
+      m.genres.includes(activeFilter)
+    );
   });
 
   displayMovies(filtered);
