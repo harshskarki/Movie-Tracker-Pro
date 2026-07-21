@@ -88,6 +88,8 @@ document.getElementById("movieList").style.display = "none";
       renderFavoriteGenre();
 
       renderGenreLeaderboard();
+
+      renderGenreDistribution();
     });
 }
 
@@ -350,6 +352,91 @@ function renderGenreLeaderboard() {
       </div>
 
     `).join("");
+
+}
+
+function renderGenreDistribution() {
+
+  const container =
+    document.getElementById(
+      "genreDistributionList"
+    );
+
+  if (!container) return;
+
+  const genreCounts = {};
+
+  movies.forEach(movie => {
+
+    if (
+      !movie.genres ||
+      !Array.isArray(movie.genres)
+    ) return;
+
+    movie.genres.forEach(genre => {
+
+      genreCounts[genre] =
+        (genreCounts[genre] || 0) + 1;
+
+    });
+
+  });
+
+  const genres =
+    Object.entries(genreCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5);
+
+  if (!genres.length) {
+
+    container.innerHTML =
+      "No genre data available";
+
+    return;
+  }
+
+  const totalMovies =
+    Object.values(genreCounts)
+      .reduce((a, b) => a + b, 0);
+
+  container.innerHTML =
+    genres.map(([genre, count]) => {
+
+      const percentage =
+        Math.round(
+          (count / totalMovies) * 100
+        );
+
+      return `
+
+        <div class="genre-dist-item">
+
+          <div class="genre-dist-header">
+
+            <div class="genre-dist-name">
+              ${genre}
+            </div>
+
+            <div class="genre-dist-percent">
+              ${percentage}%
+            </div>
+
+          </div>
+
+          <div class="genre-dist-bar">
+
+            <div
+              class="genre-dist-fill"
+              style="width:${percentage}%"
+            ></div>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
 
 }
 
