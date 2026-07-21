@@ -866,3 +866,93 @@ body.light .empty-state h3 {
 
   font-size: 14px;
 }
+
+/* Genre Ranking Leaderboard */
+
+#genreLeaderboard {
+
+  max-width: 1000px;
+
+  margin: 20px auto;
+
+  background: #1c1c1c;
+
+  border: 1px solid #333;
+
+  border-radius: 18px;
+
+  padding: 20px;
+
+}
+
+#genreLeaderboard h2 {
+
+  margin-bottom: 15px;
+
+  color: white;
+
+}
+
+.genre-rank-item {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 12px 16px;
+
+  margin-bottom: 10px;
+
+  border-radius: 12px;
+
+  background: #252525;
+
+  transition: all 0.3s ease;
+
+}
+
+.genre-rank-item:hover {
+
+  transform: translateX(5px);
+
+  background: #2f2f2f;
+
+}
+
+.genre-rank-left {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+}
+
+.genre-rank-number {
+
+  font-weight: 700;
+
+  color: #e50914;
+
+  width: 30px;
+
+}
+
+.genre-rank-name {
+
+  color: white;
+
+  font-weight: 600;
+
+}
+
+.genre-rank-count {
+
+  color: #9ca3af;
+
+  font-size: 14px;
+
+}

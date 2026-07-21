@@ -86,6 +86,8 @@ document.getElementById("movieList").style.display = "none";
       renderActivityStats();
 
       renderFavoriteGenre();
+
+      renderGenreLeaderboard();
     });
 }
 
@@ -282,6 +284,73 @@ function renderFavoriteGenre() {
 
   countElement.textContent =
     `${count} Movies`;
+}
+
+function renderGenreLeaderboard() {
+
+  const container =
+    document.getElementById(
+      "genreRankingList"
+    );
+
+  if (!container) return;
+
+  const genreCounts = {};
+
+  movies.forEach(movie => {
+
+    if (
+      !movie.genres ||
+      !Array.isArray(movie.genres)
+    ) return;
+
+    movie.genres.forEach(genre => {
+
+      genreCounts[genre] =
+        (genreCounts[genre] || 0) + 1;
+
+    });
+
+  });
+
+  const rankings =
+    Object.entries(genreCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5);
+
+  if (!rankings.length) {
+
+    container.innerHTML =
+      "No genre data available";
+
+    return;
+  }
+
+  container.innerHTML =
+    rankings.map((genre, index) => `
+
+      <div class="genre-rank-item">
+
+        <div class="genre-rank-left">
+
+          <div class="genre-rank-number">
+            #${index + 1}
+          </div>
+
+          <div class="genre-rank-name">
+            ${genre[0]}
+          </div>
+
+        </div>
+
+        <div class="genre-rank-count">
+          ${genre[1]} Movies
+        </div>
+
+      </div>
+
+    `).join("");
+
 }
 
 function renderGenreFilters() {
