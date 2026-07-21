@@ -132,49 +132,8 @@ function renderWatchHistory() {
           dateLabel =
             `${diffDays} days ago`;
         }
-      } {
-
-        const created =
-          movie.createdAt.toDate();
-
-        const now =
-          new Date();
-
-        const diffMs =
-          now - created;
-
-        const diffHours =
-          Math.floor(
-            diffMs / (1000 * 60 * 60)
-          );
-
-        const diffDays =
-          Math.floor(
-            diffHours / 24
-          );
-
-        if (diffHours < 24) {
-
-          if (diffHours <= 1) {
-            dateLabel =
-              "1 hour ago";
-          } else {
-            dateLabel =
-              `${diffHours} hours ago`;
-          }
-
-        } else if (diffDays === 1) {
-
-          dateLabel =
-            "Yesterday";
-
-        } else {
-
-          dateLabel =
-            `${diffDays} days ago`;
-        }
-      }
-
+      } 
+      
       return `
         <div class="history-item">
 
