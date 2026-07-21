@@ -74,11 +74,38 @@ function renderWatchHistory() {
   }
 
   container.innerHTML =
-    latestMovies.map(movie => `
-      <div class="history-item">
-        <span>🎬 ${movie.name}</span>
-      </div>
-    `).join("");
+    latestMovies.map((movie, index) => {
+
+      let dateLabel = "Recently Added";
+
+      if (index === 0) {
+        dateLabel = "Today";
+      } else if (index === 1) {
+        dateLabel = "Yesterday";
+      } else {
+        dateLabel = `${index + 1} Days Ago`;
+      }
+
+      return `
+        <div class="history-item">
+
+          <div class="history-left">
+            <div class="history-dot"></div>
+
+            <div>
+              <div class="history-title">
+                🎬 ${movie.name}
+              </div>
+
+              <div class="history-date">
+                Added ${dateLabel}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      `;
+    }).join("");
 }
 
 let activeFilter = "all";

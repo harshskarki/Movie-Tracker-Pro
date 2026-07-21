@@ -143,43 +143,76 @@ select:focus-visible {
   font-size: 15px;
 }
 
+/* History */
+
 #watchHistory {
-  max-width: 900px;
+  max-width: 1000px;
 
-  margin: 30px auto;
+  margin: 25px auto;
 
-  text-align: left;
+  background: #1c1c1c;
 
-  background: #1b1b1b;
+  border: 1px solid #333;
 
   border-radius: 16px;
 
   padding: 20px;
 
-  border: 1px solid #333;
+  text-align: left;
 }
 
 #watchHistory h2 {
   margin-bottom: 15px;
+
+  color: #fff;
+}
+
+#historyList {
+  color: #9ca3af;
 }
 
 .history-item {
-  display: flex;
+  padding: 14px 0;
 
-  justify-content: space-between;
-
-  padding: 10px 0;
-
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #2d2d2d;
 }
 
 .history-item:last-child {
   border-bottom: none;
 }
 
+.history-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.history-dot {
+  width: 10px;
+
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #e50914;
+
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.7);
+}
+
+.history-title {
+  font-weight: 600;
+
+  color: white;
+}
+
 .history-date {
+  font-size: 13px;
+
   color: #9ca3af;
-  font-size: 14px;
+
+  margin-top: 4px;
 }
 
 #loader {
@@ -360,34 +393,6 @@ body.light .skeleton-card {
   background: #e50914;
   border-color: #e50914;
   color: white;
-}
-
-/* History */
-
-#watchHistory {
-  max-width: 1000px;
-
-  margin: 25px auto;
-
-  background: #1c1c1c;
-
-  border: 1px solid #333;
-
-  border-radius: 16px;
-
-  padding: 20px;
-
-  text-align: left;
-}
-
-#watchHistory h2 {
-  margin-bottom: 15px;
-
-  color: #fff;
-}
-
-#historyList {
-  color: #9ca3af;
 }
 
 .container {
