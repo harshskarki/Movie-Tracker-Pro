@@ -84,6 +84,8 @@ document.getElementById("movieList").style.display = "none";
       renderWatchHistory();
 
       renderActivityStats();
+
+      renderFavoriteGenre();
     });
 }
 
@@ -224,6 +226,62 @@ function renderActivityStats() {
   document.getElementById(
     "totalCount"
   ).textContent = movies.length;
+}
+
+function renderFavoriteGenre() {
+
+  const genreElement =
+    document.getElementById("favoriteGenre");
+
+  const countElement =
+    document.getElementById("favoriteGenreCount");
+
+  if (!genreElement || !countElement)
+    return;
+
+  const genreCounts = {};
+
+  movies.forEach(movie => {
+
+    if (!movie.genres ||
+        !Array.isArray(movie.genres))
+      return;
+
+    movie.genres.forEach(genre => {
+
+      genreCounts[genre] =
+        (genreCounts[genre] || 0) + 1;
+
+    });
+
+  });
+
+  const entries =
+    Object.entries(genreCounts);
+
+  if (!entries.length) {
+
+    genreElement.textContent =
+      "No Data";
+
+    countElement.textContent =
+      "0 Movies";
+
+    return;
+  }
+
+  entries.sort(
+    (a, b) => b[1] - a[1]
+  );
+
+  const [topGenre, count] =
+    entries[0];
+
+  genreElement.textContent =
+    topGenre;
+
+  countElement.textContent =
+    `${count} Movies`;
 }
 
 function renderGenreFilters() {
