@@ -78,12 +78,50 @@ function renderWatchHistory() {
 
       let dateLabel = "Recently Added";
 
-      if (index === 0) {
-        dateLabel = "Today";
-      } else if (index === 1) {
-        dateLabel = "Yesterday";
-      } else {
-        dateLabel = `${index + 1} Days Ago`;
+      if (
+        movie.createdAt &&
+        typeof movie.createdAt.toDate === "function"
+      ) {
+
+        const created =
+          movie.createdAt.toDate();
+
+        const now =
+          new Date();
+
+        const diffMs =
+          now - created;
+
+        const diffHours =
+          Math.floor(
+            diffMs / (1000 * 60 * 60)
+          );
+
+        const diffDays =
+          Math.floor(
+            diffHours / 24
+          );
+
+        if (diffHours < 24) {
+
+          if (diffHours <= 1) {
+            dateLabel =
+              "1 hour ago";
+          } else {
+            dateLabel =
+              `${diffHours} hours ago`;
+          }
+
+        } else if (diffDays === 1) {
+
+          dateLabel =
+            "Yesterday";
+
+        } else {
+
+          dateLabel =
+            `${diffDays} days ago`;
+        }
       }
 
       return `
