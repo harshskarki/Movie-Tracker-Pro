@@ -90,6 +90,8 @@ document.getElementById("movieList").style.display = "none";
       renderGenreLeaderboard();
 
       renderGenreDistribution();
+
+      renderGenreInsights();
     });
 }
 
@@ -437,6 +439,131 @@ function renderGenreDistribution() {
       `;
 
     }).join("");
+
+}
+
+function renderGenreInsights() {
+
+  const container =
+    document.getElementById(
+      "genreInsightText"
+    );
+
+  if (!container) return;
+
+  const genreCounts = {};
+
+  movies.forEach(movie => {
+
+    if (
+      !movie.genres ||
+      !Array.isArray(movie.genres)
+    ) return;
+
+    movie.genres.forEach(genre => {
+
+      genreCounts[genre] =
+        (genreCounts[genre] || 0) + 1;
+
+    });
+
+  });
+
+  const genres =
+    Object.entries(genreCounts)
+      .sort((a, b) => b[1] - a[1]);
+
+  if (!genres.length) {
+
+    container.innerHTML =
+      "No insights available yet.";
+
+    return;
+  }
+
+  const [topGenre, topCount] =
+    genres[0];
+
+  const totalGenreEntries =
+    Object.values(genreCounts)
+      .reduce((a, b) => a + b, 0);
+
+  const percentage =
+    Math.round(
+      (topCount / totalGenreEntries) * 100
+    );
+
+  let genreMessage =
+    "You enjoy a wide variety of movies.";
+
+  if (
+    topGenre === "Action" ||
+    topGenre === "Adventure"
+  ) {
+
+    genreMessage =
+      "You seem to enjoy fast-paced and high-energy movies.";
+
+  } else if (
+    topGenre === "Drama"
+  ) {
+
+    genreMessage =
+      "You appreciate deep stories and strong character development.";
+
+  } else if (
+    topGenre === "Thriller"
+  ) {
+
+    genreMessage =
+      "You enjoy suspense, tension, and unpredictable plots.";
+
+  } else if (
+    topGenre === "Crime"
+  ) {
+
+    genreMessage =
+      "You are drawn toward investigation, strategy, and complex narratives.";
+
+  } else if (
+    topGenre === "Comedy"
+  ) {
+
+    genreMessage =
+      "You enjoy lighthearted and entertaining experiences.";
+
+  }
+
+  container.innerHTML = `
+
+    <p>
+      🎭 Your favorite genre is
+      <span class="insight-highlight">
+        ${topGenre}
+      </span>.
+    </p>
+
+    <p>
+      🔥 ${topGenre} accounts for
+      <span class="insight-highlight">
+        ${percentage}%
+      </span>
+      of your collection.
+    </p>
+
+    <p>
+      🎬 ${genreMessage}
+    </p>
+
+    <p>
+      📈 Your library currently spans
+      <span class="insight-highlight">
+        ${genres.length}
+      </span>
+      genres.
+    </p>
+
+  `;
 
 }
 

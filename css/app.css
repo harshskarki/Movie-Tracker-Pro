@@ -1042,3 +1042,52 @@ body.light .empty-state h3 {
   );
 
 }
+
+/* Favorite Genre Insights */
+
+#genreInsights {
+
+  max-width: 1000px;
+
+  margin: 20px auto;
+
+  background: linear-gradient(
+    135deg,
+    #1c1c1c,
+    #252525
+  );
+
+  border: 1px solid #333;
+
+  border-radius: 18px;
+
+  padding: 20px;
+
+}
+
+#genreInsights h2 {
+
+  color: white;
+
+  margin-bottom: 15px;
+
+}
+
+#genreInsightText {
+
+  color: #d1d5db;
+
+  line-height: 1.8;
+
+  font-size: 15px;
+
+}
+
+.insight-highlight {
+
+  color: #e50914;
+
+  font-weight: 700;
+
+}
+
