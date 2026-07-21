@@ -1091,3 +1091,81 @@ body.light .empty-state h3 {
 
 }
 
+/* Monthly Statistics Card */
+
+#monthlyStats {
+
+  max-width: 1000px;
+
+  margin: 20px auto;
+
+  background: #1c1c1c;
+
+  border: 1px solid #333;
+
+  border-radius: 18px;
+
+  padding: 20px;
+
+}
+
+#monthlyStats h2 {
+
+  color: white;
+
+  margin-bottom: 15px;
+
+}
+
+#monthlyStatsGrid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(180px, 1fr));
+
+  gap: 15px;
+
+}
+
+.month-stat-card {
+
+  background: #252525;
+
+  border-radius: 14px;
+
+  padding: 20px;
+
+  text-align: center;
+
+  transition: all 0.3s ease;
+
+}
+
+.month-stat-card:hover {
+
+  transform: translateY(-3px);
+
+  background: #2f2f2f;
+
+}
+
+.month-stat-value {
+
+  font-size: 28px;
+
+  font-weight: 700;
+
+  color: #e50914;
+
+  margin-bottom: 8px;
+
+}
+
+.month-stat-label {
+
+  color: #9ca3af;
+
+  font-size: 14px;
+
+}

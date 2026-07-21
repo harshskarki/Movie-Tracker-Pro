@@ -92,6 +92,8 @@ document.getElementById("movieList").style.display = "none";
       renderGenreDistribution();
 
       renderGenreInsights();
+
+      renderMonthlyStats();
     });
 }
 
@@ -565,6 +567,124 @@ function renderGenreInsights() {
 
   `;
 
+}
+
+function renderMonthlyStats() {
+
+  const thisMonthElement =
+    document.getElementById(
+      "thisMonthCount"
+    );
+
+  const lastMonthElement =
+    document.getElementById(
+      "lastMonthCount"
+    );
+
+  const growthElement =
+    document.getElementById(
+      "monthlyGrowth"
+    );
+
+  if (
+    !thisMonthElement ||
+    !lastMonthElement ||
+    !growthElement
+  ) return;
+
+  const now = new Date();
+
+  const currentMonth =
+    now.getMonth();
+
+  const currentYear =
+    now.getFullYear();
+
+  let thisMonth = 0;
+  let lastMonth = 0;
+
+  movies.forEach(movie => {
+
+    if (!movie.createdAt)
+      return;
+
+    let created;
+
+    if (
+      typeof movie.createdAt.toDate ===
+      "function"
+    ) {
+
+      created =
+        movie.createdAt.toDate();
+
+    } else {
+
+      created =
+        new Date(movie.createdAt);
+    }
+
+    const month =
+      created.getMonth();
+
+    const year =
+      created.getFullYear();
+
+    if (
+      month === currentMonth &&
+      year === currentYear
+    ) {
+
+      thisMonth++;
+
+    }
+
+    const previousMonthDate =
+      new Date(
+        currentYear,
+        currentMonth - 1,
+        1
+      );
+
+    if (
+      month ===
+        previousMonthDate.getMonth() &&
+      year ===
+        previousMonthDate.getFullYear()
+    ) {
+
+      lastMonth++;
+
+    }
+
+  });
+
+  let growth = 0;
+
+  if (lastMonth > 0) {
+
+    growth =
+      Math.round(
+        ((thisMonth - lastMonth) /
+          lastMonth) *
+          100
+      );
+
+  } else if (
+    thisMonth > 0
+  ) {
+
+    growth = 100;
+  }
+
+  thisMonthElement.textContent =
+    thisMonth;
+
+  lastMonthElement.textContent =
+    lastMonth;
+
+  growthElement.textContent =
+    `${growth}%`;
 }
 
 function renderGenreFilters() {
