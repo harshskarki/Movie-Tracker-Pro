@@ -801,3 +801,68 @@ body.light .empty-state h3 {
 
   gap: 8px;
 }
+
+/* Favorite Genre Card */
+
+#genreAnalytics {
+  max-width: 1000px;
+  margin: 20px auto;
+}
+
+.genre-card {
+  background: linear-gradient(
+    135deg,
+    #1f1f1f,
+    #2b2b2b
+  );
+
+  border: 1px solid #333;
+
+  border-radius: 18px;
+
+  padding: 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.35);
+
+  transition: all 0.3s ease;
+}
+
+.genre-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #e50914;
+
+  box-shadow:
+    0 12px 30px rgba(229,9,20,0.25);
+}
+
+.genre-icon {
+  font-size: 42px;
+}
+
+.genre-info {
+  text-align: left;
+}
+
+#favoriteGenre {
+  font-size: 22px;
+
+  font-weight: 700;
+
+  color: white;
+}
+
+#favoriteGenreCount {
+  color: #9ca3af;
+
+  margin-top: 4px;
+
+  font-size: 14px;
+}
