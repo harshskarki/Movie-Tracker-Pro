@@ -77,7 +77,7 @@ document.getElementById("movieList").style.display = "none";
       document.getElementById("loader").style.display = "none";
       document.getElementById("movieList").style.display = "grid";
 
-      displayMovies();
+      applyFilters();
 
       renderGenreFilters();
 
