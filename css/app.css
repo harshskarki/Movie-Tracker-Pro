@@ -735,3 +735,61 @@ body.light .empty-state h3 {
     text-align: center;
   }
 }
+
+#activityStats {
+  max-width: 1000px;
+
+  margin: 25px auto;
+
+  text-align: left;
+}
+
+#activityStats h2 {
+  margin-bottom: 15px;
+}
+
+#activityGrid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+  gap: 15px;
+}
+
+.activity-card {
+  background: #1c1c1c;
+
+  border: 1px solid #333;
+
+  border-radius: 16px;
+
+  padding: 18px;
+
+  text-align: center;
+
+  transition: 0.3s ease;
+}
+
+.activity-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #e50914;
+}
+
+.activity-card span {
+  display: block;
+
+  font-size: 28px;
+
+  font-weight: 700;
+
+  color: #e50914;
+
+  margin-bottom: 8px;
+}
+
+.activity-card small {
+  color: #9ca3af;
+
+  font-size: 14px;
+}

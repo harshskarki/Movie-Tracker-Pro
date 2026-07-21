@@ -53,7 +53,10 @@ document.getElementById("movieList").style.display = "none";
       document.getElementById("movieList").style.display = "grid";
 
       displayMovies();
+
       renderWatchHistory();
+
+      renderActivityStats();
     });
 }
 
@@ -144,6 +147,51 @@ function renderWatchHistory() {
         </div>
       `;
     }).join("");
+}
+
+function renderActivityStats() {
+
+  const now = new Date();
+
+  let weekCount = 0;
+  let monthCount = 0;
+
+  movies.forEach(movie => {
+
+    if (
+      !movie.createdAt ||
+      typeof movie.createdAt.toDate !== "function"
+    ) return;
+
+    const created =
+      movie.createdAt.toDate();
+
+    const diffMs =
+      now - created;
+
+    const diffDays =
+      diffMs / (1000 * 60 * 60 * 24);
+
+    if (diffDays <= 7) {
+      weekCount++;
+    }
+
+    if (diffDays <= 30) {
+      monthCount++;
+    }
+  });
+
+  document.getElementById(
+    "weekCount"
+  ).textContent = weekCount;
+
+  document.getElementById(
+    "monthCount"
+  ).textContent = monthCount;
+
+  document.getElementById(
+    "totalCount"
+  ).textContent = movies.length;
 }
 
 let activeFilter = "all";
