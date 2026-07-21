@@ -793,3 +793,11 @@ body.light .empty-state h3 {
 
   font-size: 14px;
 }
+
+#dynamicGenres {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
