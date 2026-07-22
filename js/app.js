@@ -94,6 +94,8 @@ document.getElementById("movieList").style.display = "none";
       renderGenreInsights();
 
       renderMonthlyStats();
+
+      renderMonthlyTimeline();
     });
 }
 
@@ -756,6 +758,112 @@ function renderMonthlyStats() {
 
   mostActiveElement.textContent =
     mostActiveLabel;
+}
+
+function renderMonthlyTimeline() {
+
+  const container =
+    document.getElementById(
+      "monthlyTimelineList"
+    );
+
+  if (!container) return;
+
+  const monthlyCounts = {};
+
+  movies.forEach(movie => {
+
+    if (!movie.createdAt)
+      return;
+
+    let created;
+
+    if (
+      typeof movie.createdAt.toDate ===
+      "function"
+    ) {
+
+      created =
+        movie.createdAt.toDate();
+
+    } else {
+
+      created =
+        new Date(movie.createdAt);
+    }
+
+    const key =
+      `${created.getFullYear()}-${created.getMonth()}`;
+
+    monthlyCounts[key] =
+      (monthlyCounts[key] || 0) + 1;
+
+  });
+
+  const sortedMonths =
+    Object.entries(monthlyCounts)
+      .sort((a, b) => {
+
+        const [yearA, monthA] =
+          a[0].split("-");
+
+        const [yearB, monthB] =
+          b[0].split("-");
+
+        return (
+          new Date(yearB, monthB) -
+          new Date(yearA, monthA)
+        );
+
+      });
+
+  if (!sortedMonths.length) {
+
+    container.innerHTML =
+      "No activity available";
+
+    return;
+  }
+
+  container.innerHTML =
+    sortedMonths.map(([key, count]) => {
+
+      const [year, month] =
+        key.split("-");
+
+      const date =
+        new Date(
+          Number(year),
+          Number(month)
+        );
+
+      const label =
+        date.toLocaleString(
+          "default",
+          {
+            month: "long",
+            year: "numeric"
+          }
+        );
+
+      return `
+
+        <div class="timeline-item">
+
+          <div class="timeline-month">
+            ${label}
+          </div>
+
+          <div class="timeline-count">
+            ${count} Movies
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
 }
 
 function renderGenreFilters() {
