@@ -1169,3 +1169,73 @@ body.light .empty-state h3 {
   font-size: 14px;
 
 }
+
+/* Monthly Activity Timeline */
+
+#monthlyTimeline {
+
+  max-width: 1000px;
+
+  margin: 20px auto;
+
+  background: #1c1c1c;
+
+  border: 1px solid #333;
+
+  border-radius: 18px;
+
+  padding: 20px;
+
+}
+
+#monthlyTimeline h2 {
+
+  color: white;
+
+  margin-bottom: 15px;
+
+}
+
+.timeline-item {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 14px 16px;
+
+  margin-bottom: 10px;
+
+  border-radius: 12px;
+
+  background: #252525;
+
+  transition: all 0.3s ease;
+
+}
+
+.timeline-item:hover {
+
+  background: #2f2f2f;
+
+  transform: translateX(5px);
+
+}
+
+.timeline-month {
+
+  color: white;
+
+  font-weight: 600;
+
+}
+
+.timeline-count {
+
+  color: #e50914;
+
+  font-weight: 700;
+
+}
