@@ -1387,3 +1387,90 @@ body.light .empty-state h3 {
   margin-bottom: 10px;
 
 }
+
+/* Achievement Badges */
+
+#achievementBadges {
+
+  max-width: 1000px;
+
+  margin: 20px auto;
+
+  background: #1c1c1c;
+
+  border: 1px solid #333;
+
+  border-radius: 18px;
+
+  padding: 20px;
+
+}
+
+#achievementBadges h2 {
+
+  color: white;
+
+  margin-bottom: 15px;
+
+}
+
+#achievementGrid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 15px;
+
+}
+
+.badge-card {
+
+  background: #252525;
+
+  border: 1px solid #333;
+
+  border-radius: 14px;
+
+  padding: 18px;
+
+  text-align: center;
+
+  transition: all 0.3s ease;
+
+}
+
+.badge-card:hover {
+
+  transform: translateY(-4px);
+
+  background: #2f2f2f;
+
+}
+
+.badge-icon {
+
+  font-size: 32px;
+
+  margin-bottom: 10px;
+
+}
+
+.badge-title {
+
+  color: white;
+
+  font-weight: 700;
+
+  margin-bottom: 6px;
+
+}
+
+.badge-desc {
+
+  color: #9ca3af;
+
+  font-size: 14px;
+
+}
