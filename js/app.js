@@ -104,6 +104,8 @@ document.getElementById("movieList").style.display = "none";
       renderViewerArchetype();
 
       renderAchievementBadges();
+
+      renderGenreEvolution();
     });
 }
 
@@ -1411,6 +1413,167 @@ function renderAchievementBadges() {
 
     `).join("");
 
+}
+
+function renderGenreEvolution() {
+
+  const container =
+    document.getElementById(
+      "genreEvolutionText"
+    );
+
+  if (!container) return;
+
+  if (movies.length < 6) {
+
+    container.innerHTML =
+      "Add more movies to unlock genre trend analysis.";
+
+    return;
+  }
+
+  const sortedMovies =
+    [...movies].sort((a, b) => {
+
+      let dateA =
+        a.createdAt?.toDate
+          ? a.createdAt.toDate()
+          : new Date(a.createdAt);
+
+      let dateB =
+        b.createdAt?.toDate
+          ? b.createdAt.toDate()
+          : new Date(b.createdAt);
+
+      return dateA - dateB;
+
+    });
+
+  const midpoint =
+    Math.floor(
+      sortedMovies.length / 2
+    );
+
+  const olderMovies =
+    sortedMovies.slice(
+      0,
+      midpoint
+    );
+
+  const newerMovies =
+    sortedMovies.slice(
+      midpoint
+    );
+
+  const countGenres =
+    (movieList) => {
+
+      const counts = {};
+
+      movieList.forEach(movie => {
+
+        if (
+          movie.genres &&
+          Array.isArray(movie.genres)
+        ) {
+
+          movie.genres.forEach(
+            genre => {
+
+              counts[genre] =
+                (counts[genre] || 0) + 1;
+
+            }
+          );
+
+        }
+
+      });
+
+      return counts;
+
+    };
+
+  const oldGenres =
+    countGenres(
+      olderMovies
+    );
+
+  const newGenres =
+    countGenres(
+      newerMovies
+    );
+
+  const oldTop =
+    Object.entries(oldGenres)
+      .sort(
+        (a, b) =>
+          b[1] - a[1]
+      )[0];
+
+  const newTop =
+    Object.entries(newGenres)
+      .sort(
+        (a, b) =>
+          b[1] - a[1]
+      )[0];
+
+  if (
+    !oldTop ||
+    !newTop
+  ) {
+
+    container.innerHTML =
+      "Not enough genre data available.";
+
+    return;
+  }
+
+  let trendMessage;
+
+  if (
+    oldTop[0] === newTop[0]
+  ) {
+
+    trendMessage =
+      `${newTop[0]} has remained your dominant genre.`;
+
+  } else {
+
+    trendMessage =
+      `${newTop[0]} is replacing ${oldTop[0]} as your preferred genre.`;
+
+  }
+
+  container.innerHTML = `
+
+    <p>
+      🎭 Previous favorite genre:
+      <span class="genre-evolution-highlight">
+        ${oldTop[0]}
+      </span>
+    </p>
+
+    <p>
+      🔥 Current favorite genre:
+      <span class="genre-evolution-highlight">
+        ${newTop[0]}
+      </span>
+    </p>
+
+    <p>
+      📈 ${trendMessage}
+    </p>
+
+    <p>
+      🎬 Based on analysis of
+      <span class="genre-evolution-highlight">
+        ${movies.length}
+      </span>
+      movies.
+    </p>
+
+  `;
 }
 
 function renderGenreFilters() {
