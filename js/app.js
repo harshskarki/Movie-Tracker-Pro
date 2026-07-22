@@ -102,6 +102,8 @@ document.getElementById("movieList").style.display = "none";
       renderCollectionPersonality();
 
       renderViewerArchetype();
+
+      renderAchievementBadges();
     });
 }
 
@@ -1279,6 +1281,136 @@ function renderViewerArchetype() {
     </p>
 
   `;
+}
+
+function renderAchievementBadges() {
+
+  const container =
+    document.getElementById(
+      "achievementGrid"
+    );
+
+  if (!container) return;
+
+  const badges = [];
+
+  if (movies.length >= 10) {
+
+    badges.push({
+      icon: "🏆",
+      title: "Collector",
+      desc: "Added 10+ movies"
+    });
+
+  }
+
+  if (movies.length >= 25) {
+
+    badges.push({
+      icon: "🔥",
+      title: "Movie Maniac",
+      desc: "Added 25+ movies"
+    });
+
+  }
+
+  if (movies.length >= 50) {
+
+    badges.push({
+      icon: "👑",
+      title: "Cinephile",
+      desc: "Added 50+ movies"
+    });
+
+  }
+
+  const genreSet =
+    new Set();
+
+  movies.forEach(movie => {
+
+    if (
+      movie.genres &&
+      Array.isArray(movie.genres)
+    ) {
+
+      movie.genres.forEach(
+        genre =>
+          genreSet.add(genre)
+      );
+
+    }
+
+  });
+
+  if (
+    genreSet.size >= 10
+  ) {
+
+    badges.push({
+      icon: "🎭",
+      title: "Genre Explorer",
+      desc: "Explored 10+ genres"
+    });
+
+  }
+
+  const ratings =
+    movies
+      .map(m => Number(m.rating))
+      .filter(
+        r => !isNaN(r)
+      );
+
+  if (ratings.length) {
+
+    const average =
+      ratings.reduce(
+        (a, b) => a + b,
+        0
+      ) / ratings.length;
+
+    if (average >= 7) {
+
+      badges.push({
+        icon: "⭐",
+        title: "Critic",
+        desc: "Average rating above 7"
+      });
+
+    }
+
+  }
+
+  if (!badges.length) {
+
+    container.innerHTML =
+      "No badges unlocked yet.";
+
+    return;
+  }
+
+  container.innerHTML =
+    badges.map(badge => `
+
+      <div class="badge-card">
+
+        <div class="badge-icon">
+          ${badge.icon}
+        </div>
+
+        <div class="badge-title">
+          ${badge.title}
+        </div>
+
+        <div class="badge-desc">
+          ${badge.desc}
+        </div>
+
+      </div>
+
+    `).join("");
+
 }
 
 function renderGenreFilters() {
