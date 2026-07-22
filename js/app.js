@@ -96,6 +96,8 @@ document.getElementById("movieList").style.display = "none";
       renderMonthlyStats();
 
       renderMonthlyTimeline();
+
+      renderGrowthInsights();
     });
 }
 
@@ -864,6 +866,161 @@ function renderMonthlyTimeline() {
 
     }).join("");
 
+}
+
+function renderGrowthInsights() {
+
+  const container =
+    document.getElementById(
+      "growthInsightsText"
+    );
+
+  if (!container) return;
+
+  const monthlyCounts = {};
+
+  movies.forEach(movie => {
+
+    if (!movie.createdAt)
+      return;
+
+    let created;
+
+    if (
+      typeof movie.createdAt.toDate ===
+      "function"
+    ) {
+
+      created =
+        movie.createdAt.toDate();
+
+    } else {
+
+      created =
+        new Date(movie.createdAt);
+    }
+
+    const key =
+      `${created.getFullYear()}-${created.getMonth()}`;
+
+    monthlyCounts[key] =
+      (monthlyCounts[key] || 0) + 1;
+
+  });
+
+  const months =
+    Object.entries(monthlyCounts);
+
+  if (!months.length) {
+
+    container.innerHTML =
+      "No growth insights available.";
+
+    return;
+  }
+
+  let bestMonth = "";
+  let bestCount = 0;
+
+  months.forEach(([key, count]) => {
+
+    if (count > bestCount) {
+
+      bestCount = count;
+
+      const [year, month] =
+        key.split("-");
+
+      bestMonth =
+        new Date(
+          Number(year),
+          Number(month)
+        ).toLocaleString(
+          "default",
+          {
+            month: "long",
+            year: "numeric"
+          }
+        );
+    }
+
+  });
+
+  const now = new Date();
+
+  const currentMonthKey =
+    `${now.getFullYear()}-${now.getMonth()}`;
+
+  const previousMonthKey =
+    `${new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      1
+    ).getFullYear()}-${new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      1
+    ).getMonth()}`;
+
+  const currentMonthCount =
+    monthlyCounts[currentMonthKey] || 0;
+
+  const previousMonthCount =
+    monthlyCounts[previousMonthKey] || 0;
+
+  let growth = 0;
+
+  if (previousMonthCount > 0) {
+
+    growth =
+      Math.round(
+        (
+          (currentMonthCount -
+            previousMonthCount) /
+          previousMonthCount
+        ) * 100
+      );
+
+  } else if (
+    currentMonthCount > 0
+  ) {
+
+    growth = 100;
+  }
+
+  container.innerHTML = `
+
+    <p>
+      🔥 Most movies were added in
+      <span class="growth-highlight">
+        ${bestMonth}
+      </span>.
+    </p>
+
+    <p>
+      📈 Collection growth is currently
+      <span class="growth-highlight">
+        ${growth}%
+      </span>.
+    </p>
+
+    <p>
+      🎬 Your collection spans
+      <span class="growth-highlight">
+        ${months.length}
+      </span>
+      active months.
+    </p>
+
+    <p>
+      🏆 You currently have
+      <span class="growth-highlight">
+        ${movies.length}
+      </span>
+      movies in your library.
+    </p>
+
+  `;
 }
 
 function renderGenreFilters() {
