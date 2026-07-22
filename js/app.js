@@ -100,6 +100,8 @@ document.getElementById("movieList").style.display = "none";
       renderGrowthInsights();
 
       renderCollectionPersonality();
+
+      renderViewerArchetype();
     });
 }
 
@@ -1149,6 +1151,131 @@ function renderCollectionPersonality() {
         ${genres.length}
       </span>
       different genres.
+    </p>
+
+  `;
+}
+
+function renderViewerArchetype() {
+
+  const container =
+    document.getElementById(
+      "viewerArchetypeText"
+    );
+
+  if (!container) return;
+
+  const genreCounts = {};
+
+  movies.forEach(movie => {
+
+    if (
+      !movie.genres ||
+      !Array.isArray(movie.genres)
+    ) return;
+
+    movie.genres.forEach(genre => {
+
+      genreCounts[genre] =
+        (genreCounts[genre] || 0) + 1;
+
+    });
+
+  });
+
+  const genres =
+    Object.entries(genreCounts)
+      .sort((a, b) => b[1] - a[1]);
+
+  if (!genres.length) {
+
+    container.innerHTML =
+      "Not enough data available.";
+
+    return;
+  }
+
+  const topGenre =
+    genres[0][0];
+
+  let archetype =
+    "👑 Cinema Explorer";
+
+  let description =
+    "You enjoy exploring many different kinds of movies.";
+
+  if (
+    topGenre === "Action" ||
+    topGenre === "Adventure"
+  ) {
+
+    archetype =
+      "🎬 Action Addict";
+
+    description =
+      "You love excitement, action sequences, and blockbuster adventures.";
+
+  } else if (
+    topGenre === "Drama"
+  ) {
+
+    archetype =
+      "🎭 Story Enthusiast";
+
+    description =
+      "Strong narratives and emotional storytelling define your taste.";
+
+  } else if (
+    topGenre === "Thriller"
+  ) {
+
+    archetype =
+      "🕵️ Mystery Hunter";
+
+    description =
+      "You enjoy suspense, twists, and edge-of-your-seat storytelling.";
+
+  } else if (
+    topGenre === "Comedy"
+  ) {
+
+    archetype =
+      "😂 Entertainment Seeker";
+
+    description =
+      "You watch movies primarily for fun, enjoyment, and relaxation.";
+
+  } else if (
+    topGenre === "Crime"
+  ) {
+
+    archetype =
+      "🧩 Master Strategist";
+
+    description =
+      "You enjoy intelligent plots, investigations, and complex characters.";
+
+  }
+
+  container.innerHTML = `
+
+    <div class="archetype-title">
+      ${archetype}
+    </div>
+
+    <p>
+      ${description}
+    </p>
+
+    <p>
+      🎭 Dominant genre:
+      <strong>${topGenre}</strong>
+    </p>
+
+    <p>
+      🎬 Based on analysis of
+      <strong>${movies.length}</strong>
+      movies in your collection.
     </p>
 
   `;
