@@ -1474,3 +1474,51 @@ body.light .empty-state h3 {
   font-size: 14px;
 
 }
+
+/* Genre Evolution */
+
+#genreEvolution {
+
+  max-width: 1000px;
+
+  margin: 20px auto;
+
+  background: linear-gradient(
+    135deg,
+    #1c1c1c,
+    #252525
+  );
+
+  border: 1px solid #333;
+
+  border-radius: 18px;
+
+  padding: 20px;
+
+}
+
+#genreEvolution h2 {
+
+  color: white;
+
+  margin-bottom: 15px;
+
+}
+
+#genreEvolutionText {
+
+  color: #d1d5db;
+
+  line-height: 1.9;
+
+  font-size: 15px;
+
+}
+
+.genre-evolution-highlight {
+
+  color: #e50914;
+
+  font-weight: 700;
+
+}
