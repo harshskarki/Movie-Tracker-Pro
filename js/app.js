@@ -98,6 +98,8 @@ document.getElementById("movieList").style.display = "none";
       renderMonthlyTimeline();
 
       renderGrowthInsights();
+
+      renderCollectionPersonality();
     });
 }
 
@@ -1018,6 +1020,135 @@ function renderGrowthInsights() {
         ${movies.length}
       </span>
       movies in your library.
+    </p>
+
+  `;
+}
+
+function renderCollectionPersonality() {
+
+  const container =
+    document.getElementById(
+      "collectionPersonalityText"
+    );
+
+  if (!container) return;
+
+  const genreCounts = {};
+
+  movies.forEach(movie => {
+
+    if (
+      !movie.genres ||
+      !Array.isArray(movie.genres)
+    ) return;
+
+    movie.genres.forEach(genre => {
+
+      genreCounts[genre] =
+        (genreCounts[genre] || 0) + 1;
+
+    });
+
+  });
+
+  const genres =
+    Object.entries(genreCounts)
+      .sort((a, b) => b[1] - a[1]);
+
+  if (!genres.length) {
+
+    container.innerHTML =
+      "Not enough data to analyze your collection.";
+
+    return;
+  }
+
+  const topGenre =
+    genres[0][0];
+
+  let personality =
+    "You enjoy a balanced variety of movies.";
+
+  let style =
+    "Your collection is diverse and well-rounded.";
+
+  if (
+    topGenre === "Action" ||
+    topGenre === "Adventure"
+  ) {
+
+    personality =
+      "You are an adrenaline seeker.";
+
+    style =
+      "Fast-paced stories, intense moments, and epic journeys dominate your collection.";
+
+  } else if (
+    topGenre === "Drama"
+  ) {
+
+    personality =
+      "You are a storyteller at heart.";
+
+    style =
+      "You appreciate deep narratives and strong character development.";
+
+  } else if (
+    topGenre === "Thriller"
+  ) {
+
+    personality =
+      "You enjoy suspense and unpredictability.";
+
+    style =
+      "Tension, mystery, and plot twists drive your viewing choices.";
+
+  } else if (
+    topGenre === "Crime"
+  ) {
+
+    personality =
+      "You enjoy strategic and intelligent storytelling.";
+
+    style =
+      "Investigations, rivalries, and complex characters stand out in your collection.";
+
+  } else if (
+    topGenre === "Comedy"
+  ) {
+
+    personality =
+      "You enjoy entertainment and lighthearted experiences.";
+
+    style =
+      "Your collection reflects a fun-loving viewing style.";
+
+  }
+
+  container.innerHTML = `
+
+    <p>
+      🎭 Your collection is dominated by
+      <span class="personality-highlight">
+        ${topGenre}
+      </span>.
+    </p>
+
+    <p>
+      🔥 ${personality}
+    </p>
+
+    <p>
+      🎬 ${style}
+    </p>
+
+    <p>
+      🏆 You currently explore
+      <span class="personality-highlight">
+        ${genres.length}
+      </span>
+      different genres.
     </p>
 
   `;
