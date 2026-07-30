@@ -6,7 +6,7 @@
 
 A modern full-stack movie management and discovery platform built with **HTML, CSS, JavaScript, Firebase, and TMDB API**.
 
-Movie Tracker allows users to build their personal watchlist, discover new movies, track favorites, manage watched content, watch trailers, and receive recommendations through an intuitive and responsive interface.
+Movie Tracker allows users to build their personal watchlist, discover new movies, track favorites, manage watched content, watch trailers, and receive recommendations through an intuitive and responsive interface
 
 ---
 
